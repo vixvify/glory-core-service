@@ -24,13 +24,14 @@ export interface SafeUserDTO {
 }
 
 export const registerSchema = t.Object({
-  username: t.String({ minLength: 3 }),
+  username: t.Optional(t.String({ minLength: 3 })),
   email: t.String(),
   password: t.String({ minLength: 6 }),
   name: t.Optional(t.String()),
 });
 
 export const loginSchema = t.Object({
-  username: t.String(),
+  username: t.Optional(t.String()),
+  email: t.Optional(t.String()),
   password: t.String(),
 });

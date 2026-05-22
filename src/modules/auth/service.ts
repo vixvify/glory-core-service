@@ -9,14 +9,15 @@ export class AuthService {
   constructor(private repo: AuthRepository) {}
 
   async register(data: RegisterDTO): Promise<User> {
-    const existing = await this.repo.findByUsernameOrEmail(data.username, data.email);
+    const username = data.username || data.email;
+    const existing = await this.repo.findByUsernameOrEmail(username, data.email);
     if (existing) {
       throw new ConflictError("Username or email already exists");
     }
 
     const passwordHash = await hashPassword(data.password || "");
     return this.repo.create({
-      username: data.username,
+      username,
       email: data.email,
       passwordHash,
       name: data.name,
@@ -24,7 +25,8 @@ export class AuthService {
   }
 
   async login(data: LoginDTO): Promise<SafeUserDTO> {
-    const user = await this.repo.findByUsernameOrEmailWithPassword(data.username || "");
+    const usernameOrEmail = data.username || data.email || "";
+    const user = await this.repo.findByUsernameOrEmailWithPassword(usernameOrEmail);
     if (!user) {
       throw new UnauthorizedError("Invalid username or password");
     }
