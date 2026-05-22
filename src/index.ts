@@ -1,8 +1,8 @@
 import { server } from "./server";
 import { config } from "./core/config";
 
-server.listen(config.port);
+const app = server.listen(config.port);
 
 console.log(
-  `🚀 Glory Backend is running in ${config.env} mode at http://localhost:${config.port}`
-);
+  `🚀 Glory Backend is running in ${config.env} mode at http://${app.server?.hostname}:${app.server?.port}`
+)

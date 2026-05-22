@@ -6,18 +6,17 @@ import { RegisterDTO, LoginDTO, SafeUserDTO } from "./domain/auth.dto";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
-  constructor(private repo: AuthRepository) {}
+  constructor(private repo: AuthRepository) { }
 
   async register(data: RegisterDTO): Promise<User> {
-    const username = data.username || data.email;
-    const existing = await this.repo.findByUsernameOrEmail(username, data.email);
+    const existing = await this.repo.findByUsernameOrEmail(data.username, data.email);
     if (existing) {
       throw new ConflictError("Username or email already exists");
     }
 
     const passwordHash = await hashPassword(data.password || "");
     return this.repo.create({
-      username,
+      username: data.username,
       email: data.email,
       passwordHash,
       name: data.name,
@@ -25,8 +24,7 @@ export class AuthService {
   }
 
   async login(data: LoginDTO): Promise<SafeUserDTO> {
-    const usernameOrEmail = data.username || data.email || "";
-    const user = await this.repo.findByUsernameOrEmailWithPassword(usernameOrEmail);
+    const user = await this.repo.findByUsernameOrEmailWithPassword(data.username || "");
     if (!user) {
       throw new UnauthorizedError("Invalid username or password");
     }
