@@ -1,7 +1,8 @@
-import { Elysia } from "elysia";
+import { server } from "./server";
+import { config } from "./core/config";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const app = server.listen(config.port);
 
 console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
+  `🚀 Glory Backend is running in ${config.env} mode at http://${app.server?.hostname}:${app.server?.port}`
 );
