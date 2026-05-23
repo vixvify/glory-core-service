@@ -1,22 +1,26 @@
-import { Movie } from "../../core/types";
+import { Movie as DtoMovie } from "./domain/movie.dto";
+import { Movie as PrismaMovie } from "@prisma/client";
 
 export class MovieFactory {
-  static toMovieDTO(movie: Movie): Movie {
+
+  static toDomain(movie: PrismaMovie): DtoMovie {
     return {
       id: movie.id,
       title: movie.title,
       description: movie.description,
-      imageUrl: movie.imageUrl,
-      videoUrl: movie.videoUrl,
       category: movie.category,
-      rating: movie.rating,
-      releaseYear: movie.releaseYear,
+      thumbnail: movie.thumbnail,
+      youtubeUrl: movie.youtubeUrl || "",
+      views: movie.views,
+      ratings: [],
+      year: movie.year,
+      matchRate: movie.matchRate,
+      ageRating: movie.ageRating,
       duration: movie.duration,
-      createdAt: movie.createdAt,
     };
   }
 
-  static toMovieDTOList(movies: Movie[]): Movie[] {
-    return movies.map(MovieFactory.toMovieDTO);
+  static toDomainList(movies: PrismaMovie[]): DtoMovie[] {
+    return movies.map(MovieFactory.toDomain);
   }
 }

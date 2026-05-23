@@ -1,25 +1,25 @@
 import { NotFoundError } from "../../core/error";
-import { Movie } from "../../core/types";
+import { Movie, CreateMovie, UpdateMovie } from "./domain/movie.dto";
 import { MovieRepository } from "./domain/movie.repository";
-import { CreateMovieDTO, UpdateMovieDTO } from "./domain/movie.dto";
 import { MovieFactory } from "./factory";
+import { uploadToR2 } from "../../lib/r2";
 
 export class MovieService {
-  constructor(private repo: MovieRepository) {}
+  constructor(private repo: MovieRepository) { }
 
   async getAllMovies(): Promise<Movie[]> {
     const movies = await this.repo.findAll();
-    return MovieFactory.toMovieDTOList(movies);
+    return MovieFactory.toDomainList(movies);
   }
 
   async searchMovies(q: string): Promise<Movie[]> {
     const movies = await this.repo.search(q);
-    return MovieFactory.toMovieDTOList(movies);
+    return MovieFactory.toDomainList(movies);
   }
 
   async getMoviesByCategory(category: string): Promise<Movie[]> {
     const movies = await this.repo.findByCategory(category);
-    return MovieFactory.toMovieDTOList(movies);
+    return MovieFactory.toDomainList(movies);
   }
 
   async getMovieById(id: string): Promise<Movie> {
@@ -27,21 +27,37 @@ export class MovieService {
     if (!movie) {
       throw new NotFoundError(`Movie with id ${id} not found`);
     }
-    return MovieFactory.toMovieDTO(movie);
+    return MovieFactory.toDomain(movie);
   }
 
-  async createMovie(data: CreateMovieDTO): Promise<Movie> {
-    const movie = await this.repo.create(data);
-    return MovieFactory.toMovieDTO(movie);
+  async createMovie(data: CreateMovie): Promise<Movie> {
+    const thumbnailUrl = await uploadToR2(data.thumbnail);
+
+    const movie = await this.repo.create({
+      ...data,
+      thumbnail: thumbnailUrl,
+    });
+    return MovieFactory.toDomain(movie);
   }
 
-  async updateMovie(id: string, data: UpdateMovieDTO): Promise<Movie> {
+  async updateMovie(id: string, data: UpdateMovie): Promise<Movie> {
     const existing = await this.repo.findById(id);
     if (!existing) {
       throw new NotFoundError(`Movie with id ${id} not found`);
     }
-    const movie = await this.repo.update(id, data);
-    return MovieFactory.toMovieDTO(movie);
+
+    let thumbnailUrl = existing.thumbnail;
+    if (data.thumbnail instanceof File) {
+      thumbnailUrl = await uploadToR2(data.thumbnail);
+    } else if (typeof data.thumbnail === "string") {
+      thumbnailUrl = data.thumbnail;
+    }
+
+    const movie = await this.repo.update(id, {
+      ...data,
+      thumbnail: thumbnailUrl,
+    });
+    return MovieFactory.toDomain(movie);
   }
 
   async deleteMovie(id: string): Promise<Movie> {
@@ -50,7 +66,7 @@ export class MovieService {
       throw new NotFoundError(`Movie with id ${id} not found`);
     }
     const movie = await this.repo.delete(id);
-    return MovieFactory.toMovieDTO(movie);
+    return MovieFactory.toDomain(movie);
   }
 
   async getUserFavorites(userId: string): Promise<string[]> {

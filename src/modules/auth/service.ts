@@ -1,37 +1,36 @@
 import { hashPassword, verifyPassword, signJWT } from "../../core/utils/security";
 import { ConflictError, UnauthorizedError } from "../../core/error";
-import { User } from "../../core/types";
+import { User, RegisterUser, LoginUser } from "./domain/auth.dto";
 import { AuthRepository } from "./domain/auth.repository";
-import { RegisterDTO, LoginDTO, SafeUserDTO } from "./domain/auth.dto";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
   constructor(private repo: AuthRepository) { }
 
-  async register(data: RegisterDTO): Promise<User> {
-    const existing = await this.repo.findByUsernameOrEmail(data.username, data.email);
+  async register(data: RegisterUser): Promise<User> {
+    const existing = await this.repo.findByEmail(data.email);
     if (existing) {
-      throw new ConflictError("Username or email already exists");
+      throw new ConflictError("Email already exists");
     }
 
-    const passwordHash = await hashPassword(data.password || "");
+    const passwordHash = await hashPassword(data.password);
     return this.repo.create({
-      username: data.username,
-      email: data.email,
-      passwordHash,
       name: data.name,
-    });
+      email: data.email,
+      password: data.password,
+      passwordHash,
+    } as any);
   }
 
-  async login(data: LoginDTO): Promise<SafeUserDTO> {
-    const user = await this.repo.findByUsernameOrEmailWithPassword(data.username || "");
+  async login(data: LoginUser): Promise<User & { token?: string }> {
+    const user = await this.repo.findByEmailWithPassword(data.email);
     if (!user) {
-      throw new UnauthorizedError("Invalid username or password");
+      throw new UnauthorizedError("Invalid email or password");
     }
 
-    const isPasswordValid = await verifyPassword(data.password || "", user.password);
+    const isPasswordValid = await verifyPassword(data.password, user.password || "");
     if (!isPasswordValid) {
-      throw new UnauthorizedError("Invalid username or password");
+      throw new UnauthorizedError("Invalid email or password");
     }
 
     const token = await signJWT({ id: user.id });

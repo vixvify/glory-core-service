@@ -1,50 +1,35 @@
 import { prisma } from "../../lib/prisma";
-import { User } from "../../core/types";
+import { User, RegisterUser } from "../../modules/auth/domain/auth.dto";
 import { AuthRepository } from "../../modules/auth/domain/auth.repository";
-import { RegisterDTO } from "../../modules/auth/domain/auth.dto";
 
 export class AuthRepositoryImpl implements AuthRepository {
-  async findByUsernameOrEmail(username: string, email: string): Promise<User | null> {
-    const user = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { username },
-          { email },
-        ],
-      },
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
 
     if (!user) return null;
 
     return {
       id: user.id,
-      username: user.username,
+      name: user.name || "",
       email: user.email,
-      name: user.name,
-      role: user.role,
-      createdAt: user.createdAt,
+      role: user.role as "admin" | "user",
     };
   }
 
-  async findByUsernameOrEmailWithPassword(usernameOrEmail: string): Promise<(User & { password: string }) | null> {
-    const user = await prisma.user.findFirst({
-      where: {
-        OR: [
-          { username: usernameOrEmail },
-          { email: usernameOrEmail },
-        ],
-      },
+  async findByEmailWithPassword(email: string): Promise<(User & { password?: string }) | null> {
+    const user = await prisma.user.findUnique({
+      where: { email },
     });
 
     if (!user) return null;
 
     return {
       id: user.id,
-      username: user.username,
+      name: user.name || "",
       email: user.email,
-      name: user.name,
-      role: user.role,
-      createdAt: user.createdAt,
+      role: user.role as "admin" | "user",
       password: user.password,
     };
   }
@@ -58,32 +43,27 @@ export class AuthRepositoryImpl implements AuthRepository {
 
     return {
       id: user.id,
-      username: user.username,
+      name: user.name || "",
       email: user.email,
-      name: user.name,
-      role: user.role,
-      createdAt: user.createdAt,
+      role: user.role as "admin" | "user",
     };
   }
 
-  async create(data: RegisterDTO & { passwordHash: string }): Promise<User> {
+  async create(data: RegisterUser & { passwordHash: string }): Promise<User> {
     const user = await prisma.user.create({
       data: {
-        username: data.username,
         email: data.email,
         password: data.passwordHash,
-        name: data.name || null,
+        name: data.name,
         role: "user",
       },
     });
 
     return {
       id: user.id,
-      username: user.username,
+      name: user.name || "",
       email: user.email,
-      name: user.name,
-      role: user.role,
-      createdAt: user.createdAt,
+      role: user.role as "admin" | "user",
     };
   }
 }

@@ -3,8 +3,7 @@ import { authMiddleware } from "../../middleware/auth";
 import { AuthRepositoryImpl } from "../../infrastructure/auth/auth.repository";
 import { AuthService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import { User } from "../../core/types";
-import { registerSchema, loginSchema } from "./domain/auth.dto";
+import { User, registerSchema, loginSchema } from "./domain/auth.dto";
 
 const repo = new AuthRepositoryImpl();
 const service = new AuthService(repo);

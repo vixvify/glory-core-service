@@ -2,7 +2,7 @@ import { Elysia } from "elysia";
 import { verifyJWT } from "../core/utils/security";
 import { prisma } from "../lib/prisma";
 import { UnauthorizedError } from "../core/error";
-import { User } from "../core/types";
+import { User } from "../modules/auth/domain/auth.dto";
 
 export const authMiddleware = new Elysia({ name: "auth-middleware" })
   .derive({ as: "global" }, async ({ request }) => {
@@ -18,17 +18,20 @@ export const authMiddleware = new Elysia({ name: "auth-middleware" })
         return { user: null };
       }
 
-      const user = await prisma.user.findUnique({
+      const dbUser = await prisma.user.findUnique({
         where: { id: payload.id },
-        select: {
-          id: true,
-          username: true,
-          email: true,
-          name: true,
-          role: true,
-          createdAt: true,
-        },
       });
+
+      if (!dbUser) {
+        return { user: null };
+      }
+
+      const user: User = {
+        id: dbUser.id,
+        name: dbUser.name || "",
+        email: dbUser.email,
+        role: dbUser.role as "admin" | "user",
+      };
 
       return { user };
     } catch (error) {

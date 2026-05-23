@@ -1,15 +1,13 @@
-import { User } from "../../core/types";
-import { SafeUserDTO } from "./domain/auth.dto";
+import { User } from "./domain/auth.dto";
 
 export class AuthFactory {
-  static toSafeUserDTO(user: User, token?: string): SafeUserDTO {
+  static toSafeUserDTO(user: User, token?: string): User & { token?: string } {
     return {
       id: user.id,
-      username: user.username,
-      email: user.email,
       name: user.name,
+      email: user.email,
       role: user.role,
-      createdAt: user.createdAt,
+      password: "", // Avoid leaking password
       token,
     };
   }

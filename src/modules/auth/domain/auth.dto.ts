@@ -1,35 +1,31 @@
 import { t } from "elysia";
 
-export interface RegisterDTO {
-  username: string;
-  email: string;
-  password?: string;
-  name?: string;
-}
-
-export interface LoginDTO {
-  username?: string;
-  email?: string;
-  password?: string;
-}
-
-export interface SafeUserDTO {
+export interface User {
   id: string;
-  username: string;
+  name: string;
   email: string;
-  name: string | null;
-  role: string;
-  createdAt: Date | string;
-  token?: string;
+  password?: string;
+  role: "admin" | "user";
+}
+
+export interface RegisterUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginUser {
+  email: string;
+  password: string;
 }
 
 export const registerSchema = t.Object({
-  username: t.String({ minLength: 3 }),
+  name: t.String({ minLength: 2 }),
   email: t.String(),
   password: t.String({ minLength: 6 }),
 });
 
 export const loginSchema = t.Object({
-  username: t.String({ minLength: 3 }),
+  email: t.String(),
   password: t.String({ minLength: 6 }),
 });

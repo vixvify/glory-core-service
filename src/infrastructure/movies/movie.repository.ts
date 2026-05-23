@@ -1,16 +1,16 @@
 import { prisma } from "../../lib/prisma";
-import { Movie } from "../../core/types";
+import { CreateMovie } from "../../modules/movies/domain/movie.dto";
 import { MovieRepository } from "../../modules/movies/domain/movie.repository";
-import { CreateMovieDTO, UpdateMovieDTO } from "../../modules/movies/domain/movie.dto";
+import { Movie as PrismaMovie } from "@prisma/client";
 
 export class MovieRepositoryImpl implements MovieRepository {
-  async findAll(): Promise<Movie[]> {
+  async findAll(): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
       orderBy: { createdAt: "desc" },
     });
   }
 
-  async search(q: string): Promise<Movie[]> {
+  async search(q: string): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
       where: {
         OR: [
@@ -22,7 +22,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async findByCategory(category: string): Promise<Movie[]> {
+  async findByCategory(category: string): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
       where: {
         category: { equals: category, mode: "insensitive" },
@@ -31,44 +31,46 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async findById(id: string): Promise<Movie | null> {
+  async findById(id: string): Promise<PrismaMovie | null> {
     return prisma.movie.findUnique({
       where: { id },
     });
   }
 
-  async create(data: CreateMovieDTO): Promise<Movie> {
+  async create(data: Omit<CreateMovie, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
     return prisma.movie.create({
       data: {
         title: data.title,
         description: data.description,
-        imageUrl: data.imageUrl,
-        videoUrl: data.videoUrl || null,
+        thumbnail: data.thumbnail,
+        youtubeUrl: data.youtubeUrl,
         category: data.category,
-        rating: Number(data.rating),
-        releaseYear: Number(data.releaseYear),
+        year: Number(data.year),
+        matchRate: Number(data.matchRate),
+        ageRating: data.ageRating,
         duration: Number(data.duration),
       },
     });
   }
 
-  async update(id: string, data: UpdateMovieDTO): Promise<Movie> {
+  async update(id: string, data: Omit<CreateMovie, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
     return prisma.movie.update({
       where: { id },
       data: {
         title: data.title,
         description: data.description,
-        imageUrl: data.imageUrl,
-        videoUrl: data.videoUrl || null,
+        thumbnail: data.thumbnail,
+        youtubeUrl: data.youtubeUrl,
         category: data.category,
-        rating: Number(data.rating),
-        releaseYear: Number(data.releaseYear),
+        year: Number(data.year),
+        matchRate: Number(data.matchRate),
+        ageRating: data.ageRating,
         duration: Number(data.duration),
       },
     });
   }
 
-  async delete(id: string): Promise<Movie> {
+  async delete(id: string): Promise<PrismaMovie> {
     return prisma.movie.delete({
       where: { id },
     });
