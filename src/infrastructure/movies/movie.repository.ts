@@ -1,7 +1,8 @@
 import { prisma } from "../../lib/prisma";
-import { CreateMovie } from "../../modules/movies/domain/movie.dto";
+import { CreateMovieDTO, UpdateMovieDTO } from "../../modules/movies/domain/movie.dto";
 import { MovieRepository } from "../../modules/movies/domain/movie.repository";
 import { Movie as PrismaMovie } from "@prisma/client";
+import { Rating } from "../../modules/movies/domain/rating";
 
 export class MovieRepositoryImpl implements MovieRepository {
   async findAll(): Promise<PrismaMovie[]> {
@@ -37,7 +38,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async create(data: Omit<CreateMovie, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
+  async create(data: Omit<CreateMovieDTO, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
     return prisma.movie.create({
       data: {
         title: data.title,
@@ -46,14 +47,14 @@ export class MovieRepositoryImpl implements MovieRepository {
         youtubeUrl: data.youtubeUrl,
         category: data.category,
         year: Number(data.year),
+        duration: Number(data.duration),
         matchRate: Number(data.matchRate),
         ageRating: data.ageRating,
-        duration: Number(data.duration),
       },
     });
   }
 
-  async update(id: string, data: Omit<CreateMovie, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
+  async update(id: string, data: Omit<UpdateMovieDTO, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
     return prisma.movie.update({
       where: { id },
       data: {

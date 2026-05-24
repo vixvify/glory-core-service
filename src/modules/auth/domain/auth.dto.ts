@@ -8,13 +8,13 @@ export interface User {
   role: "admin" | "user";
 }
 
-export interface RegisterUser {
+export interface RegisterUserDTO {
   name: string;
   email: string;
   password: string;
 }
 
-export interface LoginUser {
+export interface LoginUserDTO {
   email: string;
   password: string;
 }

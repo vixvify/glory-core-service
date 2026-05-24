@@ -1,13 +1,13 @@
 import { hashPassword, verifyPassword, signJWT } from "../../core/utils/security";
 import { ConflictError, UnauthorizedError } from "../../core/error";
-import { User, RegisterUser, LoginUser } from "./domain/auth.dto";
+import { User, RegisterUserDTO, LoginUserDTO } from "./domain/auth.dto";
 import { AuthRepository } from "./domain/auth.repository";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
   constructor(private repo: AuthRepository) { }
 
-  async register(data: RegisterUser): Promise<User> {
+  async register(data: RegisterUserDTO): Promise<User> {
     const existing = await this.repo.findByEmail(data.email);
     if (existing) {
       throw new ConflictError("Email already exists");
@@ -22,7 +22,7 @@ export class AuthService {
     } as any);
   }
 
-  async login(data: LoginUser): Promise<User & { token?: string }> {
+  async login(data: LoginUserDTO): Promise<User & { token?: string }> {
     const user = await this.repo.findByEmailWithPassword(data.email);
     if (!user) {
       throw new UnauthorizedError("Invalid email or password");

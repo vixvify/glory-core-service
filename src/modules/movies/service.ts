@@ -1,5 +1,5 @@
 import { NotFoundError } from "../../core/error";
-import { Movie, CreateMovie, UpdateMovie } from "./domain/movie.dto";
+import { Movie, CreateMovieDTO, UpdateMovieDTO } from "./domain/movie.dto";
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
 import { uploadToR2 } from "../../lib/r2";
@@ -30,7 +30,7 @@ export class MovieService {
     return MovieFactory.toDomain(movie);
   }
 
-  async createMovie(data: CreateMovie): Promise<Movie> {
+  async createMovie(data: CreateMovieDTO): Promise<Movie> {
     const thumbnailUrl = await uploadToR2(data.thumbnail);
 
     const movie = await this.repo.create({
@@ -40,7 +40,7 @@ export class MovieService {
     return MovieFactory.toDomain(movie);
   }
 
-  async updateMovie(id: string, data: UpdateMovie): Promise<Movie> {
+  async updateMovie(id: string, data: UpdateMovieDTO): Promise<Movie> {
     const existing = await this.repo.findById(id);
     if (!existing) {
       throw new NotFoundError(`Movie with id ${id} not found`);

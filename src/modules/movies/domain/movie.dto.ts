@@ -1,5 +1,6 @@
 import { t } from "elysia";
 import { Rating } from "./rating";
+import { User } from "../../auth/domain/auth.dto";
 
 export interface Movie {
   id: string;
@@ -14,9 +15,20 @@ export interface Movie {
   matchRate: number;
   ageRating: string;
   duration: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export interface CreateMovie {
+export interface FavoriteMovie {
+  id: string;
+  userId: string;
+  movieId: string;
+  user: User;
+  movie: Movie;
+  createdAt: Date;
+}
+
+export interface CreateMovieDTO {
   title: string;
   description: string;
   category: string;
@@ -28,8 +40,7 @@ export interface CreateMovie {
   duration: number;
 }
 
-export interface UpdateMovie {
-  id: string;
+export interface UpdateMovieDTO {
   title: string;
   description: string;
   category: string;
@@ -56,22 +67,21 @@ export const createMovieSchema = t.Object({
   thumbnail: t.File(),
   youtubeUrl: t.String(),
   year: t.Numeric(),
+  duration: t.Numeric(),
   matchRate: t.Numeric(),
   ageRating: t.String(),
-  duration: t.Numeric(),
 });
 
 export const updateMovieSchema = t.Object({
-  id: t.String(),
   title: t.String(),
   description: t.String(),
   category: t.String(),
   thumbnail: t.Union([t.File(), t.String()]),
   youtubeUrl: t.String(),
   year: t.Numeric(),
+  duration: t.Numeric(),
   matchRate: t.Numeric(),
   ageRating: t.String(),
-  duration: t.Numeric(),
 });
 
 export const searchMovieSchema = t.Object({
