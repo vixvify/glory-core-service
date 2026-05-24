@@ -15,5 +15,8 @@
     "bun-types": "latest",
     "prisma": "5"
   },
+  "prisma": {
+    "seed": "bun run prisma/seed.ts"
+  },
   "module": "src/index.js"
 }

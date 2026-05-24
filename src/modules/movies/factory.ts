@@ -17,6 +17,8 @@ export class MovieFactory {
       matchRate: movie.matchRate,
       ageRating: movie.ageRating,
       duration: movie.duration,
+      createdAt: movie.createdAt,
+      updatedAt: movie.updatedAt,
     };
   }
 
