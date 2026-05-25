@@ -85,6 +85,8 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       body: createMovieSchema,
+      requireAuth: true,
+      requireRole: "admin"
     }
   )
   .put(
@@ -97,10 +99,15 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       body: updateMovieSchema,
+      requireAuth: true,
+      requireRole: "admin"
     }
   )
   .delete("/:id", async ({ params }) => {
     const { id } = params;
     const movie = await service.deleteMovie(id);
     return formatSuccess(movie, "Movie deleted successfully");
+  }, {
+    requireAuth: true,
+    requireRole: "admin"
   });

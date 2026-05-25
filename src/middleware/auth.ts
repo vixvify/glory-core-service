@@ -1,11 +1,26 @@
 import { Elysia } from "elysia";
 import { AuthRepositoryImpl } from "../infrastructure/auth/auth.repository";
 import { AuthService } from "../modules/auth/service";
-import { UnauthorizedError } from "../core/error";
+import { UnauthorizedError, ForbiddenError } from "../core/error";
 import { User } from "../modules/auth/domain/auth";
 
 const repo = new AuthRepositoryImpl();
 const service = new AuthService(repo);
+
+type Role = "admin" | "user";
+
+const hasRole = (
+  userRole: Role,
+  requiredRoles?: Role | Role[]
+) => {
+  if (!requiredRoles) return true;
+
+  if (Array.isArray(requiredRoles)) {
+    return requiredRoles.includes(userRole);
+  }
+
+  return userRole === requiredRoles;
+};
 
 export const authMiddleware = new Elysia({ name: "auth-middleware" })
   .derive({ as: "global" }, async ({ request, cookie: { auth_token } }) => {
@@ -32,9 +47,24 @@ export const authMiddleware = new Elysia({ name: "auth-middleware" })
   .macro(({ onBeforeHandle }) => ({
     requireAuth(required = true) {
       if (!required) return;
+
       onBeforeHandle(({ user }: { user?: User | null }) => {
         if (!user) {
-          throw new UnauthorizedError("You must be logged in to access this resource");
+          throw new UnauthorizedError("Unauthorized");
+        }
+      });
+    },
+
+    requireRole(role: Role | Role[]) {
+      onBeforeHandle(({ user }: { user?: User | null }) => {
+        if (!user) {
+          throw new UnauthorizedError("Unauthorized");
+        }
+
+        const roles = Array.isArray(role) ? role : [role];
+
+        if (!roles.includes(user.role as Role)) {
+          throw new ForbiddenError("Forbidden");
         }
       });
     },
