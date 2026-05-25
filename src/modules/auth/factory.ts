@@ -1,4 +1,4 @@
-import { User } from "./domain/auth.dto";
+import { User } from "./domain/auth";
 
 export class AuthFactory {
   static toSafeUserDTO(user: User, token?: string): User & { token?: string } {
@@ -7,7 +7,6 @@ export class AuthFactory {
       name: user.name,
       email: user.email,
       role: user.role,
-      password: "", // Avoid leaking password
       token,
     };
   }

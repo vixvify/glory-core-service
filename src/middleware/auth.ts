@@ -1,38 +1,29 @@
 import { Elysia } from "elysia";
-import { verifyJWT } from "../core/utils/security";
-import { prisma } from "../lib/prisma";
+import { AuthRepositoryImpl } from "../infrastructure/auth/auth.repository";
+import { AuthService } from "../modules/auth/service";
 import { UnauthorizedError } from "../core/error";
-import { User } from "../modules/auth/domain/auth.dto";
+import { User } from "../modules/auth/domain/auth";
+
+const repo = new AuthRepositoryImpl();
+const service = new AuthService(repo);
 
 export const authMiddleware = new Elysia({ name: "auth-middleware" })
-  .derive({ as: "global" }, async ({ request }) => {
-    const authHeader = request.headers.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  .derive({ as: "global" }, async ({ request, cookie: { auth_token } }) => {
+    let token = auth_token.value as string | undefined;
+
+    if (!token) {
+      const authHeader = request.headers.get("authorization");
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        token = authHeader.split(" ")[1];
+      }
+    }
+
+    if (!token) {
       return { user: null };
     }
 
-    const token = authHeader.split(" ")[1];
     try {
-      const payload = await verifyJWT(token);
-      if (!payload || !payload.id) {
-        return { user: null };
-      }
-
-      const dbUser = await prisma.user.findUnique({
-        where: { id: payload.id },
-      });
-
-      if (!dbUser) {
-        return { user: null };
-      }
-
-      const user: User = {
-        id: dbUser.id,
-        name: dbUser.name || "",
-        email: dbUser.email,
-        role: dbUser.role as "admin" | "user",
-      };
-
+      const user = await service.verifyToken(token);
       return { user };
     } catch (error) {
       return { user: null };

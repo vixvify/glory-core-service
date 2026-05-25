@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import { User, RegisterUserDTO } from "../../modules/auth/domain/auth.dto";
+import { User, RegisterUserInput } from "../../modules/auth/domain/auth";
 import { AuthRepository } from "../../modules/auth/domain/auth.repository";
 
 export class AuthRepositoryImpl implements AuthRepository {
@@ -49,11 +49,11 @@ export class AuthRepositoryImpl implements AuthRepository {
     };
   }
 
-  async create(data: RegisterUserDTO & { passwordHash: string }): Promise<User> {
+  async create(data: RegisterUserInput & { password: string }): Promise<User> {
     const user = await prisma.user.create({
       data: {
         email: data.email,
-        password: data.passwordHash,
+        password: data.password,
         name: data.name,
         role: "user",
       },

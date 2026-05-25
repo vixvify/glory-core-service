@@ -1,13 +1,13 @@
-import { hashPassword, verifyPassword, signJWT } from "../../core/utils/security";
+import { hashPassword, verifyPassword, signJWT, verifyJWT } from "../../core/utils/security";
 import { AppError, ConflictError, UnauthorizedError, BadRequestError } from "../../core/error";
-import { User, RegisterUserDTO, LoginUserDTO } from "./domain/auth.dto";
+import { User, RegisterUserInput, LoginUserInput } from "./domain/auth";
 import { AuthRepository } from "./domain/auth.repository";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
   constructor(private repo: AuthRepository) { }
 
-  async register(data: RegisterUserDTO): Promise<User> {
+  async register(data: RegisterUserInput): Promise<User> {
     try {
       const existing = await this.repo.findByEmail(data.email);
       if (existing) {
@@ -18,8 +18,7 @@ export class AuthService {
       return await this.repo.create({
         name: data.name,
         email: data.email,
-        password: data.password,
-        passwordHash,
+        password: passwordHash,
       } as any);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
@@ -28,7 +27,7 @@ export class AuthService {
     }
   }
 
-  async login(data: LoginUserDTO): Promise<User & { token?: string }> {
+  async login(data: LoginUserInput): Promise<User & { token?: string }> {
     try {
       const user = await this.repo.findByEmailWithPassword(data.email);
       if (!user) {
@@ -40,7 +39,7 @@ export class AuthService {
         throw new UnauthorizedError("Invalid email or password");
       }
 
-      const token = await signJWT({ id: user.id });
+      const token = await signJWT({ id: user.id, name: user.name, email: user.email, role: user.role })
 
       return AuthFactory.toSafeUserDTO(user, token);
     } catch (error: unknown) {
@@ -57,6 +56,18 @@ export class AuthService {
       if (error instanceof AppError) throw error;
       const message = error instanceof Error ? error.message : "Failed to retrieve user profile";
       throw new BadRequestError(message, error);
+    }
+  }
+
+  async verifyToken(token: string): Promise<User | null> {
+    try {
+      const payload = await verifyJWT(token);
+      if (!payload || !payload.id) {
+        return null;
+      }
+      return await this.repo.findById(payload.id);
+    } catch {
+      return null;
     }
   }
 }

@@ -11,14 +11,20 @@ export class MovieRepositoryImpl implements MovieRepository {
   }
 
   async search(q: string): Promise<PrismaMovie[]> {
+    const terms = q.trim().split(/\s+/).filter(Boolean);
+    if (terms.length === 0) {
+      return prisma.movie.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+    }
+
     return prisma.movie.findMany({
       where: {
-        OR: [
-          { title: { contains: q, mode: "insensitive" } },
-          { description: { contains: q, mode: "insensitive" } },
-        ],
+        title: {
+          contains: q,
+          mode: "insensitive",
+        },
       },
-      orderBy: { createdAt: "desc" },
     });
   }
 

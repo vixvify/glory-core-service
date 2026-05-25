@@ -1,6 +1,6 @@
 import { t } from "elysia";
 import { Rating } from "./rating";
-import { User } from "../../auth/domain/auth.dto";
+import { User } from "../../auth/domain/auth";
 
 export interface Movie {
     id: string;
@@ -93,29 +93,29 @@ export const favoriteSchema = t.Object({
 });
 
 export const CATEGORIES = [
-  "Action",
-  "Sci-Fi",
-  "Horror",
-  "Comedy",
-  "Thriller",
-  "Drama",
-  "Romance",
-  "Adventure",
-  "Fantasy",
-  "Animation",
-  "Biography",
-  "Documentary",
-  "Family",
-  "Music",
-  "Mystery",
-  "Sport",
-  "Western"
+    "Action",
+    "Sci-Fi",
+    "Horror",
+    "Comedy",
+    "Thriller",
+    "Drama",
+    "Romance",
+    "Adventure",
+    "Fantasy",
+    "Animation",
+    "Biography",
+    "Documentary",
+    "Family",
+    "Music",
+    "Mystery",
+    "Sport",
+    "Western"
 ] as const;
 
 export const AGE_RATINGS = [
-  "G",
-  "PG",
-  "PG-13",
-  "NC-17",
-  "R"
+    "G",
+    "PG",
+    "PG-13",
+    "NC-17",
+    "R"
 ] as const;

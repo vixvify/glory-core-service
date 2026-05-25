@@ -3,7 +3,8 @@ import { authMiddleware } from "../../middleware/auth";
 import { AuthRepositoryImpl } from "../../infrastructure/auth/auth.repository";
 import { AuthService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import { User, registerSchema, loginSchema } from "./domain/auth.dto";
+import { registerSchema, loginSchema, User } from "./domain/auth";
+import { config } from "../../core/config";
 
 const repo = new AuthRepositoryImpl();
 const service = new AuthService(repo);
@@ -22,15 +23,27 @@ export const authRouter = new Elysia({ prefix: "/auth" })
   )
   .post(
     "/login",
-    async ({ body }) => {
-      const safeUser = await service.login(body);
+    async ({ body, cookie: { auth_token } }) => {
+      const { token, ...safeUser } = await service.login(body);
+
+      const isProd = config.env === "production";
+      auth_token.set({
+        value: token,
+        httpOnly: true,
+        path: "/",
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax",
+        maxAge: 86400,
+      });
+
       return formatSuccess(safeUser, "Logged in successfully");
     },
     {
       body: loginSchema,
     }
   )
-  .post("/logout", async () => {
+  .post("/logout", async ({ cookie: { auth_token } }) => {
+    auth_token.remove();
     return formatSuccess(null, "Logged out successfully");
   })
   .get(
