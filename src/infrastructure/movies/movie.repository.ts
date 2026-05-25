@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { CreateMovieInput, UpdateMovieInput } from "../../modules/movies/domain/movie";
 import { MovieRepository } from "../../modules/movies/domain/movie.repository";
 import { Movie as PrismaMovie } from "@prisma/client";
+import { Rating, RatingInput } from "../../modules/movies/domain/rating";
 
 export class MovieRepositoryImpl implements MovieRepository {
   async findAll(): Promise<PrismaMovie[]> {
@@ -116,6 +117,77 @@ export class MovieRepositoryImpl implements MovieRepository {
       where: {
         userId,
         movieId,
+      },
+    });
+  }
+  async addRating(data: RatingInput): Promise<void> {
+    await prisma.rating.create({
+      data: {
+        userId: data.userId,
+        movieId: data.movieId,
+        stars: data.stars,
+      },
+    });
+  }
+  async getRatingsByUserId(userId: string): Promise<Rating[]> {
+    const ratings = await prisma.rating.findMany({
+      where: { userId },
+      include: { movie: true, user: true },
+    });
+
+    return ratings.map((rating) => ({
+      ...rating,
+      user: {
+        ...rating.user,
+        name: rating.user.name ?? "Unknown User",
+        role: rating.user.role as "user" | "admin",
+      },
+    }));
+  }
+  async getRatingByMovieId(movieId: string): Promise<Rating[]> {
+    const ratings = await prisma.rating.findMany({
+      where: { movieId },
+      include: { movie: true, user: true },
+    });
+
+    return ratings.map((rating) => ({
+      ...rating,
+      user: {
+        ...rating.user,
+        name: rating.user.name ?? "Unknown User",
+        role: rating.user.role as "user" | "admin",
+      },
+    }));
+  }
+  async deleteRating(userId: string, movieId: string): Promise<void> {
+    await prisma.rating.deleteMany({
+      where: {
+        userId,
+        movieId,
+      },
+    });
+  }
+  async checkRating(userId: string, movieId: string): Promise<boolean> {
+    const existing = await prisma.rating.findUnique({
+      where: {
+        userId_movieId: {
+          userId,
+          movieId,
+        },
+      },
+    });
+    return !!existing;
+  }
+  async updateRating(data: RatingInput): Promise<void> {
+    await prisma.rating.update({
+      where: {
+        userId_movieId: {
+          userId: data.userId,
+          movieId: data.movieId,
+        },
+      },
+      data: {
+        stars: data.stars,
       },
     });
   }

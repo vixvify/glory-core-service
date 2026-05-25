@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 export const seedMovies: Prisma.MovieCreateInput[] = [
   {
     title: "The Dark Knight",
-    description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    description: "เมื่อโจ๊กเกอร์อาชญากรสุดอันตรายสร้างความโกลาหลให้เมืองก็อตแธม แบทแมนต้องเผชิญบททดสอบทั้งร่างกายและจิตใจครั้งใหญ่ในการปกป้องความยุติธรรม",
     thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
     category: "Action",
@@ -15,7 +15,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Inception",
-    description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project.",
+    description: "หัวขโมยผู้เชี่ยวชาญด้านการแทรกซึมความฝันได้รับภารกิจปลูกฝังความคิดในจิตใจของซีอีโอ แต่เรื่องราวในอดีตของเขาอาจทำให้ทุกอย่างล้มเหลว",
     thumbnail: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=YoHD9XEInc0",
     category: "Sci-Fi",
@@ -27,7 +27,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Interstellar",
-    description: "When Earth becomes uninhabitable, a team of explorers travels through a wormhole in space in an attempt to ensure humanity's survival.",
+    description: "เมื่อโลกใกล้ไม่สามารถอยู่อาศัยได้อีกต่อไป ทีมนักสำรวจจึงเดินทางผ่านรูหนอนอวกาศเพื่อค้นหาความหวังในการอยู่รอดของมนุษยชาติ",
     thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=zSWdZVtXT7E",
     category: "Sci-Fi",
@@ -39,7 +39,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Godfather",
-    description: "Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger.",
+    description: "ดอน วีโต คอร์เลโอเน หัวหน้าตระกูลมาเฟีย ตัดสินใจส่งต่ออาณาจักรให้ลูกชายคนเล็ก แต่การตัดสินใจครั้งนี้กลับนำอันตรายมาสู่ครอบครัว",
     thumbnail: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=UaVTIH8mujA",
     category: "Drama",
@@ -51,7 +51,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Spirited Away",
-    description: "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
+    description: "เด็กหญิงวัย 10 ปีหลงเข้าไปในโลกแห่งเทพเจ้าและวิญญาณ ระหว่างการย้ายบ้าน พร้อมต้องหาทางช่วยพ่อแม่และกลับสู่โลกมนุษย์",
     thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=ByXuk9QqQkk",
     category: "Animation",
@@ -63,7 +63,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "La La Land",
-    description: "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future.",
+    description: "นักเปียโนและนักแสดงสาวในลอสแอนเจลิสตกหลุมรักกัน ท่ามกลางความฝันและเส้นทางอาชีพที่อาจพาพวกเขาห่างไกลกัน",
     thumbnail: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=0pdqf4P9MB8",
     category: "Romance",
@@ -75,7 +75,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Knives Out",
-    description: "A detective investigates the death of the patriarch of an eccentric, combative family.",
+    description: "นักสืบเอกชนเข้ามาสืบสวนการเสียชีวิตปริศนาของหัวหน้าครอบครัวผู้มั่งคั่งและเต็มไปด้วยความขัดแย้ง",
     thumbnail: "https://images.unsplash.com/photo-1585647347483-22b66260dfff?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=qGqiHJTsRkQ",
     category: "Comedy",
@@ -87,7 +87,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Parasite",
-    description: "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    description: "ความโลภและชนชั้นทางสังคมทำให้ความสัมพันธ์ระหว่างครอบครัวยากจนและครอบครัวมหาเศรษฐีเริ่มบิดเบี้ยวและอันตราย",
     thumbnail: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=5xH0HfJHsaY",
     category: "Thriller",
@@ -99,7 +99,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Pulp Fiction",
-    description: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    description: "เรื่องราวชีวิตของนักฆ่า นักมวย เจ้าพ่อ และโจรปล้นร้านอาหารเชื่อมโยงกันผ่านเหตุการณ์รุนแรงและการไถ่บาป",
     thumbnail: "https://images.unsplash.com/photo-1593085512500-5d55148d6f0d?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=s7EgWkyY_lU",
     category: "Drama",
@@ -111,7 +111,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Matrix",
-    description: "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+    description: "แฮกเกอร์หนุ่มค้นพบว่าชีวิตที่เขาอาศัยอยู่เป็นเพียงภาพลวงตาที่ถูกสร้างขึ้นโดยปัญญาประดิษฐ์อันชั่วร้าย",
     thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=vKQi3bBA1y8",
     category: "Sci-Fi",
@@ -123,7 +123,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Avengers: Endgame",
-    description: "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions.",
+    description: "หลังเหตุการณ์ทำลายล้างจากธานอส เหล่าอเวนเจอร์ที่เหลือต้องรวมพลังอีกครั้งเพื่อกอบกู้จักรวาลและย้อนคืนทุกสิ่ง",
     thumbnail: "https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=TcMBFSGVi1c",
     category: "Action",
@@ -135,7 +135,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Titanic",
-    description: "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+    description: "หญิงสาวชนชั้นสูงตกหลุมรักศิลปินหนุ่มยากจนบนเรือไททานิค ท่ามกลางโศกนาฏกรรมครั้งประวัติศาสตร์",
     thumbnail: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=CHekzSiZ47I",
     category: "Romance",
@@ -147,7 +147,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Jurassic Park",
-    description: "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    description: "สวนสนุกไดโนเสาร์ที่สร้างจากการโคลนนิ่งเกิดความวุ่นวาย เมื่อระบบรักษาความปลอดภัยล้มเหลวและไดโนเสาร์หลุดออกมา",
     thumbnail: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=QWBK657U9q4",
     category: "Adventure",
@@ -159,7 +159,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Shawshank Redemption",
-    description: "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
+    description: "มิตรภาพของนักโทษสองคนค่อย ๆ ก่อตัวขึ้นภายในเรือนจำ พร้อมความหวังและการไถ่บาปที่เปลี่ยนชีวิตพวกเขา",
     thumbnail: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=PLl99DlL6b4",
     category: "Drama",
@@ -171,7 +171,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Gladiator",
-    description: "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.",
+    description: "อดีตนายพลโรมันออกเดินทางล้างแค้นจักรพรรดิผู้โหดเหี้ยมที่ฆ่าครอบครัวของเขาและส่งเขาไปเป็นทาส",
     thumbnail: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=P5ieIbInFpg",
     category: "Action",
@@ -183,7 +183,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Whiplash",
-    description: "A promising young drummer enrolls at a cut-throat music conservatory where his dreams of greatness are mentored by an instructor who will stop at nothing to realize a student's potential.",
+    description: "มือกลองหนุ่มผู้มีความฝันต้องเผชิญครูสอนดนตรีสุดโหดที่ผลักดันลูกศิษย์จนถึงขีดจำกัด",
     thumbnail: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=7d_jQyGLDVc",
     category: "Music",
@@ -195,7 +195,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Lion King",
-    description: "A young lion prince is cast out of his pride by his cruel uncle, who claims he caused his father's death. While the uncle rules with an iron paw, the prince grows up beyond the Savannah.",
+    description: "ลูกสิงโตเจ้าชายต้องเผชิญการสูญเสียและเรียนรู้เส้นทางการเติบโตเพื่อกลับมาทวงบัลลังก์ของตน",
     thumbnail: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=lFzVJEksoDY",
     category: "Animation",
@@ -207,7 +207,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Your Name",
-    description: "Two strangers find themselves linked in a bizarre way. When a connection is formed, will distance be the only thing to keep them apart?",
+    description: "วัยรุ่นชายหญิงสองคนสลับร่างกันอย่างลึกลับ และเริ่มสร้างสายสัมพันธ์ที่เปลี่ยนชีวิตของทั้งคู่",
     thumbnail: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=s0wTdCGKrJY",
     category: "Animation",
@@ -219,7 +219,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Coco",
-    description: "Aspiring musician Miguel, confronted with his family's ancestral ban on music, enters the Land of the Dead to find his great-great-grandfather, a legendary singer.",
+    description: "เด็กชายผู้รักดนตรีเดินทางสู่ดินแดนแห่งความตายเพื่อค้นหาความจริงเกี่ยวกับครอบครัวและความฝันของตัวเอง",
     thumbnail: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=Ga6RYejoS1I",
     category: "Animation",
@@ -231,7 +231,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Pee Mak",
-    description: "After serving in a brutal war, Mak returns home to his beautiful wife Nak and four military comrades, only to find rumors that Nak has actually died and is now a ghost.",
+    description: "ชายหนุ่มกลับบ้านหลังสงครามพร้อมเพื่อนสนิท แต่กลับพบข่าวลือว่าภรรยาของเขากลายเป็นผีไปแล้ว",
     thumbnail: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=5Vz5Y-yK_U0",
     category: "Comedy",
@@ -243,7 +243,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Bad Genius",
-    description: "Lynn, a genius high school student who makes money by cheating on tests, receives a new task that leads her to Sydney, Australia to pull off an international exams heist.",
+    description: "นักเรียนอัจฉริยะใช้ความสามารถในการโกงข้อสอบเพื่อหาเงิน จนนำไปสู่ภารกิจระดับนานาชาติ",
     thumbnail: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=CLHe8J_SNDc",
     category: "Thriller",
@@ -255,7 +255,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Spider-Man: Into the Spider-Verse",
-    description: "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
+    description: "ไมลส์ โมราเลสต้องร่วมมือกับสไปเดอร์แมนจากหลายมิติเพื่อหยุดภัยคุกคามที่อาจทำลายทุกจักรวาล",
     thumbnail: "https://images.unsplash.com/photo-1608889175123-8ee362201f81?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=g4Hbz2yLXGE",
     category: "Animation",
@@ -267,7 +267,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Dune",
-    description: "A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir is troubled by visions of a dark future.",
+    description: "ทายาทตระกูลขุนนางต้องเข้าไปพัวพันกับสงครามแย่งชิงทรัพยากรล้ำค่าที่สุดในจักรวาล",
     thumbnail: "https://images.unsplash.com/photo-1547483238-f400e65ccd56?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=n9DwoQ7HWvI",
     category: "Sci-Fi",
@@ -279,7 +279,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Mad Max: Fury Road",
-    description: "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.",
+    description: "หญิงสาวผู้กล้าหาญร่วมมือกับแม็กซ์เพื่อหลบหนีจากทรราชในโลกหลังหายนะอันโหดร้าย",
     thumbnail: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=hEJnMQG9ev8",
     category: "Action",
@@ -291,7 +291,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Get Out",
-    description: "A young African-American visits his white girlfriend's parents for the weekend, where his simmering uneasiness about their reception eventually reaches a boiling point.",
+    description: "ชายหนุ่มเริ่มสงสัยครอบครัวของแฟนสาวระหว่างการไปเยือนบ้าน และค้นพบความลับสุดสยอง",
     thumbnail: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=sRfnebToHE4",
     category: "Thriller",
@@ -303,7 +303,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Conjuring",
-    description: "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.",
+    description: "นักสืบเรื่องเหนือธรรมชาติเข้าช่วยครอบครัวที่ถูกคุกคามจากวิญญาณร้ายในบ้านไร่",
     thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=k10ETZ41q5o",
     category: "Horror",
@@ -315,7 +315,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "A Quiet Place",
-    description: "A family struggles for survival in a world where most humans have been killed by blind but noise-sensitive creatures. They must live in silence to survive.",
+    description: "ครอบครัวหนึ่งต้องใช้ชีวิตอย่างเงียบที่สุดเพื่อเอาชีวิตรอดจากสิ่งมีชีวิตที่ล่าด้วยเสียง",
     thumbnail: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=WR7cc5t7tv8",
     category: "Horror",
@@ -327,7 +327,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Black Panther",
-    description: "T'Challa, heir to the hidden and advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+    description: "ทีชัลลา ราชาแห่งวากานด้า ต้องก้าวขึ้นเป็นผู้นำคนใหม่และเผชิญหน้ากับศัตรูจากอดีตของอาณาจักร",
     thumbnail: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=xjDjIWPwcPU",
     category: "Action",
@@ -339,7 +339,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Bohemian Rhapsody",
-    description: "The story of the legendary British rock band Queen and their lead singer Freddie Mercury, leading up to their famous performance at Live Aid in 1985.",
+    description: "เรื่องราวของวงร็อกระดับตำนาน Queen และเฟรดดี้ เมอร์คิวรี ก่อนการแสดงประวัติศาสตร์ในคอนเสิร์ต Live Aid ปี 1985",
     thumbnail: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=mP0VHJYFO98",
     category: "Biography",
@@ -351,7 +351,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Social Network",
-    description: "As Harvard student Mark Zuckerberg creates the social networking site that would become known as Facebook, he is sued by the twins who claimed he stole their idea, and by the co-founder who was later squeezed out.",
+    description: "มาร์ก ซักเคอร์เบิร์ก นักศึกษาฮาร์วาร์ด สร้าง Facebook ขึ้นมา แต่ความสำเร็จก็นำมาซึ่งคดีความและความขัดแย้ง",
     thumbnail: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=lB95KLKe0x8",
     category: "Biography",
@@ -363,7 +363,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Truman Show",
-    description: "An insurance salesman discovers his whole life is actually a reality TV show broadcast to the entire world, prompting him to escape his artificial world.",
+    description: "ชายขายประกันค้นพบว่าชีวิตทั้งชีวิตของเขาเป็นเพียงรายการเรียลลิตี้โชว์ที่ถ่ายทอดสดไปทั่วโลก",
     thumbnail: "https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=dlnmQbPGuls",
     category: "Comedy",
@@ -375,7 +375,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Forrest Gump",
-    description: "The history of the United States from the 1950s to the 1970s unfolds from the perspective of an Alabama man with an IQ of 75, who yearns to be reunited with his childhood sweetheart.",
+    description: "ชายผู้มี IQ ต่ำกว่าค่าเฉลี่ยได้เข้าไปเกี่ยวข้องกับเหตุการณ์สำคัญในประวัติศาสตร์อเมริกา พร้อมตามหาความรักในวัยเด็ก",
     thumbnail: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=bLvqoHBptjg",
     category: "Drama",
@@ -387,7 +387,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Spider-Man: No Way Home",
-    description: "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.",
+    description: "เมื่อความลับของสไปเดอร์แมนถูกเปิดเผย ปีเตอร์ ปาร์คเกอร์ต้องเผชิญหน้าศัตรูจากต่างมิติ",
     thumbnail: "https://images.unsplash.com/photo-1634828221818-503587f33d02?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=JfVOs4VSpmA",
     category: "Action",
@@ -399,7 +399,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Ford v Ferrari",
-    description: "American car designer Carroll Shelby and driver Ken Miles battle corporate interference and the laws of physics to build a revolutionary race car for Ford in order to defeat Ferrari at the 24 Hours of Le Mans in 1966.",
+    description: "นักออกแบบรถและนักแข่งของฟอร์ดร่วมมือกันสร้างรถแข่งเพื่อโค่นเฟอร์รารีในการแข่งขันเลอม็องปี 1966",
     thumbnail: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=I3h9Z69mI_A",
     category: "Sport",
@@ -411,7 +411,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Star Wars: Episode V - The Empire Strikes Back",
-    description: "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader across the galaxy.",
+    description: "หลังฝ่ายกบฏพ่ายแพ้ ลุค สกายวอล์คเกอร์เริ่มฝึกเป็นเจได ขณะที่ดาร์ธ เวเดอร์ตามล่าพวกเขาทั่วกาแล็กซี",
     thumbnail: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=JNwNXF9Y6kY",
     category: "Sci-Fi",
@@ -423,7 +423,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Lord of the Rings: The Fellowship of the Ring",
-    description: "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+    description: "ฮอบบิทหนุ่มและสหายทั้งแปดออกเดินทางเพื่อทำลายแหวนทรงพลังและหยุดยั้งจอมมารเซารอน",
     thumbnail: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=V75dMMBt2Ac",
     category: "Fantasy",
@@ -435,7 +435,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Harry Potter and the Sorcerer's Stone",
-    description: "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+    description: "เด็กชายกำพร้าค้นพบว่าตัวเองเป็นพ่อมด และเริ่มต้นชีวิตใหม่ในโรงเรียนเวทมนตร์ฮอกวอตส์",
     thumbnail: "https://images.unsplash.com/photo-1510172951991-856a654063f9?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=VyHV0BRZYy4",
     category: "Fantasy",
@@ -447,7 +447,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "The Silence of the Lambs",
-    description: "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.",
+    description: "เจ้าหน้าที่เอฟบีไอฝึกหัดต้องขอความช่วยเหลือจากฆาตกรกินคนเพื่อไล่ล่าฆาตกรต่อเนื่องสุดอันตราย",
     thumbnail: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=W6Mm8Sbe__o",
     category: "Thriller",
@@ -459,7 +459,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
   },
   {
     title: "Django Unchained",
-    description: "With the help of a German bounty-hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.",
+    description: "อดีตทาสร่วมมือกับนักล่าค่าหัวชาวเยอรมันเพื่อตามช่วยภรรยาจากเจ้าของไร่ผู้โหดเหี้ยม",
     thumbnail: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=600&q=80",
     youtubeUrl: "https://www.youtube.com/watch?v=0fUCuvNlOCg",
     category: "Western",

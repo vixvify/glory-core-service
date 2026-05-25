@@ -4,6 +4,7 @@ import { MovieRepositoryImpl } from "../../infrastructure/movies/movie.repositor
 import { MovieService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
 import { createMovieSchema, updateMovieSchema, searchMovieSchema, favoriteSchema } from "./domain/movie";
+import { ratingInputSchema, deleteRatingSchema, checkRatingSchema } from "./domain/rating";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -14,11 +15,11 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     const movies = await service.getAllMovies();
     return formatSuccess(movies);
   })
-  .get("/categories", async () => {
+  .get("/categories-data", async () => {
     const categories = await service.getCategories();
     return formatSuccess(categories);
   })
-  .get("/ratings", async () => {
+  .get("/ratings-data", async () => {
     const ratings = await service.getAgeRatings();
     return formatSuccess(ratings);
   })
@@ -110,4 +111,47 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   }, {
     requireAuth: true,
     requireRole: "admin"
-  });
+  })
+  .post("/ratings", async ({ body }) => {
+    await service.addRating(body);
+    return formatSuccess(null, "Rating added successfully");
+  }, {
+    body: ratingInputSchema,
+    requireAuth: true,
+  })
+  .get("/ratings/:userId", async ({ params }) => {
+    const { userId } = params;
+    const ratings = await service.getRatingsByUser(userId);
+    return formatSuccess(ratings);
+  }, {
+    requireAuth: true,
+  })
+  .get("/ratings/:movieId", async ({ params }) => {
+    const { movieId } = params;
+    const rating = await service.getRatingsByMovie(movieId)
+    return formatSuccess(rating);
+  }, {
+    requireAuth: true,
+  })
+  .delete("/ratings", async ({ body }) => {
+    await service.deleteRating(body.userId, body.movieId);
+    return formatSuccess(null, "Rating deleted successfully");
+  }, {
+    body: deleteRatingSchema,
+    requireAuth: true,
+  })
+  .get("/ratings/check", async ({ body }) => {
+    const { userId, movieId } = body;
+    const rating = await service.checkRating(userId, movieId)
+    return formatSuccess(rating);
+  }, {
+    body: checkRatingSchema,
+    requireAuth: true,
+  })
+  .put("/ratings", async ({ body }) => {
+    await service.updateRating(body);
+    return formatSuccess(null, "Rating updated successfully");
+  }, {
+    body: ratingInputSchema,
+    requireAuth: true,
+  })
