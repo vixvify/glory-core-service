@@ -1,4 +1,4 @@
-import { CreateMovieDTO, UpdateMovieDTO } from "./movie.dto";
+import { CreateMovieInput, UpdateMovieInput } from "./movie";
 import { Movie as PrismaMovie } from "@prisma/client";
 
 export interface MovieRepository {
@@ -6,8 +6,8 @@ export interface MovieRepository {
   search(q: string): Promise<PrismaMovie[]>;
   findByCategory(category: string): Promise<PrismaMovie[]>;
   findById(id: string): Promise<PrismaMovie | null>;
-  create(data: Omit<CreateMovieDTO, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie>;
-  update(id: string, data: Omit<UpdateMovieDTO, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie>;
+  create(data: Omit<CreateMovieInput, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie>;
+  update(id: string, data: Omit<UpdateMovieInput, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie>;
   delete(id: string): Promise<PrismaMovie>;
   getFavorites(userId: string): Promise<string[]>;
   checkFavorite(userId: string, movieId: string): Promise<boolean>;

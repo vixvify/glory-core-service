@@ -3,12 +3,7 @@ import { authMiddleware } from "../../middleware/auth";
 import { MovieRepositoryImpl } from "../../infrastructure/movies/movie.repository";
 import { MovieService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import {
-  createMovieSchema,
-  updateMovieSchema,
-  searchMovieSchema,
-  favoriteSchema,
-} from "./domain/movie.dto";
+import { createMovieSchema, updateMovieSchema, searchMovieSchema, favoriteSchema } from "./domain/movie";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -18,6 +13,14 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   .get("/all", async () => {
     const movies = await service.getAllMovies();
     return formatSuccess(movies);
+  })
+  .get("/categories", async () => {
+    const categories = await service.getCategories();
+    return formatSuccess(categories);
+  })
+  .get("/ratings", async () => {
+    const ratings = await service.getAgeRatings();
+    return formatSuccess(ratings);
   })
   .get(
     "/search",
@@ -76,7 +79,8 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   .post(
     "/",
     async ({ body }) => {
-      const movie = await service.createMovie(body);
+      const payload = { ...body, year: Number(body.year), duration: Number(body.duration), matchRate: Number(body.matchRate) }
+      const movie = await service.createMovie(payload);
       return formatSuccess(movie, "Movie created successfully");
     },
     {
@@ -87,7 +91,8 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     "/:id",
     async ({ params, body }) => {
       const { id } = params;
-      const movie = await service.updateMovie(id, body);
+      const payload = { ...body, year: Number(body.year), duration: Number(body.duration), matchRate: Number(body.matchRate) }
+      const movie = await service.updateMovie(id, payload);
       return formatSuccess(movie, "Movie updated successfully");
     },
     {

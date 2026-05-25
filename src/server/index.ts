@@ -22,10 +22,10 @@ export const server = new Elysia()
     if (code === "VALIDATION") {
       set.status = 400;
       return {
-        success: false,
         data: null,
-        error: "Validation error",
-        details: error.message,
+        error: error.message || "Validation error",
+        status: 400,
+        statusCode: "VALIDATION_ERROR",
       };
     }
     set.status = 500;

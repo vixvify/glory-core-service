@@ -1,5 +1,5 @@
 import { User } from "../../auth/domain/auth.dto";
-import { Movie } from "./movie.dto";
+import { Movie } from "./movie";
 
 export interface Rating {
   id: string;

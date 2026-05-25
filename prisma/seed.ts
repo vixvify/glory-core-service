@@ -56,7 +56,7 @@ const movies: Prisma.MovieCreateInput[] = [
     description: "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, and where humans are changed into beasts.",
     thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600",
     youtubeUrl: "https://www.youtube.com/watch?v=ByXuk9QqQkk",
-    category: "Anime",
+    category: "Animation",
     matchRate: 86,
     year: 2001,
     duration: 125,
@@ -91,18 +91,16 @@ const movies: Prisma.MovieCreateInput[] = [
 
 async function main() {
   console.log("🌱 Starting seeding...");
-  const count = await prisma.movie.count();
-  if (count === 0) {
-    console.log("Creating mock movies...");
-    for (const movie of movies) {
-      await prisma.movie.create({
-        data: movie,
-      });
-    }
-    console.log(`✅ Seeded ${movies.length} movies successfully.`);
-  } else {
-    console.log("⚠️ Database already has movies. Skipping seed.");
+  console.log("Cleaning up database...");
+  await prisma.movie.deleteMany();
+
+  console.log("Creating mock movies...");
+  for (const movie of movies) {
+    await prisma.movie.create({
+      data: movie,
+    });
   }
+  console.log(`✅ Seeded ${movies.length} movies successfully.`);
 }
 
 main()

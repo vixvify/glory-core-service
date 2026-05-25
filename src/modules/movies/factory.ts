@@ -1,4 +1,4 @@
-import { Movie as DtoMovie } from "./domain/movie.dto";
+import { Movie as DtoMovie } from "./domain/movie";
 import { Movie as PrismaMovie } from "@prisma/client";
 
 export class MovieFactory {
