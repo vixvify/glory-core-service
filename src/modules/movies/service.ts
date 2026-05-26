@@ -1,12 +1,22 @@
 import { AppError, NotFoundError, BadRequestError } from "../../core/error";
-import { Movie, CreateMovieInput, UpdateMovieInput, CATEGORIES, AGE_RATINGS } from "./domain/movie";
+import {
+  Movie,
+  CreateMovieInput,
+  UpdateMovieInput,
+  CATEGORIES,
+  AGE_RATINGS,
+} from "./domain/movie";
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
 import { uploadToSupabase } from "../../lib/supabase";
-import { RatingInput, Rating } from "./domain/rating";
+import {
+  RatingInput,
+  Rating,
+  RatingUserIdAndMovieIdInput,
+} from "./domain/rating";
 
 export class MovieService {
-  constructor(private repo: MovieRepository) { }
+  constructor(private repo: MovieRepository) {}
 
   async getAllMovies(): Promise<Movie[]> {
     try {
@@ -14,7 +24,8 @@ export class MovieService {
       return MovieFactory.toDomainList(movies);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get movies";
+      const message =
+        error instanceof Error ? error.message : "Failed to get movies";
       throw new BadRequestError(message, error);
     }
   }
@@ -25,7 +36,8 @@ export class MovieService {
       return MovieFactory.toDomainList(movies);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to search movies";
+      const message =
+        error instanceof Error ? error.message : "Failed to search movies";
       throw new BadRequestError(message, error);
     }
   }
@@ -36,7 +48,10 @@ export class MovieService {
       return MovieFactory.toDomainList(movies);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get movies by category";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to get movies by category";
       throw new BadRequestError(message, error);
     }
   }
@@ -50,7 +65,8 @@ export class MovieService {
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get movie";
+      const message =
+        error instanceof Error ? error.message : "Failed to get movie";
       throw new BadRequestError(message, error);
     }
   }
@@ -70,7 +86,8 @@ export class MovieService {
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to create movie";
+      const message =
+        error instanceof Error ? error.message : "Failed to create movie";
       throw new BadRequestError(message, error);
     }
   }
@@ -96,7 +113,8 @@ export class MovieService {
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to update movie";
+      const message =
+        error instanceof Error ? error.message : "Failed to update movie";
       throw new BadRequestError(message, error);
     }
   }
@@ -111,7 +129,8 @@ export class MovieService {
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to delete movie";
+      const message =
+        error instanceof Error ? error.message : "Failed to delete movie";
       throw new BadRequestError(message, error);
     }
   }
@@ -121,7 +140,8 @@ export class MovieService {
       return await this.repo.getFavorites(userId);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get user favorites";
+      const message =
+        error instanceof Error ? error.message : "Failed to get user favorites";
       throw new BadRequestError(message, error);
     }
   }
@@ -139,17 +159,26 @@ export class MovieService {
       }
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to add movie to favorites";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to add movie to favorites";
       throw new BadRequestError(message, error);
     }
   }
 
-  async removeMovieFromFavorites(userId: string, movieId: string): Promise<void> {
+  async removeMovieFromFavorites(
+    userId: string,
+    movieId: string,
+  ): Promise<void> {
     try {
       await this.repo.removeFavorite(userId, movieId);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to remove movie from favorites";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to remove movie from favorites";
       throw new BadRequestError(message, error);
     }
   }
@@ -167,27 +196,21 @@ export class MovieService {
       return await this.repo.addRating(data);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to add rating";
+      const message =
+        error instanceof Error ? error.message : "Failed to add rating";
       throw new BadRequestError(message, error);
     }
   }
 
-  async getRatingsByUser(userId: string): Promise<Rating[]> {
+  async getRatingsByUserIdAndMovieId(
+    data: RatingUserIdAndMovieIdInput,
+  ): Promise<Rating[]> {
     try {
-      return await this.repo.getRatingsByUserId(userId);
+      return await this.repo.getRatingsByUserIdAndMovieId(data);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get ratings";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async getRatingsByMovie(movieId: string): Promise<Rating[]> {
-    try {
-      return await this.repo.getRatingByMovieId(movieId);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to get ratings";
+      const message =
+        error instanceof Error ? error.message : "Failed to get ratings";
       throw new BadRequestError(message, error);
     }
   }
@@ -197,7 +220,8 @@ export class MovieService {
       await this.repo.deleteRating(userId, movieId);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to delete rating";
+      const message =
+        error instanceof Error ? error.message : "Failed to delete rating";
       throw new BadRequestError(message, error);
     }
   }
@@ -207,7 +231,8 @@ export class MovieService {
       return await this.repo.checkRating(userId, movieId);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to check rating";
+      const message =
+        error instanceof Error ? error.message : "Failed to check rating";
       throw new BadRequestError(message, error);
     }
   }
@@ -217,7 +242,8 @@ export class MovieService {
       return await this.repo.updateRating(data);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to update rating";
+      const message =
+        error instanceof Error ? error.message : "Failed to update rating";
       throw new BadRequestError(message, error);
     }
   }

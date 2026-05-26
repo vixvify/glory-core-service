@@ -1,8 +1,15 @@
 import { prisma } from "../../lib/prisma";
-import { CreateMovieInput, UpdateMovieInput } from "../../modules/movies/domain/movie";
+import {
+  CreateMovieInput,
+  UpdateMovieInput,
+} from "../../modules/movies/domain/movie";
 import { MovieRepository } from "../../modules/movies/domain/movie.repository";
 import { Movie as PrismaMovie } from "@prisma/client";
-import { Rating, RatingInput } from "../../modules/movies/domain/rating";
+import {
+  Rating,
+  RatingInput,
+  RatingUserIdAndMovieIdInput,
+} from "../../modules/movies/domain/rating";
 
 export class MovieRepositoryImpl implements MovieRepository {
   async findAll(): Promise<PrismaMovie[]> {
@@ -44,7 +51,9 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async create(data: Omit<CreateMovieInput, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
+  async create(
+    data: Omit<CreateMovieInput, "thumbnail"> & { thumbnail: string },
+  ): Promise<PrismaMovie> {
     return prisma.movie.create({
       data: {
         title: data.title,
@@ -60,7 +69,10 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async update(id: string, data: Omit<UpdateMovieInput, "thumbnail"> & { thumbnail: string }): Promise<PrismaMovie> {
+  async update(
+    id: string,
+    data: Omit<UpdateMovieInput, "thumbnail"> & { thumbnail: string },
+  ): Promise<PrismaMovie> {
     return prisma.movie.update({
       where: { id },
       data: {
@@ -129,24 +141,14 @@ export class MovieRepositoryImpl implements MovieRepository {
       },
     });
   }
-  async getRatingsByUserId(userId: string): Promise<Rating[]> {
+  async getRatingsByUserIdAndMovieId(
+    data: RatingUserIdAndMovieIdInput,
+  ): Promise<Rating[]> {
     const ratings = await prisma.rating.findMany({
-      where: { userId },
-      include: { movie: true, user: true },
-    });
-
-    return ratings.map((rating) => ({
-      ...rating,
-      user: {
-        ...rating.user,
-        name: rating.user.name ?? "Unknown User",
-        role: rating.user.role as "user" | "admin",
+      where: {
+        userId: data.userId,
+        movieId: data.movieId,
       },
-    }));
-  }
-  async getRatingByMovieId(movieId: string): Promise<Rating[]> {
-    const ratings = await prisma.rating.findMany({
-      where: { movieId },
       include: { movie: true, user: true },
     });
 

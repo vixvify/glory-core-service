@@ -21,6 +21,11 @@ export interface RatingInput {
   stars: number;
 }
 
+export interface RatingUserIdAndMovieIdInput {
+  movieId: string;
+  userId: string;
+}
+
 export const ratingInputSchema = t.Object({
   userId: t.String(),
   movieId: t.String(),
@@ -34,5 +39,3 @@ export const checkRatingSchema = t.Object({
   userId: t.String(),
   movieId: t.String(),
 });
-
-

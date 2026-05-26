@@ -3,8 +3,17 @@ import { authMiddleware } from "../../middleware/auth";
 import { MovieRepositoryImpl } from "../../infrastructure/movies/movie.repository";
 import { MovieService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import { createMovieSchema, updateMovieSchema, searchMovieSchema, favoriteSchema } from "./domain/movie";
-import { ratingInputSchema, deleteRatingSchema, checkRatingSchema } from "./domain/rating";
+import {
+  createMovieSchema,
+  updateMovieSchema,
+  searchMovieSchema,
+  favoriteSchema,
+} from "./domain/movie";
+import {
+  ratingInputSchema,
+  deleteRatingSchema,
+  checkRatingSchema,
+} from "./domain/rating";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -32,7 +41,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       query: searchMovieSchema,
-    }
+    },
   )
   .get("/category/:category", async ({ params }) => {
     const { category } = params;
@@ -47,7 +56,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       requireAuth: true,
-    }
+    },
   )
   .post(
     "/favorites",
@@ -59,7 +68,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     {
       requireAuth: true,
       body: favoriteSchema,
-    }
+    },
   )
   .delete(
     "/favorites/:movieId",
@@ -70,7 +79,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       requireAuth: true,
-    }
+    },
   )
   .get("/:id", async ({ params }) => {
     const { id } = params;
@@ -80,78 +89,105 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   .post(
     "/",
     async ({ body }) => {
-      const payload = { ...body, year: Number(body.year), duration: Number(body.duration), matchRate: Number(body.matchRate) }
+      const payload = {
+        ...body,
+        year: Number(body.year),
+        duration: Number(body.duration),
+        matchRate: Number(body.matchRate),
+      };
       const movie = await service.createMovie(payload);
       return formatSuccess(movie, "Movie created successfully");
     },
     {
       body: createMovieSchema,
       requireAuth: true,
-      requireRole: "admin"
-    }
+      requireRole: "admin",
+    },
   )
   .put(
     "/:id",
     async ({ params, body }) => {
       const { id } = params;
-      const payload = { ...body, year: Number(body.year), duration: Number(body.duration), matchRate: Number(body.matchRate) }
+      const payload = {
+        ...body,
+        year: Number(body.year),
+        duration: Number(body.duration),
+        matchRate: Number(body.matchRate),
+      };
       const movie = await service.updateMovie(id, payload);
       return formatSuccess(movie, "Movie updated successfully");
     },
     {
       body: updateMovieSchema,
       requireAuth: true,
-      requireRole: "admin"
-    }
+      requireRole: "admin",
+    },
   )
-  .delete("/:id", async ({ params }) => {
-    const { id } = params;
-    const movie = await service.deleteMovie(id);
-    return formatSuccess(movie, "Movie deleted successfully");
-  }, {
-    requireAuth: true,
-    requireRole: "admin"
-  })
-  .post("/ratings", async ({ body }) => {
-    await service.addRating(body);
-    return formatSuccess(null, "Rating added successfully");
-  }, {
-    body: ratingInputSchema,
-    requireAuth: true,
-  })
-  .get("/ratings/:userId", async ({ params }) => {
-    const { userId } = params;
-    const ratings = await service.getRatingsByUser(userId);
-    return formatSuccess(ratings);
-  }, {
-    requireAuth: true,
-  })
-  .get("/ratings/:movieId", async ({ params }) => {
-    const { movieId } = params;
-    const rating = await service.getRatingsByMovie(movieId)
-    return formatSuccess(rating);
-  }, {
-    requireAuth: true,
-  })
-  .delete("/ratings", async ({ body }) => {
-    await service.deleteRating(body.userId, body.movieId);
-    return formatSuccess(null, "Rating deleted successfully");
-  }, {
-    body: deleteRatingSchema,
-    requireAuth: true,
-  })
-  .get("/ratings/check", async ({ body }) => {
-    const { userId, movieId } = body;
-    const rating = await service.checkRating(userId, movieId)
-    return formatSuccess(rating);
-  }, {
-    body: checkRatingSchema,
-    requireAuth: true,
-  })
-  .put("/ratings", async ({ body }) => {
-    await service.updateRating(body);
-    return formatSuccess(null, "Rating updated successfully");
-  }, {
-    body: ratingInputSchema,
-    requireAuth: true,
-  })
+  .delete(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      const movie = await service.deleteMovie(id);
+      return formatSuccess(movie, "Movie deleted successfully");
+    },
+    {
+      requireAuth: true,
+      requireRole: "admin",
+    },
+  )
+  .post(
+    "/ratings",
+    async ({ body }) => {
+      await service.addRating(body);
+      return formatSuccess(null, "Rating added successfully");
+    },
+    {
+      body: ratingInputSchema,
+      requireAuth: true,
+    },
+  )
+  .get(
+    "/ratings",
+    async ({ body }) => {
+      const ratings = await service.getRatingsByUserIdAndMovieId(body);
+      return formatSuccess(ratings);
+    },
+    {
+      body: checkRatingSchema,
+      requireAuth: true,
+    },
+  )
+  .delete(
+    "/ratings",
+    async ({ body }) => {
+      await service.deleteRating(body.userId, body.movieId);
+      return formatSuccess(null, "Rating deleted successfully");
+    },
+    {
+      body: deleteRatingSchema,
+      requireAuth: true,
+    },
+  )
+  .get(
+    "/ratings/check",
+    async ({ body }) => {
+      const { userId, movieId } = body;
+      const rating = await service.checkRating(userId, movieId);
+      return formatSuccess(rating);
+    },
+    {
+      body: checkRatingSchema,
+      requireAuth: true,
+    },
+  )
+  .put(
+    "/ratings",
+    async ({ body }) => {
+      await service.updateRating(body);
+      return formatSuccess(null, "Rating updated successfully");
+    },
+    {
+      body: ratingInputSchema,
+      requireAuth: true,
+    },
+  );
