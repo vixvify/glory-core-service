@@ -3,7 +3,7 @@ import { Movie as PrismaMovie } from "@prisma/client";
 
 export class MovieFactory {
 
-  static toDomain(movie: PrismaMovie): DtoMovie {
+  static toDomain(movie: any): DtoMovie {
     return {
       id: movie.id,
       title: movie.title,
@@ -12,7 +12,15 @@ export class MovieFactory {
       thumbnail: movie.thumbnail,
       youtubeUrl: movie.youtubeUrl || "",
       views: movie.views,
-      ratings: [],
+      ratings: movie.ratings
+        ? movie.ratings.map((r: any) => ({
+            ...r,
+            user: r.user ? {
+              ...r.user,
+              name: r.user.name ?? "Unknown User",
+            } : undefined
+          }))
+        : [],
       year: movie.year,
       matchRate: movie.matchRate,
       ageRating: movie.ageRating,

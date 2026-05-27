@@ -148,10 +148,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   )
   .post(
     "/ratings",
-    async ({ user, body }) => {
-      if (user?.role !== "admin" && body.userId !== user?.id) {
-        throw new ForbiddenError("You can only add ratings for yourself");
-      }
+    async ({ body }) => {
       await service.addRating(body);
       return formatSuccess(null, "Rating added successfully");
     },
@@ -162,12 +159,12 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   )
   .get(
     "/ratings",
-    async ({ body }) => {
-      const ratings = await service.getRatingsByUserIdAndMovieId(body);
+    async ({ query }) => {
+      const ratings = await service.getRatingsByUserIdAndMovieId(query);
       return formatSuccess(ratings);
     },
     {
-      body: checkRatingSchema,
+      query: checkRatingSchema,
       requireAuth: true,
     },
   )
@@ -184,13 +181,13 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   )
   .get(
     "/ratings/check",
-    async ({ body }) => {
-      const { userId, movieId } = body;
+    async ({ query }) => {
+      const { userId, movieId } = query;
       const rating = await service.checkRating(userId, movieId);
       return formatSuccess(rating);
     },
     {
-      body: checkRatingSchema,
+      query: checkRatingSchema,
       requireAuth: true,
     },
   )

@@ -14,6 +14,20 @@ import {
 export class MovieRepositoryImpl implements MovieRepository {
   async findAll(): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
+      include: {
+        ratings: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                email: true,
+                name: true,
+                role: true,
+              },
+            },
+          },
+        },
+      },
       orderBy: { createdAt: "desc" },
     });
   }
@@ -48,6 +62,20 @@ export class MovieRepositoryImpl implements MovieRepository {
   async findById(id: string): Promise<PrismaMovie | null> {
     return prisma.movie.findUnique({
       where: { id },
+      include: {
+        ratings: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                email: true,
+                name: true,
+                role: true,
+              },
+            },
+          },
+        },
+      },
     });
   }
 
