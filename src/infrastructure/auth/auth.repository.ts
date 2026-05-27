@@ -49,11 +49,11 @@ export class AuthRepositoryImpl implements AuthRepository {
     };
   }
 
-  async create(data: RegisterUserInput & { password: string }): Promise<User> {
+  async create(data: Omit<RegisterUserInput, "password"> & { passwordHash: string }): Promise<User> {
     const user = await prisma.user.create({
       data: {
         email: data.email,
-        password: data.password,
+        password: data.passwordHash,
         name: data.name,
         role: "user",
       },

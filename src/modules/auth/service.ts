@@ -18,8 +18,8 @@ export class AuthService {
       return await this.repo.create({
         name: data.name,
         email: data.email,
-        password: passwordHash,
-      } as any);
+        passwordHash,
+      });
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
       const message = error instanceof Error ? error.message : "Failed to register user";

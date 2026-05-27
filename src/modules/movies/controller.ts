@@ -1,19 +1,11 @@
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 import { authMiddleware } from "../../middleware/auth";
 import { MovieRepositoryImpl } from "../../infrastructure/movies/movie.repository";
 import { MovieService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import {
-  createMovieSchema,
-  updateMovieSchema,
-  searchMovieSchema,
-  favoriteSchema,
-} from "./domain/movie";
-import {
-  ratingInputSchema,
-  deleteRatingSchema,
-  checkRatingSchema,
-} from "./domain/rating";
+import { createMovieSchema, updateMovieSchema, searchMovieSchema, favoriteSchema } from "./domain/movie";
+import { ratingInputSchema, deleteRatingSchema, checkRatingSchema } from "./domain/rating";
+import { ForbiddenError } from "../../core/error";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -43,11 +35,19 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       query: searchMovieSchema,
     },
   )
-  .get("/category/:category", async ({ params }) => {
-    const { category } = params;
-    const movies = await service.getMoviesByCategory(category);
-    return formatSuccess(movies);
-  })
+  .get(
+    "/category/:category",
+    async ({ params }) => {
+      const { category } = params;
+      const movies = await service.getMoviesByCategory(category);
+      return formatSuccess(movies);
+    },
+    {
+      params: t.Object({
+        category: t.String(),
+      }),
+    }
+  )
   .get(
     "/favorites",
     async ({ user }) => {
@@ -79,23 +79,28 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       requireAuth: true,
-    },
+      params: t.Object({
+        movieId: t.String({ format: "uuid" }),
+      }),
+    }
   )
-  .get("/:id", async ({ params }) => {
-    const { id } = params;
-    const movie = await service.getMovieById(id);
-    return formatSuccess(movie);
-  })
+  .get(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      const movie = await service.getMovieById(id);
+      return formatSuccess(movie);
+    },
+    {
+      params: t.Object({
+        id: t.String({ format: "uuid" }),
+      }),
+    }
+  )
   .post(
     "/",
     async ({ body }) => {
-      const payload = {
-        ...body,
-        year: Number(body.year),
-        duration: Number(body.duration),
-        matchRate: Number(body.matchRate),
-      };
-      const movie = await service.createMovie(payload);
+      const movie = await service.createMovie(body);
       return formatSuccess(movie, "Movie created successfully");
     },
     {
@@ -118,6 +123,9 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie, "Movie updated successfully");
     },
     {
+      params: t.Object({
+        id: t.String({ format: "uuid" }),
+      }),
       body: updateMovieSchema,
       requireAuth: true,
       requireRole: "admin",
@@ -131,13 +139,19 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie, "Movie deleted successfully");
     },
     {
+      params: t.Object({
+        id: t.String({ format: "uuid" }),
+      }),
       requireAuth: true,
       requireRole: "admin",
-    },
+    }
   )
   .post(
     "/ratings",
-    async ({ body }) => {
+    async ({ user, body }) => {
+      if (user?.role !== "admin" && body.userId !== user?.id) {
+        throw new ForbiddenError("You can only add ratings for yourself");
+      }
       await service.addRating(body);
       return formatSuccess(null, "Rating added successfully");
     },

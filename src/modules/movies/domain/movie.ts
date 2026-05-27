@@ -66,9 +66,9 @@ export const createMovieSchema = t.Object({
     category: t.String(),
     thumbnail: t.File(),
     youtubeUrl: t.String(),
-    year: t.String(),
-    duration: t.String(),
-    matchRate: t.String(),
+    year: t.Numeric(),
+    duration: t.Numeric(),
+    matchRate: t.Numeric(),
     ageRating: t.String(),
 });
 
@@ -78,9 +78,9 @@ export const updateMovieSchema = t.Object({
     category: t.String(),
     thumbnail: t.Union([t.File(), t.String()]),
     youtubeUrl: t.String(),
-    year: t.String(),
-    duration: t.String(),
-    matchRate: t.String(),
+    year: t.Numeric(),
+    duration: t.Numeric(),
+    matchRate: t.Numeric(),
     ageRating: t.String(),
 });
 

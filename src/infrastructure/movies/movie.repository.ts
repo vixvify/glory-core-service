@@ -145,11 +145,18 @@ export class MovieRepositoryImpl implements MovieRepository {
     data: RatingUserIdAndMovieIdInput,
   ): Promise<Rating[]> {
     const ratings = await prisma.rating.findMany({
-      where: {
-        userId: data.userId,
-        movieId: data.movieId,
+      where: { userId: data.userId, movieId: data.movieId },
+      include: {
+        movie: true,
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            role: true,
+          },
+        },
       },
-      include: { movie: true, user: true },
     });
 
     return ratings.map((rating) => ({

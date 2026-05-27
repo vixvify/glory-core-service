@@ -1,9 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { config } from "../core/config";
 
 const { url, serviceRoleKey, bucketName } = config.supabase;
 
-let supabaseClient: any = null;
+let supabaseClient: SupabaseClient | null = null;
 if (url && serviceRoleKey && (url.startsWith("http://") || url.startsWith("https://"))) {
   try {
     supabaseClient = createClient(url, serviceRoleKey, {
