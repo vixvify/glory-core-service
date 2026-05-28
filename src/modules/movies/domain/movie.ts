@@ -113,6 +113,11 @@ export const getMoviesByCategoryParamsSchema = t.Object({
 });
 export type GetMoviesByCategoryParamsInput = Static<typeof getMoviesByCategoryParamsSchema>;
 
+export const getMoviesByUniversityParamsSchema = t.Object({
+    university: t.String(),
+});
+export type GetMoviesByUniversityParamsInput = Static<typeof getMoviesByUniversityParamsSchema>;
+
 export const deleteMovieParamsSchema = t.Object({
     id: t.String({ format: "uuid" }),
 });
@@ -160,3 +165,11 @@ export const AGE_RATINGS = [
     "NC-17",
     "R"
 ] as const;
+
+export const UNIVERSITIES = [
+    "จุฬาลงกรณ์มหาวิทยาลัย",
+    "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
+    "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "มหาวิทยาลัยกรุงเทพ"
+] as const;
+

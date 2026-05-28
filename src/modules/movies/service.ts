@@ -5,6 +5,7 @@ import {
   UpdateMovieBodyInput,
   CATEGORIES,
   AGE_RATINGS,
+  UNIVERSITIES,
 } from "./domain/movie";
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
@@ -53,6 +54,20 @@ export class MovieService {
         error instanceof Error
           ? error.message
           : "Failed to get movies by category";
+      throw new BadRequestError(message, error);
+    }
+  }
+
+  async getMoviesByUniversity(university: string): Promise<Movie[]> {
+    try {
+      const movies = await this.repo.findByUniversity(university);
+      return MovieFactory.toDomainList(movies);
+    } catch (error: unknown) {
+      if (error instanceof AppError) throw error;
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to get movies by university";
       throw new BadRequestError(message, error);
     }
   }
@@ -141,9 +156,10 @@ export class MovieService {
     }
   }
 
-  async getUserFavorites(userId: string): Promise<string[]> {
+  async getUserFavorites(userId: string): Promise<Movie[]> {
     try {
-      return await this.repo.getFavorites(userId);
+      const favorites = await this.repo.getFavorites(userId);
+      return MovieFactory.toDomainList(favorites);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
       const message =
@@ -191,6 +207,10 @@ export class MovieService {
 
   async getCategories(): Promise<readonly string[]> {
     return CATEGORIES;
+  }
+
+  async getUniversities(): Promise<readonly string[]> {
+    return UNIVERSITIES;
   }
 
   async getAgeRatings(): Promise<readonly string[]> {

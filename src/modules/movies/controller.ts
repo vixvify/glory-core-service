@@ -9,6 +9,7 @@ import {
   updateMovieBodySchema,
   getMovieByIdParamsSchema,
   getMoviesByCategoryParamsSchema,
+  getMoviesByUniversityParamsSchema,
   deleteMovieParamsSchema,
   searchMoviesQuerySchema,
   addFavoriteBodySchema,
@@ -34,6 +35,10 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
   .get("/categories-data", async () => {
     const categories = await service.getCategories();
     return formatSuccess(categories);
+  })
+  .get("/universities-data", async () => {
+    const universities = await service.getUniversities();
+    return formatSuccess(universities);
   })
   .get("/ratings-data", async () => {
     const ratings = await service.getAgeRatings();
@@ -62,10 +67,21 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     }
   )
   .get(
+    "/university/:university",
+    async ({ params }) => {
+      const { university } = params;
+      const movies = await service.getMoviesByUniversity(university);
+      return formatSuccess(movies);
+    },
+    {
+      params: getMoviesByUniversityParamsSchema,
+    }
+  )
+  .get(
     "/favorites",
     async ({ user }) => {
-      const favoriteMovieIds = await service.getUserFavorites(user!.id);
-      return formatSuccess(favoriteMovieIds);
+      const favoriteMovies = await service.getUserFavorites(user!.id);
+      return formatSuccess(favoriteMovies);
     },
     {
       requireAuth: true,
@@ -206,4 +222,4 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       body: updateRatingBodySchema,
       requireAuth: true,
     },
-  );
+  )

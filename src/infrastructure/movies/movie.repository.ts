@@ -70,6 +70,18 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
+  async findByUniversity(university: string): Promise<PrismaMovie[]> {
+    return prisma.movie.findMany({
+      where: {
+        university: { equals: university, mode: "insensitive" },
+      },
+      include: {
+        crew: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
   async findById(id: string): Promise<PrismaMovie | null> {
     return prisma.movie.findUnique({
       where: { id },
@@ -185,12 +197,30 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
 
-  async getFavorites(userId: string): Promise<string[]> {
+  async getFavorites(userId: string): Promise<PrismaMovie[]> {
     const favorites = await prisma.favorite.findMany({
       where: { userId },
-      select: { movieId: true },
+      include: {
+        movie: {
+          include: {
+            crew: true,
+            ratings: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    role: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     });
-    return favorites.map((fav) => fav.movieId);
+    return favorites.map((fav) => fav.movie);
   }
 
   async checkFavorite(userId: string, movieId: string): Promise<boolean> {

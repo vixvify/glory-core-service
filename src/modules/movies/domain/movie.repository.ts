@@ -6,6 +6,7 @@ export interface MovieRepository {
   findAll(): Promise<PrismaMovie[]>;
   search(q: string): Promise<PrismaMovie[]>;
   findByCategory(category: string): Promise<PrismaMovie[]>;
+  findByUniversity(university: string): Promise<PrismaMovie[]>;
   findById(id: string): Promise<PrismaMovie | null>;
   create(
     data: Omit<CreateMovieBodyInput, "thumbnail" | "btsPhotos"> & {
@@ -21,7 +22,7 @@ export interface MovieRepository {
     },
   ): Promise<PrismaMovie>;
   delete(id: string): Promise<PrismaMovie>;
-  getFavorites(userId: string): Promise<string[]>;
+  getFavorites(userId: string): Promise<PrismaMovie[]>;
   checkFavorite(userId: string, movieId: string): Promise<boolean>;
   addFavorite(userId: string, movieId: string): Promise<void>;
   removeFavorite(userId: string, movieId: string): Promise<void>;
