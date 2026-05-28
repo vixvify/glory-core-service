@@ -54,3 +54,35 @@ export async function uploadToSupabase(file: File, folder: string = "movies"): P
 
   return publicUrlData.publicUrl;
 }
+
+export async function resolveUploadedFiles(
+  input: File | File[] | string | string[] | undefined | null,
+  folder: string = "movies"
+): Promise<string | undefined> {
+  if (!input) {
+    return undefined;
+  }
+
+  if (input instanceof File) {
+    return await uploadToSupabase(input, folder);
+  }
+
+  if (typeof input === "string") {
+    return input;
+  }
+
+  if (Array.isArray(input)) {
+    const urls: string[] = [];
+    for (const item of input) {
+      if (item instanceof File) {
+        const url = await uploadToSupabase(item, folder);
+        urls.push(url);
+      } else if (typeof item === "string") {
+        urls.push(item);
+      }
+    }
+    return urls.join(",");
+  }
+
+  return undefined;
+}

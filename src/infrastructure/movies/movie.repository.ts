@@ -92,7 +92,10 @@ export class MovieRepositoryImpl implements MovieRepository {
   }
 
   async create(
-    data: Omit<CreateMovieBodyInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<CreateMovieBodyInput, "thumbnail" | "btsPhotos"> & {
+      thumbnail: string;
+      btsPhotos?: string;
+    },
   ): Promise<PrismaMovie> {
     const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
     const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
@@ -128,7 +131,10 @@ export class MovieRepositoryImpl implements MovieRepository {
 
   async update(
     id: string,
-    data: Omit<UpdateMovieBodyInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<UpdateMovieBodyInput, "thumbnail" | "btsPhotos"> & {
+      thumbnail: string;
+      btsPhotos?: string;
+    },
   ): Promise<PrismaMovie> {
     const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
     const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];

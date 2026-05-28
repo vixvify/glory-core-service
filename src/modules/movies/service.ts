@@ -8,7 +8,7 @@ import {
 } from "./domain/movie";
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
-import { uploadToSupabase } from "../../lib/supabase";
+import { uploadToSupabase, resolveUploadedFiles } from "../../lib/supabase";
 import {
   AddRatingBodyInput,
   Rating,
@@ -80,9 +80,11 @@ export class MovieService {
       } else {
         thumbnailUrl = data.thumbnail;
       }
+      const resolvedBts = await resolveUploadedFiles(data.btsPhotos);
       const movie = await this.repo.create({
         ...data,
         thumbnail: thumbnailUrl,
+        btsPhotos: resolvedBts,
       });
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {
@@ -107,9 +109,12 @@ export class MovieService {
         thumbnailUrl = data.thumbnail;
       }
 
+      const resolvedBts = await resolveUploadedFiles(data.btsPhotos);
+
       const movie = await this.repo.update(id, {
         ...data,
         thumbnail: thumbnailUrl,
+        btsPhotos: resolvedBts,
       });
       return MovieFactory.toDomain(movie);
     } catch (error: unknown) {

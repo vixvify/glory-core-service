@@ -60,7 +60,14 @@ export const createMovieBodySchema = t.Object({
     writer: t.Optional(t.String()),
     cast: t.Optional(t.String()),
     btsVideo: t.Optional(t.String()),
-    btsPhotos: t.Optional(t.String()),
+    btsPhotos: t.Optional(
+        t.Union([
+            t.File(),
+            t.Array(t.File()),
+            t.String(),
+            t.Array(t.String()),
+        ])
+    ),
 });
 export type CreateMovieBodyInput = Static<typeof createMovieBodySchema>;
 
@@ -85,7 +92,14 @@ export const updateMovieBodySchema = t.Object({
     writer: t.Optional(t.String()),
     cast: t.Optional(t.String()),
     btsVideo: t.Optional(t.String()),
-    btsPhotos: t.Optional(t.String()),
+    btsPhotos: t.Optional(
+        t.Union([
+            t.File(),
+            t.Array(t.File()),
+            t.String(),
+            t.Array(t.String()),
+        ])
+    ),
 });
 export type UpdateMovieBodyInput = Static<typeof updateMovieBodySchema>;
 
