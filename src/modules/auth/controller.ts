@@ -3,7 +3,7 @@ import { authMiddleware } from "../../middleware/auth";
 import { AuthRepositoryImpl } from "../../infrastructure/auth/auth.repository";
 import { AuthService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import { registerSchema, loginSchema, User } from "./domain/auth";
+import { registerUserBodySchema, loginUserBodySchema, User } from "./domain/auth";
 import { config } from "../../core/config";
 
 const repo = new AuthRepositoryImpl();
@@ -18,7 +18,7 @@ export const authRouter = new Elysia({ prefix: "/auth" })
       return formatSuccess(user, "User registered successfully");
     },
     {
-      body: registerSchema,
+      body: registerUserBodySchema,
     }
   )
   .post(
@@ -39,7 +39,7 @@ export const authRouter = new Elysia({ prefix: "/auth" })
       return formatSuccess(safeUser, "Logged in successfully");
     },
     {
-      body: loginSchema,
+      body: loginUserBodySchema,
     }
   )
   .post("/logout", async ({ cookie: { auth_token } }) => {

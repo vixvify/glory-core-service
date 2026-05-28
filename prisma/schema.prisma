@@ -33,13 +33,32 @@ model Movie {
   views       Int        @default(0)
   matchRate   Int        @default(100)
   ageRating   String     @default("PG-13")
+  university  String?
 
   favorites Favorite[]
   ratings   Rating[]
+  crew      MovieCrew?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
   @@map("movies")
+}
+
+model MovieCrew {
+  id        String   @id @default(uuid()) @db.Uuid
+  movieId   String   @unique @db.Uuid
+  director  String?
+  producer  String?
+  writer    String?
+  cast      String[] @default([])
+  btsVideo  String?
+  btsPhotos String[] @default([])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  movie     Movie    @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@map("movie_crews")
 }
 
 model Favorite {
@@ -68,3 +87,4 @@ model Rating {
   @@unique([userId, movieId])
   @@map("ratings")
 }
+

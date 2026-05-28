@@ -1,8 +1,8 @@
 import { AppError, NotFoundError, BadRequestError } from "../../core/error";
 import {
   Movie,
-  CreateMovieInput,
-  UpdateMovieInput,
+  CreateMovieBodyInput,
+  UpdateMovieBodyInput,
   CATEGORIES,
   AGE_RATINGS,
 } from "./domain/movie";
@@ -10,9 +10,10 @@ import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
 import { uploadToSupabase } from "../../lib/supabase";
 import {
-  RatingInput,
+  AddRatingBodyInput,
   Rating,
-  RatingUserIdAndMovieIdInput,
+  GetRatingsQueryInput,
+  UpdateRatingBodyInput,
 } from "./domain/rating";
 
 export class MovieService {
@@ -71,7 +72,7 @@ export class MovieService {
     }
   }
 
-  async createMovie(data: CreateMovieInput): Promise<Movie> {
+  async createMovie(data: CreateMovieBodyInput): Promise<Movie> {
     try {
       let thumbnailUrl = "";
       if (data.thumbnail instanceof File) {
@@ -92,7 +93,7 @@ export class MovieService {
     }
   }
 
-  async updateMovie(id: string, data: UpdateMovieInput): Promise<Movie> {
+  async updateMovie(id: string, data: UpdateMovieBodyInput): Promise<Movie> {
     try {
       const existing = await this.repo.findById(id);
       if (!existing) {
@@ -191,7 +192,7 @@ export class MovieService {
     return AGE_RATINGS;
   }
 
-  async addRating(data: RatingInput): Promise<void> {
+  async addRating(data: AddRatingBodyInput): Promise<void> {
     try {
       return await this.repo.addRating(data);
     } catch (error: unknown) {
@@ -203,7 +204,7 @@ export class MovieService {
   }
 
   async getRatingsByUserIdAndMovieId(
-    data: RatingUserIdAndMovieIdInput,
+    data: GetRatingsQueryInput,
   ): Promise<Rating[]> {
     try {
       return await this.repo.getRatingsByUserIdAndMovieId(data);
@@ -237,7 +238,7 @@ export class MovieService {
     }
   }
 
-  async updateRating(data: RatingInput): Promise<void> {
+  async updateRating(data: UpdateRatingBodyInput): Promise<void> {
     try {
       return await this.repo.updateRating(data);
     } catch (error: unknown) {

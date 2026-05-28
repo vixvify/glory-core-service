@@ -1,13 +1,13 @@
 import { hashPassword, verifyPassword, signJWT, verifyJWT } from "../../core/utils/security";
 import { AppError, ConflictError, UnauthorizedError, BadRequestError } from "../../core/error";
-import { User, RegisterUserInput, LoginUserInput } from "./domain/auth";
+import { User, RegisterUserBodyInput, LoginUserBodyInput } from "./domain/auth";
 import { AuthRepository } from "./domain/auth.repository";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
   constructor(private repo: AuthRepository) { }
 
-  async register(data: RegisterUserInput): Promise<User> {
+  async register(data: RegisterUserBodyInput): Promise<User> {
     try {
       const existing = await this.repo.findByEmail(data.email);
       if (existing) {
@@ -27,7 +27,7 @@ export class AuthService {
     }
   }
 
-  async login(data: LoginUserInput): Promise<User & { token?: string }> {
+  async login(data: LoginUserBodyInput): Promise<User & { token?: string }> {
     try {
       const user = await this.repo.findByEmailWithPassword(data.email);
       if (!user) {

@@ -1,6 +1,19 @@
-import { t } from "elysia";
+import { t, Static } from "elysia";
 import { Rating } from "./rating";
 import { User } from "../../auth/domain/auth";
+
+export interface MovieCrew {
+    id: string;
+    movieId: string;
+    director?: string | null;
+    producer?: string | null;
+    writer?: string | null;
+    cast: string[];
+    btsVideo?: string | null;
+    btsPhotos: string[];
+    createdAt: Date;
+    updatedAt: Date;
+}
 
 export interface Movie {
     id: string;
@@ -15,6 +28,8 @@ export interface Movie {
     matchRate: number;
     ageRating: string;
     duration: number;
+    university?: string | null;
+    crew?: MovieCrew | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -28,39 +43,8 @@ export interface FavoriteMovie {
     createdAt: Date;
 }
 
-export interface CreateMovieInput {
-    title: string;
-    description: string;
-    category: string;
-    thumbnail: File;
-    youtubeUrl: string;
-    year: number;
-    matchRate: number;
-    ageRating: string;
-    duration: number;
-}
 
-export interface UpdateMovieInput {
-    title: string;
-    description: string;
-    category: string;
-    thumbnail: File | string;
-    youtubeUrl: string;
-    year: number;
-    matchRate: number;
-    ageRating: string;
-    duration: number;
-}
-
-export interface SearchMovieDTO {
-    q?: string;
-}
-
-export interface FavoriteDTO {
-    movieId: string;
-}
-
-export const createMovieSchema = t.Object({
+export const createMovieBodySchema = t.Object({
     title: t.String(),
     description: t.String(),
     category: t.String(),
@@ -70,9 +54,22 @@ export const createMovieSchema = t.Object({
     duration: t.Numeric(),
     matchRate: t.Numeric(),
     ageRating: t.String(),
+    university: t.Optional(t.String()),
+    director: t.Optional(t.String()),
+    producer: t.Optional(t.String()),
+    writer: t.Optional(t.String()),
+    cast: t.Optional(t.String()),
+    btsVideo: t.Optional(t.String()),
+    btsPhotos: t.Optional(t.String()),
 });
+export type CreateMovieBodyInput = Static<typeof createMovieBodySchema>;
 
-export const updateMovieSchema = t.Object({
+export const updateMovieParamsSchema = t.Object({
+    id: t.String({ format: "uuid" }),
+});
+export type UpdateMovieParamsInput = Static<typeof updateMovieParamsSchema>;
+
+export const updateMovieBodySchema = t.Object({
     title: t.String(),
     description: t.String(),
     category: t.String(),
@@ -82,15 +79,45 @@ export const updateMovieSchema = t.Object({
     duration: t.Numeric(),
     matchRate: t.Numeric(),
     ageRating: t.String(),
+    university: t.Optional(t.String()),
+    director: t.Optional(t.String()),
+    producer: t.Optional(t.String()),
+    writer: t.Optional(t.String()),
+    cast: t.Optional(t.String()),
+    btsVideo: t.Optional(t.String()),
+    btsPhotos: t.Optional(t.String()),
 });
+export type UpdateMovieBodyInput = Static<typeof updateMovieBodySchema>;
 
-export const searchMovieSchema = t.Object({
+export const getMovieByIdParamsSchema = t.Object({
+    id: t.String({ format: "uuid" }),
+});
+export type GetMovieByIdParamsInput = Static<typeof getMovieByIdParamsSchema>;
+
+export const getMoviesByCategoryParamsSchema = t.Object({
+    category: t.String(),
+});
+export type GetMoviesByCategoryParamsInput = Static<typeof getMoviesByCategoryParamsSchema>;
+
+export const deleteMovieParamsSchema = t.Object({
+    id: t.String({ format: "uuid" }),
+});
+export type DeleteMovieParamsInput = Static<typeof deleteMovieParamsSchema>;
+
+export const searchMoviesQuerySchema = t.Object({
     q: t.Optional(t.String()),
 });
+export type SearchMoviesQueryInput = Static<typeof searchMoviesQuerySchema>;
 
-export const favoriteSchema = t.Object({
+export const addFavoriteBodySchema = t.Object({
     movieId: t.String(),
 });
+export type AddFavoriteBodyInput = Static<typeof addFavoriteBodySchema>;
+
+export const removeFavoriteParamsSchema = t.Object({
+    movieId: t.String({ format: "uuid" }),
+});
+export type RemoveFavoriteParamsInput = Static<typeof removeFavoriteParamsSchema>;
 
 export const CATEGORIES = [
     "Action",

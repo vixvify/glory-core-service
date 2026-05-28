@@ -1,4 +1,4 @@
-import { t } from "elysia";
+import { t, Static } from "elysia";
 
 export interface User {
     id: string;
@@ -8,24 +8,18 @@ export interface User {
     role: "admin" | "user";
 }
 
-export interface RegisterUserInput {
-    name: string;
-    email: string;
-    password: string;
-}
-
-export interface LoginUserInput {
-    email: string;
-    password: string;
-}
-
-export const registerSchema = t.Object({
+export const registerUserBodySchema = t.Object({
     name: t.String({ minLength: 2 }),
     email: t.String(),
     password: t.String({ minLength: 6 }),
 });
 
-export const loginSchema = t.Object({
+export type RegisterUserBodyInput = Static<typeof registerUserBodySchema>;
+
+export const loginUserBodySchema = t.Object({
     email: t.String(),
     password: t.String({ minLength: 6 }),
 });
+
+export type LoginUserBodyInput = Static<typeof loginUserBodySchema>;
+

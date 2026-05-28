@@ -1,20 +1,22 @@
 import { prisma } from "../../lib/prisma";
 import {
-  CreateMovieInput,
-  UpdateMovieInput,
+  CreateMovieBodyInput,
+  UpdateMovieBodyInput,
 } from "../../modules/movies/domain/movie";
 import { MovieRepository } from "../../modules/movies/domain/movie.repository";
 import { Movie as PrismaMovie } from "@prisma/client";
 import {
   Rating,
-  RatingInput,
-  RatingUserIdAndMovieIdInput,
+  AddRatingBodyInput,
+  GetRatingsQueryInput,
+  UpdateRatingBodyInput,
 } from "../../modules/movies/domain/rating";
 
 export class MovieRepositoryImpl implements MovieRepository {
   async findAll(): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
       include: {
+        crew: true,
         ratings: {
           include: {
             user: {
@@ -36,6 +38,9 @@ export class MovieRepositoryImpl implements MovieRepository {
     const terms = q.trim().split(/\s+/).filter(Boolean);
     if (terms.length === 0) {
       return prisma.movie.findMany({
+        include: {
+          crew: true,
+        },
         orderBy: { createdAt: "desc" },
       });
     }
@@ -47,6 +52,9 @@ export class MovieRepositoryImpl implements MovieRepository {
           mode: "insensitive",
         },
       },
+      include: {
+        crew: true,
+      },
     });
   }
 
@@ -54,6 +62,9 @@ export class MovieRepositoryImpl implements MovieRepository {
     return prisma.movie.findMany({
       where: {
         category: { equals: category, mode: "insensitive" },
+      },
+      include: {
+        crew: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -63,6 +74,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     return prisma.movie.findUnique({
       where: { id },
       include: {
+        crew: true,
         ratings: {
           include: {
             user: {
@@ -80,8 +92,11 @@ export class MovieRepositoryImpl implements MovieRepository {
   }
 
   async create(
-    data: Omit<CreateMovieInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<CreateMovieBodyInput, "thumbnail"> & { thumbnail: string },
   ): Promise<PrismaMovie> {
+    const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
+    const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
+
     return prisma.movie.create({
       data: {
         title: data.title,
@@ -93,14 +108,31 @@ export class MovieRepositoryImpl implements MovieRepository {
         duration: data.duration,
         matchRate: data.matchRate,
         ageRating: data.ageRating,
+        university: data.university,
+        crew: {
+          create: {
+            director: data.director,
+            producer: data.producer,
+            writer: data.writer,
+            cast: castArray,
+            btsVideo: data.btsVideo,
+            btsPhotos: btsPhotosArray,
+          }
+        }
       },
+      include: {
+        crew: true,
+      }
     });
   }
 
   async update(
     id: string,
-    data: Omit<UpdateMovieInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<UpdateMovieBodyInput, "thumbnail"> & { thumbnail: string },
   ): Promise<PrismaMovie> {
+    const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
+    const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
+
     return prisma.movie.update({
       where: { id },
       data: {
@@ -113,7 +145,31 @@ export class MovieRepositoryImpl implements MovieRepository {
         matchRate: data.matchRate,
         ageRating: data.ageRating,
         duration: data.duration,
+        university: data.university,
+        crew: {
+          upsert: {
+            create: {
+              director: data.director,
+              producer: data.producer,
+              writer: data.writer,
+              cast: castArray,
+              btsVideo: data.btsVideo,
+              btsPhotos: btsPhotosArray,
+            },
+            update: {
+              director: data.director,
+              producer: data.producer,
+              writer: data.writer,
+              cast: castArray,
+              btsVideo: data.btsVideo,
+              btsPhotos: btsPhotosArray,
+            }
+          }
+        }
       },
+      include: {
+        crew: true,
+      }
     });
   }
 
@@ -160,7 +216,7 @@ export class MovieRepositoryImpl implements MovieRepository {
       },
     });
   }
-  async addRating(data: RatingInput): Promise<void> {
+  async addRating(data: AddRatingBodyInput): Promise<void> {
     await prisma.rating.create({
       data: {
         userId: data.userId,
@@ -170,7 +226,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
   }
   async getRatingsByUserIdAndMovieId(
-    data: RatingUserIdAndMovieIdInput,
+    data: GetRatingsQueryInput,
   ): Promise<Rating[]> {
     const ratings = await prisma.rating.findMany({
       where: { userId: data.userId, movieId: data.movieId },
@@ -215,7 +271,7 @@ export class MovieRepositoryImpl implements MovieRepository {
     });
     return !!existing;
   }
-  async updateRating(data: RatingInput): Promise<void> {
+  async updateRating(data: UpdateRatingBodyInput): Promise<void> {
     await prisma.rating.update({
       where: {
         userId_movieId: {

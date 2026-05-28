@@ -12,6 +12,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 152,
     views: 1250000,
     ageRating: "R",
+    university: "Gotham University",
+    crew: {
+      create: {
+        director: "Christopher Nolan",
+        producer: "Emma Thomas",
+        writer: "Jonathan Nolan, Christopher Nolan",
+        cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
+        btsVideo: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+        btsPhotos: ["https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0"]
+      }
+    }
   },
   {
     title: "Inception",
@@ -24,6 +35,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 148,
     views: 890000,
     ageRating: "PG-13",
+    university: "Paris Sorbonne University",
+    crew: {
+      create: {
+        director: "Christopher Nolan",
+        producer: "Emma Thomas",
+        writer: "Christopher Nolan",
+        cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+        btsVideo: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+        btsPhotos: ["https://images.unsplash.com/photo-1536440136628-849c177e76a1"]
+      }
+    }
   },
   {
     title: "Interstellar",
@@ -36,6 +58,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 169,
     views: 950000,
     ageRating: "PG-13",
+    university: "NASA Academy",
+    crew: {
+      create: {
+        director: "Christopher Nolan",
+        producer: "Emma Thomas",
+        writer: "Jonathan Nolan, Christopher Nolan",
+        cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
+        btsVideo: "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+        btsPhotos: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa"]
+      }
+    }
   },
   {
     title: "The Godfather",
@@ -216,6 +249,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 106,
     views: 750000,
     ageRating: "PG",
+    university: "Tokyo Metropolitan University",
+    crew: {
+      create: {
+        director: "Makoto Shinkai",
+        producer: "Genki Kawamura",
+        writer: "Makoto Shinkai",
+        cast: ["Ryunosuke Kamiki", "Mone Kamishiraishi"],
+        btsVideo: "https://www.youtube.com/watch?v=s0wTdCGKrJY",
+        btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
+      }
+    }
   },
   {
     title: "Coco",
@@ -240,6 +284,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 115,
     views: 1500000,
     ageRating: "PG-13",
+    university: "Thammasat University",
+    crew: {
+      create: {
+        director: "Banjong Pisanthanakun",
+        producer: "Chenchonnanee Suntornyanakit",
+        writer: "Banjong Pisanthanakun",
+        cast: ["Mario Maurer", "Davika Hoorne"],
+        btsVideo: "https://www.youtube.com/watch?v=5Vz5Y-yK_U0",
+        btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
+      }
+    }
   },
   {
     title: "Bad Genius",
@@ -252,6 +307,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 130,
     views: 990000,
     ageRating: "PG-13",
+    university: "Chulalongkorn University",
+    crew: {
+      create: {
+        director: "Nattawut Poonpiriya",
+        producer: "Jira Maligool",
+        writer: "Nattawut Poonpiriya",
+        cast: ["Chutimon Chuengcharoensukying", "Chanon Santinatornkul"],
+        btsVideo: "https://www.youtube.com/watch?v=CLHe8J_SNDc",
+        btsPhotos: ["https://images.unsplash.com/photo-1434030216411-0b793f4b4173"]
+      }
+    }
   },
   {
     title: "Spider-Man: Into the Spider-Verse",

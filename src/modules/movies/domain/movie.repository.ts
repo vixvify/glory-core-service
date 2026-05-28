@@ -1,6 +1,6 @@
-import { CreateMovieInput, UpdateMovieInput } from "./movie";
+import { CreateMovieBodyInput, UpdateMovieBodyInput } from "./movie";
 import { Movie as PrismaMovie } from "@prisma/client";
-import { Rating, RatingInput, RatingUserIdAndMovieIdInput } from "./rating";
+import { Rating, AddRatingBodyInput, GetRatingsQueryInput, UpdateRatingBodyInput } from "./rating";
 
 export interface MovieRepository {
   findAll(): Promise<PrismaMovie[]>;
@@ -8,22 +8,22 @@ export interface MovieRepository {
   findByCategory(category: string): Promise<PrismaMovie[]>;
   findById(id: string): Promise<PrismaMovie | null>;
   create(
-    data: Omit<CreateMovieInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<CreateMovieBodyInput, "thumbnail"> & { thumbnail: string },
   ): Promise<PrismaMovie>;
   update(
     id: string,
-    data: Omit<UpdateMovieInput, "thumbnail"> & { thumbnail: string },
+    data: Omit<UpdateMovieBodyInput, "thumbnail"> & { thumbnail: string },
   ): Promise<PrismaMovie>;
   delete(id: string): Promise<PrismaMovie>;
   getFavorites(userId: string): Promise<string[]>;
   checkFavorite(userId: string, movieId: string): Promise<boolean>;
   addFavorite(userId: string, movieId: string): Promise<void>;
   removeFavorite(userId: string, movieId: string): Promise<void>;
-  addRating(data: RatingInput): Promise<void>;
+  addRating(data: AddRatingBodyInput): Promise<void>;
   getRatingsByUserIdAndMovieId(
-    data: RatingUserIdAndMovieIdInput,
+    data: GetRatingsQueryInput,
   ): Promise<Rating[]>;
   deleteRating(userId: string, movieId: string): Promise<void>;
   checkRating(userId: string, movieId: string): Promise<boolean>;
-  updateRating(data: RatingInput): Promise<void>;
+  updateRating(data: UpdateRatingBodyInput): Promise<void>;
 }

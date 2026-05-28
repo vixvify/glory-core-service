@@ -1,11 +1,26 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { authMiddleware } from "../../middleware/auth";
 import { MovieRepositoryImpl } from "../../infrastructure/movies/movie.repository";
 import { MovieService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
-import { createMovieSchema, updateMovieSchema, searchMovieSchema, favoriteSchema } from "./domain/movie";
-import { ratingInputSchema, deleteRatingSchema, checkRatingSchema } from "./domain/rating";
-import { ForbiddenError } from "../../core/error";
+import {
+  createMovieBodySchema,
+  updateMovieParamsSchema,
+  updateMovieBodySchema,
+  getMovieByIdParamsSchema,
+  getMoviesByCategoryParamsSchema,
+  deleteMovieParamsSchema,
+  searchMoviesQuerySchema,
+  addFavoriteBodySchema,
+  removeFavoriteParamsSchema,
+} from "./domain/movie";
+import {
+  addRatingBodySchema,
+  getRatingsQuerySchema,
+  deleteRatingBodySchema,
+  checkRatingQuerySchema,
+  updateRatingBodySchema,
+} from "./domain/rating";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -32,7 +47,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movies);
     },
     {
-      query: searchMovieSchema,
+      query: searchMoviesQuerySchema,
     },
   )
   .get(
@@ -43,9 +58,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movies);
     },
     {
-      params: t.Object({
-        category: t.String(),
-      }),
+      params: getMoviesByCategoryParamsSchema,
     }
   )
   .get(
@@ -67,7 +80,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       requireAuth: true,
-      body: favoriteSchema,
+      body: addFavoriteBodySchema,
     },
   )
   .delete(
@@ -79,9 +92,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       requireAuth: true,
-      params: t.Object({
-        movieId: t.String({ format: "uuid" }),
-      }),
+      params: removeFavoriteParamsSchema,
     }
   )
   .get(
@@ -92,9 +103,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie);
     },
     {
-      params: t.Object({
-        id: t.String({ format: "uuid" }),
-      }),
+      params: getMovieByIdParamsSchema,
     }
   )
   .post(
@@ -104,7 +113,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie, "Movie created successfully");
     },
     {
-      body: createMovieSchema,
+      body: createMovieBodySchema,
       requireAuth: true,
       requireRole: "admin",
     },
@@ -123,10 +132,8 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie, "Movie updated successfully");
     },
     {
-      params: t.Object({
-        id: t.String({ format: "uuid" }),
-      }),
-      body: updateMovieSchema,
+      params: updateMovieParamsSchema,
+      body: updateMovieBodySchema,
       requireAuth: true,
       requireRole: "admin",
     },
@@ -139,9 +146,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(movie, "Movie deleted successfully");
     },
     {
-      params: t.Object({
-        id: t.String({ format: "uuid" }),
-      }),
+      params: deleteMovieParamsSchema,
       requireAuth: true,
       requireRole: "admin",
     }
@@ -153,7 +158,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(null, "Rating added successfully");
     },
     {
-      body: ratingInputSchema,
+      body: addRatingBodySchema,
       requireAuth: true,
     },
   )
@@ -164,7 +169,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(ratings);
     },
     {
-      query: checkRatingSchema,
+      query: getRatingsQuerySchema,
       requireAuth: true,
     },
   )
@@ -175,7 +180,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(null, "Rating deleted successfully");
     },
     {
-      body: deleteRatingSchema,
+      body: deleteRatingBodySchema,
       requireAuth: true,
     },
   )
@@ -187,7 +192,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(rating);
     },
     {
-      query: checkRatingSchema,
+      query: checkRatingQuerySchema,
       requireAuth: true,
     },
   )
@@ -198,7 +203,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       return formatSuccess(null, "Rating updated successfully");
     },
     {
-      body: ratingInputSchema,
+      body: updateRatingBodySchema,
       requireAuth: true,
     },
   );
