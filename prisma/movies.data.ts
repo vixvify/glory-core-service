@@ -19,7 +19,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Emma Thomas",
         writer: "Jonathan Nolan, Christopher Nolan",
         cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
-        btsVideo: "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+        btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0"]
       }
     }
@@ -42,7 +42,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Emma Thomas",
         writer: "Christopher Nolan",
         cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
-        btsVideo: "https://www.youtube.com/watch?v=YoHD9XEInc0",
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1536440136628-849c177e76a1"]
       }
     }
@@ -65,7 +65,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Emma Thomas",
         writer: "Jonathan Nolan, Christopher Nolan",
         cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
-        btsVideo: "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+        btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa"]
       }
     }
@@ -81,6 +81,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 175,
     views: 2000000,
     ageRating: "R",
+    university: "Harvard University",
+    crew: {
+      create: {
+        director: "Francis Ford Coppola",
+        producer: "Albert S. Ruddy",
+        writer: "Mario Puzo, Francis Ford Coppola",
+        cast: ["Marlon Brando", "Al Pacino", "James Caan"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1509198397868-475647b2a1e5"]
+      }
+    }
   },
   {
     title: "Spirited Away",
@@ -93,6 +104,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 125,
     views: 620000,
     ageRating: "PG",
+    university: "Waseda University",
+    crew: {
+      create: {
+        director: "Hayao Miyazaki",
+        producer: "Toshio Suzuki",
+        writer: "Hayao Miyazaki",
+        cast: ["Rumi Hiiragi", "Miyu Irino", "Mari Natsuki"],
+        btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
+        btsPhotos: ["https://images.unsplash.com/photo-1578632767115-351597cf2477"]
+      }
+    }
   },
   {
     title: "La La Land",
@@ -105,6 +127,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 128,
     views: 450000,
     ageRating: "PG-13",
+    university: "University of Southern California",
+    crew: {
+      create: {
+        director: "Damien Chazelle",
+        producer: "Fred Berger",
+        writer: "Damien Chazelle",
+        cast: ["Ryan Gosling", "Emma Stone", "Amiée Conn"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"]
+      }
+    }
   },
   {
     title: "Knives Out",
@@ -117,6 +150,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 130,
     views: 510000,
     ageRating: "PG-13",
+    university: "Middletown University",
+    crew: {
+      create: {
+        director: "Rian Johnson",
+        producer: "Ram Bergman",
+        writer: "Rian Johnson",
+        cast: ["Daniel Craig", "Chris Evans", "Ana de Armas"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
+      }
+    }
   },
   {
     title: "Parasite",
@@ -129,6 +173,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 132,
     views: 780000,
     ageRating: "R",
+    university: "Seoul National University",
+    crew: {
+      create: {
+        director: "Bong Joon Ho",
+        producer: "Kwak Sin Ae",
+        writer: "Bong Joon Ho, Han Jin Won",
+        cast: ["Song Kang Ho", "Lee Sun Kyun", "Cho Yeo Jeong"],
+        btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
+        btsPhotos: ["https://images.unsplash.com/photo-1594909122845-11baa439b7bf"]
+      }
+    }
   },
   {
     title: "Pulp Fiction",
@@ -141,6 +196,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 154,
     views: 1100000,
     ageRating: "R",
+    university: "University of Los Angeles",
+    crew: {
+      create: {
+        director: "Quentin Tarantino",
+        producer: "Lawrence Bender",
+        writer: "Quentin Tarantino, Roger Avary",
+        cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1593085512500-5d55148d6f0d"]
+      }
+    }
   },
   {
     title: "The Matrix",
@@ -153,6 +219,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 136,
     views: 1300000,
     ageRating: "R",
+    university: "Sydney Technical College",
+    crew: {
+      create: {
+        director: "Lana Wachowski, Lilly Wachowski",
+        producer: "Joel Silver",
+        writer: "Lana Wachowski, Lilly Wachowski",
+        cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"]
+      }
+    }
   },
   {
     title: "Avengers: Endgame",
@@ -165,6 +242,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 181,
     views: 3500000,
     ageRating: "PG-13",
+    university: "Avengers Academy",
+    crew: {
+      create: {
+        director: "Anthony Russo, Joe Russo",
+        producer: "Kevin Feige",
+        writer: "Christopher Markus, Stephen McFeely",
+        cast: ["Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"],
+        btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
+        btsPhotos: ["https://images.unsplash.com/photo-1635805737707-575885ab0820"]
+      }
+    }
   },
   {
     title: "Titanic",
@@ -177,6 +265,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 194,
     views: 2400000,
     ageRating: "PG-13",
+    university: "Oxford University",
+    crew: {
+      create: {
+        director: "James Cameron",
+        producer: "James Cameron, Jon Landau",
+        writer: "James Cameron",
+        cast: ["Leonardo DiCaprio", "Kate Winslet", "Billy Zane"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
+      }
+    }
   },
   {
     title: "Jurassic Park",
@@ -189,6 +288,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 127,
     views: 1800000,
     ageRating: "PG-13",
+    university: "Stanford University",
+    crew: {
+      create: {
+        director: "Steven Spielberg",
+        producer: "Kathleen Kennedy, Gerald R. Molen",
+        writer: "Michael Crichton, David Koepp",
+        cast: ["Sam Neill", "Laura Dern", "Jeff Goldblum"],
+        btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
+        btsPhotos: ["https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7"]
+      }
+    }
   },
   {
     title: "The Shawshank Redemption",
@@ -201,6 +311,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 142,
     views: 2100000,
     ageRating: "R",
+    university: "Maine State University",
+    crew: {
+      create: {
+        director: "Frank Darabont",
+        producer: "Niki Marvin",
+        writer: "Stephen King, Frank Darabont",
+        cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"]
+      }
+    }
   },
   {
     title: "Gladiator",
@@ -213,6 +334,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 155,
     views: 1400000,
     ageRating: "R",
+    university: "Rome University",
+    crew: {
+      create: {
+        director: "Ridley Scott",
+        producer: "Douglas Wick",
+        writer: "David Franzoni, John Logan",
+        cast: ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d"]
+      }
+    }
   },
   {
     title: "Whiplash",
@@ -225,6 +357,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 106,
     views: 580000,
     ageRating: "R",
+    university: "Shaffer Conservatory",
+    crew: {
+      create: {
+        director: "Damien Chazelle",
+        producer: "Jason Blum",
+        writer: "Damien Chazelle",
+        cast: ["Miles Teller", "J.K. Simmons", "Paul Reiser"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1511192336575-5a79af67a629"]
+      }
+    }
   },
   {
     title: "The Lion King",
@@ -237,6 +380,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 88,
     views: 1900000,
     ageRating: "G",
+    university: "Pride Lands Institute",
+    crew: {
+      create: {
+        director: "Roger Allers, Rob Minkoff",
+        producer: "Don Hahn",
+        writer: "Irene Mecchi, Jonathan Roberts",
+        cast: ["Matthew Broderick", "Jeremy Irons", "James Earl Jones"],
+        btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
+        btsPhotos: ["https://images.unsplash.com/photo-1546182990-dffeafbe841d"]
+      }
+    }
   },
   {
     title: "Your Name",
@@ -256,7 +410,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Genki Kawamura",
         writer: "Makoto Shinkai",
         cast: ["Ryunosuke Kamiki", "Mone Kamishiraishi"],
-        btsVideo: "https://www.youtube.com/watch?v=s0wTdCGKrJY",
+        btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
     }
@@ -272,6 +426,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 105,
     views: 920000,
     ageRating: "PG",
+    university: "Santa Cecilia School",
+    crew: {
+      create: {
+        director: "Lee Unkrich",
+        producer: "Darla K. Anderson",
+        writer: "Adrian Molina, Matthew Aldrich",
+        cast: ["Anthony Gonzalez", "Gael García Bernal", "Benjamin Bratt"],
+        btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
+        btsPhotos: ["https://images.unsplash.com/photo-1518609878373-06d740f60d8b"]
+      }
+    }
   },
   {
     title: "Pee Mak",
@@ -291,7 +456,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Chenchonnanee Suntornyanakit",
         writer: "Banjong Pisanthanakun",
         cast: ["Mario Maurer", "Davika Hoorne"],
-        btsVideo: "https://www.youtube.com/watch?v=5Vz5Y-yK_U0",
+        btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
       }
     }
@@ -314,7 +479,7 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
         producer: "Jira Maligool",
         writer: "Nattawut Poonpiriya",
         cast: ["Chutimon Chuengcharoensukying", "Chanon Santinatornkul"],
-        btsVideo: "https://www.youtube.com/watch?v=CLHe8J_SNDc",
+        btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1434030216411-0b793f4b4173"]
       }
     }
@@ -330,6 +495,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 117,
     views: 1400000,
     ageRating: "PG",
+    university: "Brooklyn Visions Academy",
+    crew: {
+      create: {
+        director: "Bob Persichetti, Peter Ramsey",
+        producer: "Avi Arad, Amy Pascal",
+        writer: "Phil Lord, Rodney Rothman",
+        cast: ["Shameik Moore", "Jake Johnson", "Hailee Steinfeld"],
+        btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
+        btsPhotos: ["https://images.unsplash.com/photo-1608889175123-8ee362201f81"]
+      }
+    }
   },
   {
     title: "Dune",
@@ -342,6 +518,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 155,
     views: 1200000,
     ageRating: "PG-13",
+    university: "Imperial Academy",
+    crew: {
+      create: {
+        director: "Denis Villeneuve",
+        producer: "Mary Parent, Cale Boyter",
+        writer: "Jon Spaihts, Denis Villeneuve",
+        cast: ["Timothée Chalamet", "Rebecca Ferguson", "Oscar Isaac"],
+        btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
+        btsPhotos: ["https://images.unsplash.com/photo-1547483238-f400e65ccd56"]
+      }
+    }
   },
   {
     title: "Mad Max: Fury Road",
@@ -354,6 +541,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 120,
     views: 1100000,
     ageRating: "R",
+    university: "Citadel Academy",
+    crew: {
+      create: {
+        director: "George Miller",
+        producer: "Doug Mitchell, George Miller",
+        writer: "George Miller, Brendan McCarthy",
+        cast: ["Tom Hardy", "Charlize Theron", "Nicholas Hoult"],
+        btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
+        btsPhotos: ["https://images.unsplash.com/photo-1514539079130-25950c84af65"]
+      }
+    }
   },
   {
     title: "Get Out",
@@ -366,6 +564,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 104,
     views: 890000,
     ageRating: "R",
+    university: "SUNY Purchase",
+    crew: {
+      create: {
+        director: "Jordan Peele",
+        producer: "Sean McKittrick, Jason Blum",
+        writer: "Jordan Peele",
+        cast: ["Daniel Kaluuya", "Allison Williams", "Bradley Whitford"],
+        btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
+        btsPhotos: ["https://images.unsplash.com/photo-1533928298208-27ff66555d8d"]
+      }
+    }
   },
   {
     title: "The Conjuring",
@@ -378,6 +587,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 112,
     views: 1050000,
     ageRating: "R",
+    university: "University of Rhode Island",
+    crew: {
+      create: {
+        director: "James Wan",
+        producer: "Tony DeRosa-Grund",
+        writer: "Chad Hayes, Carey W. Hayes",
+        cast: ["Vera Farmiga", "Patrick Wilson", "Lili Taylor"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe"]
+      }
+    }
   },
   {
     title: "A Quiet Place",
@@ -390,6 +610,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 90,
     views: 780000,
     ageRating: "PG-13",
+    university: "Brown University",
+    crew: {
+      create: {
+        director: "John Krasinski",
+        producer: "Michael Bay, Andrew Form",
+        writer: "Bryan Woods, Scott Beck",
+        cast: ["Emily Blunt", "John Krasinski", "Millicent Simmonds"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1522071820081-009f0129c71c"]
+      }
+    }
   },
   {
     title: "Black Panther",
@@ -402,6 +633,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 134,
     views: 1700000,
     ageRating: "PG-13",
+    university: "Wakanda Science Institute",
+    crew: {
+      create: {
+        director: "Ryan Coogler",
+        producer: "Kevin Feige",
+        writer: "Ryan Coogler, Joe Robert Cole",
+        cast: ["Chadwick Boseman", "Michael B. Jordan", "Lupita Nyong'o"],
+        btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
+        btsPhotos: ["https://images.unsplash.com/photo-1534447677768-be436bb09401"]
+      }
+    }
   },
   {
     title: "Bohemian Rhapsody",
@@ -414,6 +656,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 134,
     views: 940000,
     ageRating: "PG-13",
+    university: "Ealing Art College",
+    crew: {
+      create: {
+        director: "Bryan Singer",
+        producer: "Graham King, Jim Beach",
+        writer: "Anthony McCarten, Peter Morgan",
+        cast: ["Rami Malek", "Lucy Boynton", "Gwilym Lee"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1514525253161-7a46d19cd819"]
+      }
+    }
   },
   {
     title: "The Social Network",
@@ -426,6 +679,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 120,
     views: 820000,
     ageRating: "PG-13",
+    university: "Harvard University",
+    crew: {
+      create: {
+        director: "David Fincher",
+        producer: "Scott Rudin, Dana Brunetti",
+        writer: "Aaron Sorkin",
+        cast: ["Jesse Eisenberg", "Andrew Garfield", "Justin Timberlake"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7"]
+      }
+    }
   },
   {
     title: "The Truman Show",
@@ -438,6 +702,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 103,
     views: 740000,
     ageRating: "PG",
+    university: "Seahaven College",
+    crew: {
+      create: {
+        director: "Peter Weir",
+        producer: "Scott Rudin, Andrew Niccol",
+        writer: "Andrew Niccol",
+        cast: ["Jim Carrey", "Laura Linney", "Ed Harris"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1601042879364-f3947d3f9c16"]
+      }
+    }
   },
   {
     title: "Forrest Gump",
@@ -450,6 +725,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 142,
     views: 1800000,
     ageRating: "PG-13",
+    university: "University of Alabama",
+    crew: {
+      create: {
+        director: "Robert Zemeckis",
+        producer: "Wendy Finerman, Steve Tisch",
+        writer: "Winston Groom, Eric Roth",
+        cast: ["Tom Hanks", "Robin Wright", "Gary Sinise"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1"]
+      }
+    }
   },
   {
     title: "Spider-Man: No Way Home",
@@ -462,6 +748,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 148,
     views: 2200000,
     ageRating: "PG-13",
+    university: "Midtown High School",
+    crew: {
+      create: {
+        director: "Jon Watts",
+        producer: "Kevin Feige, Amy Pascal",
+        writer: "Chris McKenna, Erik Sommers",
+        cast: ["Tom Holland", "Zendaya", "Benedict Cumberbatch"],
+        btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
+        btsPhotos: ["https://images.unsplash.com/photo-1634828221818-503587f33d02"]
+      }
+    }
   },
   {
     title: "Ford v Ferrari",
@@ -474,6 +771,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 152,
     views: 650000,
     ageRating: "PG-13",
+    university: "University of Michigan",
+    crew: {
+      create: {
+        director: "James Mangold",
+        producer: "Peter Chernin, Jenno Topping",
+        writer: "Jez Butterworth, John-Henry Butterworth",
+        cast: ["Matt Damon", "Christian Bale", "Jon Bernthal"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1552519507-da3b142c6e3d"]
+      }
+    }
   },
   {
     title: "Star Wars: Episode V - The Empire Strikes Back",
@@ -486,6 +794,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 124,
     views: 1500000,
     ageRating: "PG",
+    university: "Jedi Temple Academy",
+    crew: {
+      create: {
+        director: "Irvin Kershner",
+        producer: "Gary Kurtz",
+        writer: "Leigh Brackett, Lawrence Kasdan, George Lucas",
+        cast: ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+        btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
+        btsPhotos: ["https://images.unsplash.com/photo-1506318137071-a8e063b4bec0"]
+      }
+    }
   },
   {
     title: "The Lord of the Rings: The Fellowship of the Ring",
@@ -498,6 +817,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 178,
     views: 1800000,
     ageRating: "PG-13",
+    university: "Hobbiton School",
+    crew: {
+      create: {
+        director: "Peter Jackson",
+        producer: "Barrie M. Osborne, Peter Jackson",
+        writer: "J.R.R. Tolkien, Fran Walsh",
+        cast: ["Elijah Wood", "Ian McKellen", "Orlando Bloom"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"]
+      }
+    }
   },
   {
     title: "Harry Potter and the Sorcerer's Stone",
@@ -510,6 +840,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 152,
     views: 2000000,
     ageRating: "PG",
+    university: "Hogwarts School of Witchcraft and Wizardry",
+    crew: {
+      create: {
+        director: "Chris Columbus",
+        producer: "David Heyman",
+        writer: "J.K. Rowling, Steve Kloves",
+        cast: ["Daniel Radcliffe", "Rupert Grint", "Emma Watson"],
+        btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
+        btsPhotos: ["https://images.unsplash.com/photo-1510172951991-856a654063f9"]
+      }
+    }
   },
   {
     title: "The Silence of the Lambs",
@@ -522,6 +863,17 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 118,
     views: 1100000,
     ageRating: "R",
+    university: "Quantico Academy",
+    crew: {
+      create: {
+        director: "Jonathan Demme",
+        producer: "Edward Saxon, Kenneth Utt",
+        writer: "Thomas Harris, Ted Tally",
+        cast: ["Jodie Foster", "Anthony Hopkins", "Lawrence A. Bonney"],
+        btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
+        btsPhotos: ["https://images.unsplash.com/photo-1509114397022-ed747cca3f65"]
+      }
+    }
   },
   {
     title: "Django Unchained",
@@ -534,5 +886,16 @@ export const seedMovies: Prisma.MovieCreateInput[] = [
     duration: 165,
     views: 870000,
     ageRating: "R",
+    university: "University of Texas",
+    crew: {
+      create: {
+        director: "Quentin Tarantino",
+        producer: "Stacey Sher, Reginald Hudlin",
+        writer: "Quentin Tarantino",
+        cast: ["Jamie Foxx", "Christoph Waltz", "Leonardo DiCaprio"],
+        btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
+        btsPhotos: ["https://images.unsplash.com/photo-1533105079780-92b9be482077"]
+      }
+    }
   }
 ];
