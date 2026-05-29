@@ -11,6 +11,8 @@ import {
   GetRatingsQueryInput,
   UpdateRatingBodyInput,
 } from "../../modules/movies/domain/rating";
+import { NotFoundError } from "../../core/error";
+import { isUuid } from "../../core/utils/validator";
 
 export class MovieRepositoryImpl implements MovieRepository {
 
@@ -162,29 +164,42 @@ export class MovieRepositoryImpl implements MovieRepository {
       },
     });
 
-    const associateCrew = async (names: string[], role: string) => {
-      for (const name of names) {
-        if (!name) continue;
-        const crewMember = await prisma.crewMember.upsert({
-          where: { name },
-          update: {},
-          create: { name },
-        });
+    const associateCrew = async (namesOrIds: string[], role: string, movieId: string) => {
+      for (const item of namesOrIds) {
+        if (!item) continue;
+        
+        let crewMemberId: string;
+        if (isUuid(item)) {
+          const crewMember = await prisma.crewMember.findUnique({
+            where: { id: item },
+          });
+          if (!crewMember) {
+            throw new NotFoundError(`Crew member with ID ${item} not found`);
+          }
+          crewMemberId = crewMember.id;
+        } else {
+          const crewMember = await prisma.crewMember.upsert({
+            where: { name: item },
+            update: {},
+            create: { name: item },
+          });
+          crewMemberId = crewMember.id;
+        }
 
         await prisma.movieCrew.create({
           data: {
-            movieId: movie.id,
-            crewMemberId: crewMember.id,
+            movieId,
+            crewMemberId,
             role,
           },
         });
       }
     };
 
-    await associateCrew(directors, "DIRECTOR");
-    await associateCrew(producers, "PRODUCER");
-    await associateCrew(writers, "WRITER");
-    await associateCrew(cast, "CAST");
+    await associateCrew(directors, "DIRECTOR", movie.id);
+    await associateCrew(producers, "PRODUCER", movie.id);
+    await associateCrew(writers, "WRITER", movie.id);
+    await associateCrew(cast, "CAST", movie.id);
 
     await prisma.movieBts.create({
       data: {
@@ -235,29 +250,42 @@ export class MovieRepositoryImpl implements MovieRepository {
       where: { movieId: id },
     });
 
-    const associateCrew = async (names: string[], role: string) => {
-      for (const name of names) {
-        if (!name) continue;
-        const crewMember = await prisma.crewMember.upsert({
-          where: { name },
-          update: {},
-          create: { name },
-        });
+    const associateCrew = async (namesOrIds: string[], role: string, movieId: string) => {
+      for (const item of namesOrIds) {
+        if (!item) continue;
+        
+        let crewMemberId: string;
+        if (isUuid(item)) {
+          const crewMember = await prisma.crewMember.findUnique({
+            where: { id: item },
+          });
+          if (!crewMember) {
+            throw new NotFoundError(`Crew member with ID ${item} not found`);
+          }
+          crewMemberId = crewMember.id;
+        } else {
+          const crewMember = await prisma.crewMember.upsert({
+            where: { name: item },
+            update: {},
+            create: { name: item },
+          });
+          crewMemberId = crewMember.id;
+        }
 
         await prisma.movieCrew.create({
           data: {
-            movieId: id,
-            crewMemberId: crewMember.id,
+            movieId,
+            crewMemberId,
             role,
           },
         });
       }
     };
 
-    await associateCrew(directors, "DIRECTOR");
-    await associateCrew(producers, "PRODUCER");
-    await associateCrew(writers, "WRITER");
-    await associateCrew(cast, "CAST");
+    await associateCrew(directors, "DIRECTOR", id);
+    await associateCrew(producers, "PRODUCER", id);
+    await associateCrew(writers, "WRITER", id);
+    await associateCrew(cast, "CAST", id);
 
     await prisma.movieBts.upsert({
       where: { movieId: id },
