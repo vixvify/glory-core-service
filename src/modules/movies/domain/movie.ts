@@ -69,11 +69,11 @@ export const createMovieBodySchema = t.Object({
     matchRate: t.Numeric(),
     ageRating: t.String(),
     university: t.Optional(t.String()),
-    director: t.Optional(t.Array(t.String())),
-    producer: t.Optional(t.Array(t.String())),
-    writer: t.Optional(t.Array(t.String())),
-    cast: t.Optional(t.Array(t.String())),
-    btsVideo: t.Optional(t.Array(t.String())),
+    director: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    producer: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    writer: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    cast: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    btsVideo: t.Optional(t.Union([t.String(), t.Array(t.String())])),
     btsPhotos: t.Optional(
         t.Union([
             t.File(),
@@ -101,11 +101,11 @@ export const updateMovieBodySchema = t.Object({
     matchRate: t.Numeric(),
     ageRating: t.String(),
     university: t.Optional(t.String()),
-    director: t.Optional(t.Array(t.String())),
-    producer: t.Optional(t.Array(t.String())),
-    writer: t.Optional(t.Array(t.String())),
-    cast: t.Optional(t.Array(t.String())),
-    btsVideo: t.Optional(t.Array(t.String())),
+    director: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    producer: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    writer: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    cast: t.Optional(t.Union([t.String(), t.Array(t.String())])),
+    btsVideo: t.Optional(t.Union([t.String(), t.Array(t.String())])),
     btsPhotos: t.Optional(
         t.Union([
             t.File(),

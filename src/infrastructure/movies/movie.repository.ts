@@ -140,11 +140,11 @@ export class MovieRepositoryImpl implements MovieRepository {
       btsPhotos?: string;
     },
   ): Promise<PrismaMovie> {
-    const directors = data.director || [];
-    const producers = data.producer || [];
-    const writers = data.writer || [];
-    const cast = data.cast || [];
-    const btsVideo = data.btsVideo || [];
+    const directors = data.director ? (Array.isArray(data.director) ? data.director : [data.director]) : [];
+    const producers = data.producer ? (Array.isArray(data.producer) ? data.producer : [data.producer]) : [];
+    const writers = data.writer ? (Array.isArray(data.writer) ? data.writer : [data.writer]) : [];
+    const cast = data.cast ? (Array.isArray(data.cast) ? data.cast : [data.cast]) : [];
+    const btsVideo = data.btsVideo ? (Array.isArray(data.btsVideo) ? data.btsVideo : [data.btsVideo]) : [];
     const btsPhotos = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
 
     const movie = await prisma.movie.create({
@@ -208,11 +208,11 @@ export class MovieRepositoryImpl implements MovieRepository {
       btsPhotos?: string;
     },
   ): Promise<PrismaMovie> {
-    const directors = data.director || [];
-    const producers = data.producer || [];
-    const writers = data.writer || [];
-    const cast = data.cast || [];
-    const btsVideo = data.btsVideo || [];
+    const directors = data.director ? (Array.isArray(data.director) ? data.director : [data.director]) : [];
+    const producers = data.producer ? (Array.isArray(data.producer) ? data.producer : [data.producer]) : [];
+    const writers = data.writer ? (Array.isArray(data.writer) ? data.writer : [data.writer]) : [];
+    const cast = data.cast ? (Array.isArray(data.cast) ? data.cast : [data.cast]) : [];
+    const btsVideo = data.btsVideo ? (Array.isArray(data.btsVideo) ? data.btsVideo : [data.btsVideo]) : [];
     const btsPhotos = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
 
     await prisma.movie.update({
