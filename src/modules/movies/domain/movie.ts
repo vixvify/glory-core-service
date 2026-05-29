@@ -1,5 +1,5 @@
 import { t, Static } from "elysia";
-import { Rating } from "./rating";
+import { Rating } from "../../ratings/domain/rating";
 import { User } from "../../auth/domain/auth";
 
 export interface CrewMember {
@@ -47,16 +47,6 @@ export interface Movie {
     createdAt: Date;
     updatedAt: Date;
 }
-
-export interface FavoriteMovie {
-    id: string;
-    userId: string;
-    movieId: string;
-    user: User;
-    movie: Movie;
-    createdAt: Date;
-}
-
 
 export const createMovieBodySchema = t.Object({
     title: t.String(),
@@ -141,16 +131,3 @@ export const searchMoviesQuerySchema = t.Object({
     q: t.Optional(t.String()),
 });
 export type SearchMoviesQueryInput = Static<typeof searchMoviesQuerySchema>;
-
-export const addFavoriteBodySchema = t.Object({
-    movieId: t.String(),
-});
-export type AddFavoriteBodyInput = Static<typeof addFavoriteBodySchema>;
-
-export const removeFavoriteParamsSchema = t.Object({
-    movieId: t.String({ format: "uuid" }),
-});
-export type RemoveFavoriteParamsInput = Static<typeof removeFavoriteParamsSchema>;
-
-
-

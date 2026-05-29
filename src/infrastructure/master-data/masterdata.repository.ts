@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma";
-import { MasterDataRepository } from "../../modules/masterdata/domain/masterdata.repository";
-import { Category, University, AgeRating, CrewMember } from "../../modules/masterdata/domain/masterdata";
+import { MasterDataRepository } from "../../modules/master-data/domain/masterdata.repository";
+import { Category, University, AgeRating } from "../../modules/master-data/domain/masterdata";
 
 export class MasterDataRepositoryImpl implements MasterDataRepository {
   async getCategories(): Promise<Category[]> {
@@ -17,12 +17,6 @@ export class MasterDataRepositoryImpl implements MasterDataRepository {
 
   async getAgeRatings(): Promise<AgeRating[]> {
     return prisma.ageRating.findMany({
-      orderBy: { name: "asc" },
-    });
-  }
-
-  async getCrewMembers(): Promise<CrewMember[]> {
-    return prisma.crewMember.findMany({
       orderBy: { name: "asc" },
     });
   }

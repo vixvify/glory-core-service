@@ -16,10 +16,3 @@ export interface AgeRating {
   createdAt: Date;
 }
 
-export interface CrewMember {
-  id: string;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-

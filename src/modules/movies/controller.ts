@@ -12,16 +12,7 @@ import {
   getMoviesByUniversityParamsSchema,
   deleteMovieParamsSchema,
   searchMoviesQuerySchema,
-  addFavoriteBodySchema,
-  removeFavoriteParamsSchema,
 } from "./domain/movie";
-import {
-  addRatingBodySchema,
-  getRatingsQuerySchema,
-  deleteRatingBodySchema,
-  checkRatingQuerySchema,
-  updateRatingBodySchema,
-} from "./domain/rating";
 
 const repo = new MovieRepositoryImpl();
 const service = new MovieService(repo);
@@ -64,40 +55,6 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       params: getMoviesByUniversityParamsSchema,
-    }
-  )
-  .get(
-    "/favorites",
-    async ({ user }) => {
-      const favoriteMovies = await service.getUserFavorites(user!.id);
-      return formatSuccess(favoriteMovies);
-    },
-    {
-      requireAuth: true,
-    },
-  )
-  .post(
-    "/favorites",
-    async ({ user, body }) => {
-      const { movieId } = body;
-      await service.addMovieToFavorites(user!.id, movieId);
-      return formatSuccess(null, "Movie added to favorites");
-    },
-    {
-      requireAuth: true,
-      body: addFavoriteBodySchema,
-    },
-  )
-  .delete(
-    "/favorites/:movieId",
-    async ({ user, params }) => {
-      const { movieId } = params;
-      await service.removeMovieFromFavorites(user!.id, movieId);
-      return formatSuccess(null, "Movie removed from favorites");
-    },
-    {
-      requireAuth: true,
-      params: removeFavoriteParamsSchema,
     }
   )
   .get(
@@ -155,60 +112,4 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       requireAuth: true,
       requireRole: "admin",
     }
-  )
-  .post(
-    "/ratings",
-    async ({ body }) => {
-      await service.addRating(body);
-      return formatSuccess(null, "Rating added successfully");
-    },
-    {
-      body: addRatingBodySchema,
-      requireAuth: true,
-    },
-  )
-  .get(
-    "/ratings",
-    async ({ query }) => {
-      const ratings = await service.getRatingsByUserIdAndMovieId(query);
-      return formatSuccess(ratings);
-    },
-    {
-      query: getRatingsQuerySchema,
-      requireAuth: true,
-    },
-  )
-  .delete(
-    "/ratings",
-    async ({ body }) => {
-      await service.deleteRating(body.userId, body.movieId);
-      return formatSuccess(null, "Rating deleted successfully");
-    },
-    {
-      body: deleteRatingBodySchema,
-      requireAuth: true,
-    },
-  )
-  .get(
-    "/ratings/check",
-    async ({ query }) => {
-      const { userId, movieId } = query;
-      const rating = await service.checkRating(userId, movieId);
-      return formatSuccess(rating);
-    },
-    {
-      query: checkRatingQuerySchema,
-      requireAuth: true,
-    },
-  )
-  .put(
-    "/ratings",
-    async ({ body }) => {
-      await service.updateRating(body);
-      return formatSuccess(null, "Rating updated successfully");
-    },
-    {
-      body: updateRatingBodySchema,
-      requireAuth: true,
-    },
-  )
+  );

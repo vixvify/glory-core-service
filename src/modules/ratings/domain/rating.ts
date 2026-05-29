@@ -1,5 +1,5 @@
 import { User } from "../../auth/domain/auth";
-import { Movie } from "./movie";
+import { Movie } from "../../movies/domain/movie";
 import { t, Static } from "elysia";
 
 type RatingMovie = Omit<Movie, "ratings">;
@@ -14,7 +14,6 @@ export interface Rating {
   user: User;
   movie: RatingMovie;
 }
-
 
 export const addRatingBodySchema = t.Object({
   userId: t.String(),

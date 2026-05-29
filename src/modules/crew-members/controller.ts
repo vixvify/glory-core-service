@@ -1,0 +1,84 @@
+import { Elysia } from "elysia";
+import { authMiddleware } from "../../middleware/auth";
+import { CrewMemberRepositoryImpl } from "../../infrastructure/crew-members/crew-member.repository";
+import { CrewMemberService } from "./service";
+import { formatSuccess } from "../../core/interceptor";
+import {
+  createCrewMemberSchema,
+  updateCrewMemberParamsSchema,
+  updateCrewMemberBodySchema,
+  getCrewMemberByIdParamsSchema,
+  deleteCrewMemberParamsSchema,
+  searchCrewMembersQuerySchema,
+} from "./domain/crew-member";
+
+const repo = new CrewMemberRepositoryImpl();
+const service = new CrewMemberService(repo);
+
+export const crewMemberRouter = new Elysia({ prefix: "/crew-members" })
+  .use(authMiddleware)
+  .get("/all", async () => {
+    const crewMembers = await service.getAllCrewMembers();
+    return formatSuccess(crewMembers);
+  })
+  .get(
+    "/search",
+    async ({ query }) => {
+      const q = query.q || "";
+      const crewMembers = await service.searchCrewMembers(q);
+      return formatSuccess(crewMembers);
+    },
+    {
+      query: searchCrewMembersQuerySchema,
+    },
+  )
+  .get(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      const crewMember = await service.getCrewMemberById(id);
+      return formatSuccess(crewMember);
+    },
+    {
+      params: getCrewMemberByIdParamsSchema,
+    },
+  )
+  .post(
+    "/",
+    async ({ body }) => {
+      const crewMember = await service.createCrewMember(body.name);
+      return formatSuccess(crewMember, "Crew member created successfully");
+    },
+    {
+      body: createCrewMemberSchema,
+      requireAuth: true,
+      requireRole: "admin",
+    },
+  )
+  .put(
+    "/:id",
+    async ({ params, body }) => {
+      const { id } = params;
+      const crewMember = await service.updateCrewMember(id, body.name);
+      return formatSuccess(crewMember, "Crew member updated successfully");
+    },
+    {
+      params: updateCrewMemberParamsSchema,
+      body: updateCrewMemberBodySchema,
+      requireAuth: true,
+      requireRole: "admin",
+    },
+  )
+  .delete(
+    "/:id",
+    async ({ params }) => {
+      const { id } = params;
+      const crewMember = await service.deleteCrewMember(id);
+      return formatSuccess(crewMember, "Crew member deleted successfully");
+    },
+    {
+      params: deleteCrewMemberParamsSchema,
+      requireAuth: true,
+      requireRole: "admin",
+    },
+  );

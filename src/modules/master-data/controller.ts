@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { authMiddleware } from "../../middleware/auth";
-import { MasterDataRepositoryImpl } from "../../infrastructure/masterdata/masterdata.repository";
+import { MasterDataRepositoryImpl } from "../../infrastructure/master-data/masterdata.repository";
 import { MasterDataService } from "./service";
 import { formatSuccess } from "../../core/interceptor";
 
@@ -20,8 +20,4 @@ export const masterDataRouter = new Elysia({ prefix: "/masterdata" })
   .get("/ratings", async () => {
     const ratings = await service.getAgeRatings();
     return formatSuccess(ratings);
-  })
-  .get("/crews", async () => {
-    const crew = await service.getCrewMembers();
-    return formatSuccess(crew);
   });

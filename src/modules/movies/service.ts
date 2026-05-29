@@ -7,12 +7,6 @@ import {
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
 import { uploadToSupabase, resolveUploadedFiles } from "../../lib/supabase";
-import {
-  AddRatingBodyInput,
-  Rating,
-  GetRatingsQueryInput,
-  UpdateRatingBodyInput,
-} from "./domain/rating";
 
 export class MovieService {
   constructor(private repo: MovieRepository) {}
@@ -149,114 +143,6 @@ export class MovieService {
       if (error instanceof AppError) throw error;
       const message =
         error instanceof Error ? error.message : "Failed to delete movie";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async getUserFavorites(userId: string): Promise<Movie[]> {
-    try {
-      const favorites = await this.repo.getFavorites(userId);
-      return MovieFactory.toDomainList(favorites);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to get user favorites";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async addMovieToFavorites(userId: string, movieId: string): Promise<void> {
-    try {
-      const movie = await this.repo.findById(movieId);
-      if (!movie) {
-        throw new NotFoundError("Movie not found");
-      }
-
-      const isFav = await this.repo.checkFavorite(userId, movieId);
-      if (!isFav) {
-        await this.repo.addFavorite(userId, movieId);
-      }
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Failed to add movie to favorites";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async removeMovieFromFavorites(
-    userId: string,
-    movieId: string,
-  ): Promise<void> {
-    try {
-      await this.repo.removeFavorite(userId, movieId);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Failed to remove movie from favorites";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-
-
-  async addRating(data: AddRatingBodyInput): Promise<void> {
-    try {
-      return await this.repo.addRating(data);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to add rating";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async getRatingsByUserIdAndMovieId(
-    data: GetRatingsQueryInput,
-  ): Promise<Rating[]> {
-    try {
-      return await this.repo.getRatingsByUserIdAndMovieId(data);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to get ratings";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async deleteRating(userId: string, movieId: string): Promise<void> {
-    try {
-      await this.repo.deleteRating(userId, movieId);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to delete rating";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async checkRating(userId: string, movieId: string): Promise<boolean> {
-    try {
-      return await this.repo.checkRating(userId, movieId);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to check rating";
-      throw new BadRequestError(message, error);
-    }
-  }
-
-  async updateRating(data: UpdateRatingBodyInput): Promise<void> {
-    try {
-      return await this.repo.updateRating(data);
-    } catch (error: unknown) {
-      if (error instanceof AppError) throw error;
-      const message =
-        error instanceof Error ? error.message : "Failed to update rating";
       throw new BadRequestError(message, error);
     }
   }

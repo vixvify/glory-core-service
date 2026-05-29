@@ -1,6 +1,6 @@
 import { Movie as DtoMovie } from "./domain/movie";
 import { Movie as PrismaMovie } from "@prisma/client";
-import { Rating } from "./domain/rating";
+import { Rating } from "../ratings/domain/rating";
 
 export interface PrismaMovieWithRelations extends PrismaMovie {
   ratings?: Array<{

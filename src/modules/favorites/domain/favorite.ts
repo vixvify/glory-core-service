@@ -1,0 +1,22 @@
+import { User } from "../../auth/domain/auth";
+import { Movie } from "../../movies/domain/movie";
+import { t, Static } from "elysia";
+
+export interface FavoriteMovie {
+  id: string;
+  userId: string;
+  movieId: string;
+  user: User;
+  movie: Movie;
+  createdAt: Date;
+}
+
+export const addFavoriteBodySchema = t.Object({
+  movieId: t.String(),
+});
+export type AddFavoriteBodyInput = Static<typeof addFavoriteBodySchema>;
+
+export const removeFavoriteParamsSchema = t.Object({
+  movieId: t.String({ format: "uuid" }),
+});
+export type RemoveFavoriteParamsInput = Static<typeof removeFavoriteParamsSchema>;
