@@ -65,7 +65,12 @@ export class AuthService {
       if (!payload || !payload.id) {
         return null;
       }
-      return await this.repo.findById(payload.id);
+      return {
+        id: payload.id as string,
+        name: (payload.name as string) || "",
+        email: (payload.email as string) || "",
+        role: (payload.role as "admin" | "user") || "user",
+      };
     } catch {
       return null;
     }

@@ -72,16 +72,16 @@ export async function resolveUploadedFiles(
   }
 
   if (Array.isArray(input)) {
-    const urls: string[] = [];
-    for (const item of input) {
+    const uploadPromises = input.map(async (item) => {
       if (item instanceof File) {
-        const url = await uploadToSupabase(item, folder);
-        urls.push(url);
+        return uploadToSupabase(item, folder);
       } else if (typeof item === "string") {
-        urls.push(item);
+        return item;
       }
-    }
-    return urls.join(",");
+      return "";
+    });
+    const urls = await Promise.all(uploadPromises);
+    return urls.filter(Boolean).join(",");
   }
 
   return undefined;
