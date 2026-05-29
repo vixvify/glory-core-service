@@ -1,7 +1,46 @@
-import { Prisma } from "@prisma/client";
 
-export const seedMovies: Prisma.MovieCreateInput[] = [
-  // ==================== ACTION (10) ====================
+export const categories = [
+  "Action", "Sci-Fi", "Horror", "Comedy", "Thriller", "Drama", "Romance",
+  "Adventure", "Fantasy", "Animation", "Biography", "Documentary", "Family",
+  "Music", "Mystery", "Sport", "Western"
+];
+
+export const ageRatings = [
+  "G", "PG", "PG-13", "NC-17", "R"
+];
+
+export const universities = [
+  "จุฬาลงกรณ์มหาวิทยาลัย",
+  "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
+  "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+  "มหาวิทยาลัยกรุงเทพ"
+];
+
+export interface SeedMovie {
+  title: string;
+  description: string;
+  thumbnail: string;
+  youtubeUrl: string;
+  category: string;
+  matchRate?: number;
+  year: number;
+  duration: number;
+  views?: number;
+  ageRating?: string;
+  university?: string;
+  crew?: {
+    create: {
+      director?: string;
+      producer?: string;
+      writer?: string;
+      cast?: string[] | string;
+      btsVideo?: string;
+      btsPhotos?: string[] | string;
+    };
+  };
+}
+
+export const seedMovies: SeedMovie[] = [
   {
     title: "The Dark Knight",
     description: "เมื่อโจ๊กเกอร์อาชญากรสุดอันตรายสร้างความโกลาหลให้เมืองก็อตแธม แบทแมนต้องเผชิญบททดสอบทั้งร่างกายและจิตใจครั้งใหญ่ในการปกป้องความยุติธรรม",

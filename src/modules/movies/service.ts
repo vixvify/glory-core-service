@@ -3,9 +3,6 @@ import {
   Movie,
   CreateMovieBodyInput,
   UpdateMovieBodyInput,
-  CATEGORIES,
-  AGE_RATINGS,
-  UNIVERSITIES,
 } from "./domain/movie";
 import { MovieRepository } from "./domain/movie.repository";
 import { MovieFactory } from "./factory";
@@ -205,17 +202,7 @@ export class MovieService {
     }
   }
 
-  async getCategories(): Promise<readonly string[]> {
-    return CATEGORIES;
-  }
 
-  async getUniversities(): Promise<readonly string[]> {
-    return UNIVERSITIES;
-  }
-
-  async getAgeRatings(): Promise<readonly string[]> {
-    return AGE_RATINGS;
-  }
 
   async addRating(data: AddRatingBodyInput): Promise<void> {
     try {

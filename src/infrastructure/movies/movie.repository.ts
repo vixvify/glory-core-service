@@ -13,10 +13,16 @@ import {
 } from "../../modules/movies/domain/rating";
 
 export class MovieRepositoryImpl implements MovieRepository {
+
   async findAll(): Promise<PrismaMovie[]> {
     return prisma.movie.findMany({
       include: {
-        crew: true,
+        crew: {
+          include: {
+            crewMember: true,
+          },
+        },
+        bts: true,
         ratings: {
           include: {
             user: {
@@ -39,7 +45,12 @@ export class MovieRepositoryImpl implements MovieRepository {
     if (terms.length === 0) {
       return prisma.movie.findMany({
         include: {
-          crew: true,
+          crew: {
+            include: {
+              crewMember: true,
+            },
+          },
+          bts: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -53,7 +64,12 @@ export class MovieRepositoryImpl implements MovieRepository {
         },
       },
       include: {
-        crew: true,
+        crew: {
+          include: {
+            crewMember: true,
+          },
+        },
+        bts: true,
       },
     });
   }
@@ -64,7 +80,12 @@ export class MovieRepositoryImpl implements MovieRepository {
         category: { equals: category, mode: "insensitive" },
       },
       include: {
-        crew: true,
+        crew: {
+          include: {
+            crewMember: true,
+          },
+        },
+        bts: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -76,7 +97,12 @@ export class MovieRepositoryImpl implements MovieRepository {
         university: { equals: university, mode: "insensitive" },
       },
       include: {
-        crew: true,
+        crew: {
+          include: {
+            crewMember: true,
+          },
+        },
+        bts: true,
       },
       orderBy: { createdAt: "desc" },
     });
@@ -86,7 +112,12 @@ export class MovieRepositoryImpl implements MovieRepository {
     return prisma.movie.findUnique({
       where: { id },
       include: {
-        crew: true,
+        crew: {
+          include: {
+            crewMember: true,
+          },
+        },
+        bts: true,
         ratings: {
           include: {
             user: {
@@ -109,36 +140,65 @@ export class MovieRepositoryImpl implements MovieRepository {
       btsPhotos?: string;
     },
   ): Promise<PrismaMovie> {
-    const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
-    const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
+    const directors = data.director || [];
+    const producers = data.producer || [];
+    const writers = data.writer || [];
+    const cast = data.cast || [];
+    const btsVideo = data.btsVideo || [];
+    const btsPhotos = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
 
-    return prisma.movie.create({
+    const movie = await prisma.movie.create({
       data: {
         title: data.title,
         description: data.description,
         thumbnail: data.thumbnail,
         youtubeUrl: data.youtubeUrl,
         category: data.category,
-        year: data.year,
-        duration: data.duration,
-        matchRate: data.matchRate,
+        year: Number(data.year),
+        duration: Number(data.duration),
+        matchRate: Number(data.matchRate),
         ageRating: data.ageRating,
         university: data.university,
-        crew: {
-          create: {
-            director: data.director,
-            producer: data.producer,
-            writer: data.writer,
-            cast: castArray,
-            btsVideo: data.btsVideo,
-            btsPhotos: btsPhotosArray,
-          }
-        }
       },
-      include: {
-        crew: true,
-      }
     });
+
+    const associateCrew = async (names: string[], role: string) => {
+      for (const name of names) {
+        if (!name) continue;
+        const crewMember = await prisma.crewMember.upsert({
+          where: { name },
+          update: {},
+          create: { name },
+        });
+
+        await prisma.movieCrew.create({
+          data: {
+            movieId: movie.id,
+            crewMemberId: crewMember.id,
+            role,
+          },
+        });
+      }
+    };
+
+    await associateCrew(directors, "DIRECTOR");
+    await associateCrew(producers, "PRODUCER");
+    await associateCrew(writers, "WRITER");
+    await associateCrew(cast, "CAST");
+
+    await prisma.movieBts.create({
+      data: {
+        movieId: movie.id,
+        btsVideo,
+        btsPhotos,
+      },
+    });
+
+    const result = await this.findById(movie.id);
+    if (!result) {
+      throw new Error("Failed to retrieve created movie");
+    }
+    return result;
   }
 
   async update(
@@ -148,10 +208,14 @@ export class MovieRepositoryImpl implements MovieRepository {
       btsPhotos?: string;
     },
   ): Promise<PrismaMovie> {
-    const castArray = data.cast ? data.cast.split(",").map(c => c.trim()).filter(Boolean) : [];
-    const btsPhotosArray = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
+    const directors = data.director || [];
+    const producers = data.producer || [];
+    const writers = data.writer || [];
+    const cast = data.cast || [];
+    const btsVideo = data.btsVideo || [];
+    const btsPhotos = data.btsPhotos ? data.btsPhotos.split(",").map(p => p.trim()).filter(Boolean) : [];
 
-    return prisma.movie.update({
+    await prisma.movie.update({
       where: { id },
       data: {
         title: data.title,
@@ -159,36 +223,60 @@ export class MovieRepositoryImpl implements MovieRepository {
         thumbnail: data.thumbnail,
         youtubeUrl: data.youtubeUrl,
         category: data.category,
-        year: data.year,
-        matchRate: data.matchRate,
+        year: Number(data.year),
+        duration: Number(data.duration),
+        matchRate: Number(data.matchRate),
         ageRating: data.ageRating,
-        duration: data.duration,
         university: data.university,
-        crew: {
-          upsert: {
-            create: {
-              director: data.director,
-              producer: data.producer,
-              writer: data.writer,
-              cast: castArray,
-              btsVideo: data.btsVideo,
-              btsPhotos: btsPhotosArray,
-            },
-            update: {
-              director: data.director,
-              producer: data.producer,
-              writer: data.writer,
-              cast: castArray,
-              btsVideo: data.btsVideo,
-              btsPhotos: btsPhotosArray,
-            }
-          }
-        }
       },
-      include: {
-        crew: true,
-      }
     });
+
+    await prisma.movieCrew.deleteMany({
+      where: { movieId: id },
+    });
+
+    const associateCrew = async (names: string[], role: string) => {
+      for (const name of names) {
+        if (!name) continue;
+        const crewMember = await prisma.crewMember.upsert({
+          where: { name },
+          update: {},
+          create: { name },
+        });
+
+        await prisma.movieCrew.create({
+          data: {
+            movieId: id,
+            crewMemberId: crewMember.id,
+            role,
+          },
+        });
+      }
+    };
+
+    await associateCrew(directors, "DIRECTOR");
+    await associateCrew(producers, "PRODUCER");
+    await associateCrew(writers, "WRITER");
+    await associateCrew(cast, "CAST");
+
+    await prisma.movieBts.upsert({
+      where: { movieId: id },
+      create: {
+        movieId: id,
+        btsVideo,
+        btsPhotos,
+      },
+      update: {
+        btsVideo,
+        btsPhotos,
+      },
+    });
+
+    const result = await this.findById(id);
+    if (!result) {
+      throw new Error("Failed to retrieve updated movie");
+    }
+    return result;
   }
 
   async delete(id: string): Promise<PrismaMovie> {
@@ -203,7 +291,12 @@ export class MovieRepositoryImpl implements MovieRepository {
       include: {
         movie: {
           include: {
-            crew: true,
+            crew: {
+              include: {
+                crewMember: true,
+              },
+            },
+            bts: true,
             ratings: {
               include: {
                 user: {
@@ -285,6 +378,11 @@ export class MovieRepositoryImpl implements MovieRepository {
         ...rating.user,
         name: rating.user.name ?? "Unknown User",
         role: rating.user.role as "user" | "admin",
+      },
+      movie: {
+        ...rating.movie,
+        crew: [],
+        bts: null,
       },
     }));
   }

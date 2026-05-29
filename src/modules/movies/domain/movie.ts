@@ -2,14 +2,27 @@ import { t, Static } from "elysia";
 import { Rating } from "./rating";
 import { User } from "../../auth/domain/auth";
 
+export interface CrewMember {
+    id: string;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export interface MovieCrew {
     id: string;
     movieId: string;
-    director?: string | null;
-    producer?: string | null;
-    writer?: string | null;
-    cast: string[];
-    btsVideo?: string | null;
+    crewMemberId: string;
+    role: string;
+    crewMember?: CrewMember;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface MovieBts {
+    id: string;
+    movieId: string;
+    btsVideo: string[];
     btsPhotos: string[];
     createdAt: Date;
     updatedAt: Date;
@@ -29,7 +42,8 @@ export interface Movie {
     ageRating: string;
     duration: number;
     university?: string | null;
-    crew?: MovieCrew | null;
+    crew: MovieCrew[];
+    bts?: MovieBts | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -55,11 +69,11 @@ export const createMovieBodySchema = t.Object({
     matchRate: t.Numeric(),
     ageRating: t.String(),
     university: t.Optional(t.String()),
-    director: t.Optional(t.String()),
-    producer: t.Optional(t.String()),
-    writer: t.Optional(t.String()),
-    cast: t.Optional(t.String()),
-    btsVideo: t.Optional(t.String()),
+    director: t.Optional(t.Array(t.String())),
+    producer: t.Optional(t.Array(t.String())),
+    writer: t.Optional(t.Array(t.String())),
+    cast: t.Optional(t.Array(t.String())),
+    btsVideo: t.Optional(t.Array(t.String())),
     btsPhotos: t.Optional(
         t.Union([
             t.File(),
@@ -87,11 +101,11 @@ export const updateMovieBodySchema = t.Object({
     matchRate: t.Numeric(),
     ageRating: t.String(),
     university: t.Optional(t.String()),
-    director: t.Optional(t.String()),
-    producer: t.Optional(t.String()),
-    writer: t.Optional(t.String()),
-    cast: t.Optional(t.String()),
-    btsVideo: t.Optional(t.String()),
+    director: t.Optional(t.Array(t.String())),
+    producer: t.Optional(t.Array(t.String())),
+    writer: t.Optional(t.Array(t.String())),
+    cast: t.Optional(t.Array(t.String())),
+    btsVideo: t.Optional(t.Array(t.String())),
     btsPhotos: t.Optional(
         t.Union([
             t.File(),
@@ -138,38 +152,5 @@ export const removeFavoriteParamsSchema = t.Object({
 });
 export type RemoveFavoriteParamsInput = Static<typeof removeFavoriteParamsSchema>;
 
-export const CATEGORIES = [
-    "Action",
-    "Sci-Fi",
-    "Horror",
-    "Comedy",
-    "Thriller",
-    "Drama",
-    "Romance",
-    "Adventure",
-    "Fantasy",
-    "Animation",
-    "Biography",
-    "Documentary",
-    "Family",
-    "Music",
-    "Mystery",
-    "Sport",
-    "Western"
-] as const;
 
-export const AGE_RATINGS = [
-    "G",
-    "PG",
-    "PG-13",
-    "NC-17",
-    "R"
-] as const;
-
-export const UNIVERSITIES = [
-    "จุฬาลงกรณ์มหาวิทยาลัย",
-    "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
-    "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-    "มหาวิทยาลัยกรุงเทพ"
-] as const;
 

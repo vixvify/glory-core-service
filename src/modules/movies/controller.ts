@@ -32,18 +32,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     const movies = await service.getAllMovies();
     return formatSuccess(movies);
   })
-  .get("/categories-data", async () => {
-    const categories = await service.getCategories();
-    return formatSuccess(categories);
-  })
-  .get("/universities-data", async () => {
-    const universities = await service.getUniversities();
-    return formatSuccess(universities);
-  })
-  .get("/ratings-data", async () => {
-    const ratings = await service.getAgeRatings();
-    return formatSuccess(ratings);
-  })
+
   .get(
     "/search",
     async ({ query }) => {

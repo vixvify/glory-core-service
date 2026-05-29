@@ -1,9 +1,49 @@
 import { Movie as DtoMovie } from "./domain/movie";
 import { Movie as PrismaMovie } from "@prisma/client";
+import { Rating } from "./domain/rating";
+
+export interface PrismaMovieWithRelations extends PrismaMovie {
+  ratings?: Array<{
+    id: string;
+    movieId: string;
+    userId: string;
+    stars: number;
+    createdAt: Date;
+    updatedAt: Date;
+    user?: {
+      id: string;
+      email: string;
+      name: string | null;
+      role: string;
+    } | null;
+  }> | null;
+  crew?: Array<{
+    id: string;
+    movieId: string;
+    crewMemberId: string;
+    role: string;
+    createdAt: Date;
+    updatedAt: Date;
+    crewMember?: {
+      id: string;
+      name: string;
+      createdAt: Date;
+      updatedAt: Date;
+    } | null;
+  }> | null;
+  bts?: {
+    id: string;
+    movieId: string;
+    btsVideo: string[];
+    btsPhotos: string[];
+    createdAt: Date;
+    updatedAt: Date;
+  } | null;
+}
 
 export class MovieFactory {
 
-  static toDomain(movie: any): DtoMovie {
+  static toDomain(movie: PrismaMovieWithRelations): DtoMovie {
     return {
       id: movie.id,
       title: movie.title,
@@ -13,12 +53,37 @@ export class MovieFactory {
       youtubeUrl: movie.youtubeUrl || "",
       views: movie.views,
       ratings: movie.ratings
-        ? movie.ratings.map((r: any) => ({
-            ...r,
-            user: r.user ? {
-              ...r.user,
-              name: r.user.name ?? "Unknown User",
-            } : undefined
+        ? movie.ratings.map((r): Rating => ({
+            id: r.id,
+            movieId: r.movieId,
+            userId: r.userId,
+            stars: r.stars,
+            createdAt: r.createdAt,
+            updatedAt: r.updatedAt,
+            user: {
+              id: r.user?.id || r.userId,
+              email: r.user?.email || "",
+              name: r.user?.name ?? "Unknown User",
+              role: (r.user?.role as "user" | "admin") || "user",
+            },
+            movie: {
+              id: movie.id,
+              title: movie.title,
+              description: movie.description,
+              category: movie.category,
+              thumbnail: movie.thumbnail,
+              youtubeUrl: movie.youtubeUrl || "",
+              views: movie.views,
+              year: movie.year,
+              matchRate: movie.matchRate,
+              ageRating: movie.ageRating,
+              duration: movie.duration,
+              university: movie.university,
+              crew: [],
+              bts: null,
+              createdAt: movie.createdAt,
+              updatedAt: movie.updatedAt,
+            },
           }))
         : [],
       year: movie.year,
@@ -26,24 +91,36 @@ export class MovieFactory {
       ageRating: movie.ageRating,
       duration: movie.duration,
       university: movie.university,
-      crew: movie.crew ? {
-        id: movie.crew.id,
-        movieId: movie.crew.movieId,
-        director: movie.crew.director,
-        producer: movie.crew.producer,
-        writer: movie.crew.writer,
-        cast: movie.crew.cast || [],
-        btsVideo: movie.crew.btsVideo,
-        btsPhotos: movie.crew.btsPhotos || [],
-        createdAt: movie.crew.createdAt,
-        updatedAt: movie.crew.updatedAt,
+      crew: movie.crew
+        ? movie.crew.map((c) => ({
+            id: c.id,
+            movieId: c.movieId,
+            crewMemberId: c.crewMemberId,
+            role: c.role,
+            crewMember: c.crewMember ? {
+              id: c.crewMember.id,
+              name: c.crewMember.name,
+              createdAt: c.crewMember.createdAt,
+              updatedAt: c.crewMember.updatedAt,
+            } : undefined,
+            createdAt: c.createdAt,
+            updatedAt: c.updatedAt,
+          }))
+        : [],
+      bts: movie.bts ? {
+        id: movie.bts.id,
+        movieId: movie.bts.movieId,
+        btsVideo: movie.bts.btsVideo || [],
+        btsPhotos: movie.bts.btsPhotos || [],
+        createdAt: movie.bts.createdAt,
+        updatedAt: movie.bts.updatedAt,
       } : null,
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };
   }
 
-  static toDomainList(movies: PrismaMovie[]): DtoMovie[] {
+  static toDomainList(movies: PrismaMovieWithRelations[]): DtoMovie[] {
     return movies.map(MovieFactory.toDomain);
   }
 }
