@@ -18,7 +18,9 @@ export class AuthRepositoryImpl implements AuthRepository {
     };
   }
 
-  async findByEmailWithPassword(email: string): Promise<(User & { password?: string }) | null> {
+  async findByEmailWithPassword(
+    email: string,
+  ): Promise<(User & { password?: string }) | null> {
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -49,7 +51,9 @@ export class AuthRepositoryImpl implements AuthRepository {
     };
   }
 
-  async create(data: Omit<RegisterUserBodyInput, "password"> & { passwordHash: string }): Promise<User> {
+  async create(
+    data: Omit<RegisterUserBodyInput, "password"> & { passwordHash: string },
+  ): Promise<User> {
     const user = await prisma.user.create({
       data: {
         email: data.email,

@@ -27,6 +27,7 @@ export interface PrismaMovieWithRelations extends PrismaMovie {
     crewMember?: {
       id: string;
       name: string;
+      photoUrl?: string | null;
       createdAt: Date;
       updatedAt: Date;
     } | null;
@@ -42,7 +43,6 @@ export interface PrismaMovieWithRelations extends PrismaMovie {
 }
 
 export class MovieFactory {
-
   static toDomain(movie: PrismaMovieWithRelations): DtoMovie {
     return {
       id: movie.id,
@@ -53,38 +53,40 @@ export class MovieFactory {
       youtubeUrl: movie.youtubeUrl || "",
       views: movie.views,
       ratings: movie.ratings
-        ? movie.ratings.map((r): Rating => ({
-            id: r.id,
-            movieId: r.movieId,
-            userId: r.userId,
-            stars: r.stars,
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt,
-            user: {
-              id: r.user?.id || r.userId,
-              email: r.user?.email || "",
-              name: r.user?.name ?? "Unknown User",
-              role: (r.user?.role as "user" | "admin") || "user",
-            },
-            movie: {
-              id: movie.id,
-              title: movie.title,
-              description: movie.description,
-              category: movie.category,
-              thumbnail: movie.thumbnail,
-              youtubeUrl: movie.youtubeUrl || "",
-              views: movie.views,
-              year: movie.year,
-              matchRate: movie.matchRate,
-              ageRating: movie.ageRating,
-              duration: movie.duration,
-              university: movie.university,
-              crew: [],
-              bts: null,
-              createdAt: movie.createdAt,
-              updatedAt: movie.updatedAt,
-            },
-          }))
+        ? movie.ratings.map(
+            (r): Rating => ({
+              id: r.id,
+              movieId: r.movieId,
+              userId: r.userId,
+              stars: r.stars,
+              createdAt: r.createdAt,
+              updatedAt: r.updatedAt,
+              user: {
+                id: r.user?.id || r.userId,
+                email: r.user?.email || "",
+                name: r.user?.name ?? "Unknown User",
+                role: (r.user?.role as "user" | "admin") || "user",
+              },
+              movie: {
+                id: movie.id,
+                title: movie.title,
+                description: movie.description,
+                category: movie.category,
+                thumbnail: movie.thumbnail,
+                youtubeUrl: movie.youtubeUrl || "",
+                views: movie.views,
+                year: movie.year,
+                matchRate: movie.matchRate,
+                ageRating: movie.ageRating,
+                duration: movie.duration,
+                university: movie.university,
+                crew: [],
+                bts: null,
+                createdAt: movie.createdAt,
+                updatedAt: movie.updatedAt,
+              },
+            }),
+          )
         : [],
       year: movie.year,
       matchRate: movie.matchRate,
@@ -97,24 +99,29 @@ export class MovieFactory {
             movieId: c.movieId,
             crewMemberId: c.crewMemberId,
             role: c.role,
-            crewMember: c.crewMember ? {
-              id: c.crewMember.id,
-              name: c.crewMember.name,
-              createdAt: c.crewMember.createdAt,
-              updatedAt: c.crewMember.updatedAt,
-            } : undefined,
+            crewMember: c.crewMember
+              ? {
+                  id: c.crewMember.id,
+                  name: c.crewMember.name,
+                  photoUrl: c.crewMember.photoUrl,
+                  createdAt: c.crewMember.createdAt,
+                  updatedAt: c.crewMember.updatedAt,
+                }
+              : undefined,
             createdAt: c.createdAt,
             updatedAt: c.updatedAt,
           }))
         : [],
-      bts: movie.bts ? {
-        id: movie.bts.id,
-        movieId: movie.bts.movieId,
-        btsVideo: movie.bts.btsVideo || [],
-        btsPhotos: movie.bts.btsPhotos || [],
-        createdAt: movie.bts.createdAt,
-        updatedAt: movie.bts.updatedAt,
-      } : null,
+      bts: movie.bts
+        ? {
+            id: movie.bts.id,
+            movieId: movie.bts.movieId,
+            btsVideo: movie.bts.btsVideo || [],
+            btsPhotos: movie.bts.btsPhotos || [],
+            createdAt: movie.bts.createdAt,
+            updatedAt: movie.bts.updatedAt,
+          }
+        : null,
       createdAt: movie.createdAt,
       updatedAt: movie.updatedAt,
     };

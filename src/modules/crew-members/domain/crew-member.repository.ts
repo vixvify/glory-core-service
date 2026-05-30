@@ -5,7 +5,7 @@ export interface CrewMemberRepository {
   search(q: string): Promise<CrewMember[]>;
   findById(id: string): Promise<CrewMember | null>;
   findByName(name: string): Promise<CrewMember | null>;
-  create(name: string): Promise<CrewMember>;
-  update(id: string, name: string): Promise<CrewMember>;
+  create(name: string, photoUrl?: string): Promise<CrewMember>;
+  update(id: string, name: string, photoUrl?: string): Promise<CrewMember>;
   delete(id: string): Promise<CrewMember>;
 }

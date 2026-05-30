@@ -1,6 +1,10 @@
 import { prisma } from "../../lib/prisma";
 import { MasterDataRepository } from "../../modules/master-data/domain/masterdata.repository";
-import { Category, University, AgeRating } from "../../modules/master-data/domain/masterdata";
+import {
+  Category,
+  University,
+  AgeRating,
+} from "../../modules/master-data/domain/masterdata";
 
 export class MasterDataRepositoryImpl implements MasterDataRepository {
   async getCategories(): Promise<Category[]> {

@@ -1,4 +1,9 @@
-import { Rating, AddRatingBodyInput, GetRatingsQueryInput, UpdateRatingBodyInput } from "./rating";
+import {
+  Rating,
+  AddRatingBodyInput,
+  GetRatingsQueryInput,
+  UpdateRatingBodyInput,
+} from "./rating";
 
 export interface RatingRepository {
   addRating(data: AddRatingBodyInput): Promise<void>;

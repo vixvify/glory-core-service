@@ -16,6 +16,11 @@ export const universities = [
   "มหาวิทยาลัยกรุงเทพ"
 ];
 
+export interface SeedCrewMember {
+  name: string;
+  photoUrl?: string;
+}
+
 export interface SeedMovie {
   title: string;
   description: string;
@@ -30,10 +35,10 @@ export interface SeedMovie {
   university?: string;
   crew?: {
     create: {
-      director?: string;
-      producer?: string;
-      writer?: string;
-      cast?: string[] | string;
+      director?: SeedCrewMember | SeedCrewMember[] | string;
+      producer?: SeedCrewMember | SeedCrewMember[] | string;
+      writer?: SeedCrewMember | SeedCrewMember[] | string;
+      cast?: SeedCrewMember[] | string[];
       btsVideo?: string;
       btsPhotos?: string[] | string;
     };
@@ -55,10 +60,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Christopher Nolan",
-        producer: "Emma Thomas",
-        writer: "Jonathan Nolan, Christopher Nolan",
-        cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
+        director: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Emma Thomas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jonathan Nolan", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Christian Bale", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Heath Ledger", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Aaron Eckhart", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0"]
       }
@@ -78,10 +90,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Anthony Russo, Joe Russo",
-        producer: "Kevin Feige",
-        writer: "Christopher Markus, Stephen McFeely",
-        cast: ["Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"],
+        director: [
+          { name: "Anthony Russo", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Joe Russo", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        producer: { name: "Kevin Feige", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Christopher Markus", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Stephen McFeely", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Robert Downey Jr.", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Chris Evans", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Mark Ruffalo", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1635805737707-575885ab0820"]
       }
@@ -101,10 +123,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Ridley Scott",
-        producer: "Douglas Wick",
-        writer: "David Franzoni, John Logan",
-        cast: ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
+        director: { name: "Ridley Scott", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Douglas Wick", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "David Franzoni", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "John Logan", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Russell Crowe", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Joaquin Phoenix", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Connie Nielsen", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
         btsPhotos: ["https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d"]
       }
@@ -124,10 +153,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "George Miller",
-        producer: "Doug Mitchell, George Miller",
-        writer: "George Miller, Brendan McCarthy",
-        cast: ["Tom Hardy", "Charlize Theron", "Nicholas Hoult"],
+        director: { name: "George Miller", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Doug Mitchell", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "George Miller", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "George Miller", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Brendan McCarthy", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tom Hardy", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Charlize Theron", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Nicholas Hoult", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1514539079130-25950c84af65"]
       }
@@ -147,10 +186,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Ryan Coogler",
-        producer: "Kevin Feige",
-        writer: "Ryan Coogler, Joe Robert Cole",
-        cast: ["Chadwick Boseman", "Michael B. Jordan", "Lupita Nyong'o"],
+        director: { name: "Ryan Coogler", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Kevin Feige", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Ryan Coogler", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Joe Robert Cole", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Chadwick Boseman", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael B. Jordan", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lupita Nyong'o", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1534447677768-be436bb09401"]
       }
@@ -170,10 +216,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Jon Watts",
-        producer: "Kevin Feige, Amy Pascal",
-        writer: "Chris McKenna, Erik Sommers",
-        cast: ["Tom Holland", "Zendaya", "Benedict Cumberbatch"],
+        director: { name: "Jon Watts", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Kevin Feige", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Amy Pascal", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Chris McKenna", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Erik Sommers", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tom Holland", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Zendaya", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Benedict Cumberbatch", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1634828221818-503587f33d02"]
       }
@@ -193,10 +249,14 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Chad Stahelski",
-        producer: "Basil Iwanyk",
-        writer: "Derek Kolstad",
-        cast: ["Keanu Reeves", "Michael Nyqvist", "Alfie Allen"],
+        director: { name: "Chad Stahelski", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Basil Iwanyk", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Derek Kolstad", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Keanu Reeves", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael Nyqvist", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Alfie Allen", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1509198397868-475647b2a1e5"]
       }
@@ -216,10 +276,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Christopher McQuarrie",
-        producer: "Tom Cruise, Jake Myers",
-        writer: "Christopher McQuarrie",
-        cast: ["Tom Cruise", "Henry Cavill", "Ving Rhames"],
+        director: { name: "Christopher McQuarrie", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Tom Cruise", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jake Myers", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: { name: "Christopher McQuarrie", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Tom Cruise", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Henry Cavill", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ving Rhames", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1533105079780-92b9be482077"]
       }
@@ -239,10 +306,20 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Joseph Kosinski",
-        producer: "Jerry Bruckheimer, Tom Cruise",
-        writer: "Ehren Kruger, Eric Warren Singer",
-        cast: ["Tom Cruise", "Miles Teller", "Jennifer Connelly"],
+        director: { name: "Joseph Kosinski", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Jerry Bruckheimer", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Tom Cruise", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Ehren Kruger", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Eric Warren Singer", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tom Cruise", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Miles Teller", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jennifer Connelly", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
       }
@@ -262,10 +339,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Lana Wachowski",
-        producer: "James McTeigue",
-        writer: "Lana Wachowski, David Mitchell",
-        cast: ["Keanu Reeves", "Carrie-Anne Moss", "Yahya Abdul-Mateen II"],
+        director: { name: "Lana Wachowski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "James McTeigue", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Lana Wachowski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "David Mitchell", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Keanu Reeves", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Carrie-Anne Moss", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Yahya Abdul-Mateen II", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=u8M3z0gHk3c",
         btsPhotos: ["https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"]
       }
@@ -287,10 +371,14 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Christopher Nolan",
-        producer: "Emma Thomas",
-        writer: "Christopher Nolan",
-        cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+        director: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Emma Thomas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Leonardo DiCaprio", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Joseph Gordon-Levitt", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Elliot Page", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1536440136628-849c177e76a1"]
       }
@@ -310,10 +398,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Christopher Nolan",
-        producer: "Emma Thomas",
-        writer: "Jonathan Nolan, Christopher Nolan",
-        cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
+        director: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Emma Thomas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jonathan Nolan", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Matthew McConaughey", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Anne Hathaway", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jessica Chastain", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa"]
       }
@@ -333,10 +428,20 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Lana Wachowski, Lilly Wachowski",
-        producer: "Joel Silver",
-        writer: "Lana Wachowski, Lilly Wachowski",
-        cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+        director: [
+          { name: "Lana Wachowski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lilly Wachowski", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        producer: { name: "Joel Silver", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Lana Wachowski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lilly Wachowski", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Keanu Reeves", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Laurence Fishburne", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Carrie-Anne Moss", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5"]
       }
@@ -356,10 +461,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Denis Villeneuve",
-        producer: "Mary Parent, Cale Boyter",
-        writer: "Jon Spaihts, Denis Villeneuve",
-        cast: ["Timothée Chalamet", "Rebecca Ferguson", "Oscar Isaac"],
+        director: { name: "Denis Villeneuve", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Mary Parent", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Cale Boyter", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Jon Spaihts", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Denis Villeneuve", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Timothée Chalamet", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rebecca Ferguson", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Oscar Isaac", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1547483238-f400e65ccd56"]
       }
@@ -379,10 +494,18 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Irvin Kershner",
-        producer: "Gary Kurtz",
-        writer: "Leigh Brackett, Lawrence Kasdan, George Lucas",
-        cast: ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+        director: { name: "Irvin Kershner", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Gary Kurtz", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Leigh Brackett", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lawrence Kasdan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "George Lucas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Mark Hamill", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Harrison Ford", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Carrie Fisher", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1506318137071-a8e063b4bec0"]
       }
@@ -402,10 +525,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Denis Villeneuve",
-        producer: "Andrew A. Kosove",
-        writer: "Hampton Fancher, Michael Green",
-        cast: ["Ryan Gosling", "Harrison Ford", "Ana de Armas"],
+        director: { name: "Denis Villeneuve", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Andrew A. Kosove", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Hampton Fancher", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael Green", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ryan Gosling", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Harrison Ford", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ana de Armas", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0"]
       }
@@ -425,10 +555,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Denis Villeneuve",
-        producer: "Dan Levine",
-        writer: "Eric Heisserer, Ted Chiang",
-        cast: ["Amy Adams", "Jeremy Renner", "Forest Whitaker"],
+        director: { name: "Denis Villeneuve", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Dan Levine", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Eric Heisserer", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ted Chiang", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Amy Adams", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jeremy Renner", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Forest Whitaker", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa"]
       }
@@ -448,10 +585,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Ridley Scott",
-        producer: "Simon Kinberg",
-        writer: "Drew Goddard, Andy Weir",
-        cast: ["Matt Damon", "Jessica Chastain", "Kristen Wiig"],
+        director: { name: "Ridley Scott", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Simon Kinberg", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Drew Goddard", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Andy Weir", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Matt Damon", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jessica Chastain", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Kristen Wiig", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -471,10 +615,19 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Alfonso Cuarón",
-        producer: "Alfonso Cuarón, David Heyman",
-        writer: "Alfonso Cuarón, Jonás Cuarón",
-        cast: ["Sandra Bullock", "George Clooney"],
+        director: { name: "Alfonso Cuarón", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Alfonso Cuarón", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "David Heyman", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Alfonso Cuarón", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jonás Cuarón", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Sandra Bullock", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "George Clooney", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa"]
       }
@@ -494,10 +647,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Christopher Nolan",
-        producer: "Emma Thomas, Christopher Nolan",
-        writer: "Christopher Nolan",
-        cast: ["John David Washington", "Robert Pattinson", "Elizabeth Debicki"],
+        director: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Emma Thomas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "John David Washington", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Robert Pattinson", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Elizabeth Debicki", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0"]
       }
@@ -519,10 +679,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "James Wan",
-        producer: "Tony DeRosa-Grund",
-        writer: "Chad Hayes, Carey W. Hayes",
-        cast: ["Vera Farmiga", "Patrick Wilson", "Lili Taylor"],
+        director: { name: "James Wan", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Tony DeRosa-Grund", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Chad Hayes", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Carey W. Hayes", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Vera Farmiga", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Patrick Wilson", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lili Taylor", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe"]
       }
@@ -542,10 +709,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "John Krasinski",
-        producer: "Michael Bay, Andrew Form",
-        writer: "Bryan Woods, Scott Beck",
-        cast: ["Emily Blunt", "John Krasinski", "Millicent Simmonds"],
+        director: { name: "John Krasinski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Michael Bay", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Andrew Form", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Bryan Woods", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Scott Beck", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Emily Blunt", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "John Krasinski", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Millicent Simmonds", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1522071820081-009f0129c71c"]
       }
@@ -565,10 +742,14 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Ari Aster",
-        producer: "Kevin Frakes",
-        writer: "Ari Aster",
-        cast: ["Toni Collette", "Alex Wolff", "Milly Shapiro"],
+        director: { name: "Ari Aster", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Kevin Frakes", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Ari Aster", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Toni Collette", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Alex Wolff", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Milly Shapiro", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
       }
@@ -588,10 +769,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Andy Muschietti",
-        producer: "Roy Lee",
-        writer: "Stephen King, Chase Palmer",
-        cast: ["Bill Skarsgård", "Jaeden Martell", "Finn Wolfhard"],
+        director: { name: "Andy Muschietti", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Roy Lee", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Stephen King", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Chase Palmer", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Bill Skarsgård", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jaeden Martell", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Finn Wolfhard", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=FnCdOQsX5kc",
         btsPhotos: ["https://images.unsplash.com/photo-1608889175123-8ee362201f81"]
       }
@@ -611,10 +799,14 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Leigh Whannell",
-        producer: "Jason Blum",
-        writer: "Leigh Whannell",
-        cast: ["Elisabeth Moss", "Oliver Jackson-Cohen", "Harriet Dyer"],
+        director: { name: "Leigh Whannell", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jason Blum", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Leigh Whannell", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Elisabeth Moss", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Oliver Jackson-Cohen", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Harriet Dyer", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1509114397022-ed747cca3f65"]
       }
@@ -634,10 +826,19 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Banjong Pisanthanakun, Parkpoom Wongpoom",
-        producer: "Yodphet Sudsawad",
-        writer: "Banjong Pisanthanakun, Parkpoom Wongpoom",
-        cast: ["Ananda Everingham", "Natthaweeranuch Thongmee"],
+        director: [
+          { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Parkpoom Wongpoom", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        producer: { name: "Yodphet Sudsawad", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Parkpoom Wongpoom", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ananda Everingham", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Natthaweeranuch Thongmee", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
       }
@@ -657,10 +858,16 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Sophon Sakdaphisit",
-        producer: "Jira Maligool",
-        writer: "Sophon Sakdaphisit, Sopana Chaowwiwatkul",
-        cast: ["Saharat Sangkapreecha", "Piyathida Woramusik"],
+        director: { name: "Sophon Sakdaphisit", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jira Maligool", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Sophon Sakdaphisit", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Sopana Chaowwiwatkul", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Saharat Sangkapreecha", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Piyathida Woramusik", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe"]
       }
@@ -680,10 +887,16 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Banjong Pisanthanakun",
-        producer: "Na Hong-jin",
-        writer: "Banjong Pisanthanakun, Na Hong-jin",
-        cast: ["Narilya Gulmongkolpech", "Sawanee Utoomma"],
+        director: { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Na Hong-jin", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Na Hong-jin", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Narilya Gulmongkolpech", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Sawanee Utoomma", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
       }
@@ -703,10 +916,16 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Banjong Pisanthanakun",
-        producer: "Chenchonnanee Suntornyanakit",
-        writer: "Banjong Pisanthanakun, Nontra Chalermchat",
-        cast: ["Mario Maurer", "Davika Hoorne"],
+        director: { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Chenchonnanee Suntornyanakit", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Banjong Pisanthanakun", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Nontra Chalermchat", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Mario Maurer", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Davika Hoorne", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1509248961158-e54f6934749c"]
       }
@@ -726,10 +945,16 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Hideo Nakata",
-        producer: "Shinya Kawai",
-        writer: "Koji Suzuki, Hiroshi Takahashi",
-        cast: ["Nanako Matsushima", "Hiroyuki Sanada"],
+        director: { name: "Hideo Nakata", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Shinya Kawai", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Koji Suzuki", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Hiroshi Takahashi", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Nanako Matsushima", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Hiroyuki Sanada", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe"]
       }
@@ -751,10 +976,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Todd Phillips",
-        producer: "Daniel Goldberg",
-        writer: "Jon Lucas, Scott Moore",
-        cast: ["Bradley Cooper", "Ed Helms", "Zach Galifianakis"],
+        director: { name: "Todd Phillips", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Daniel Goldberg", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jon Lucas", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Scott Moore", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Bradley Cooper", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ed Helms", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Zach Galifianakis", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
       }
@@ -774,10 +1006,16 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Harold Ramis",
-        producer: "Trevor Albert",
-        writer: "Danny Rubin, Harold Ramis",
-        cast: ["Bill Murray", "Andie MacDowell"],
+        director: { name: "Harold Ramis", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Trevor Albert", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Danny Rubin", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Harold Ramis", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Bill Murray", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Andie MacDowell", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1601042879364-f3947d3f9c16"]
       }
@@ -797,10 +1035,14 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Mark Waters",
-        producer: "Lorne Michaels",
-        writer: "Tina Fey",
-        cast: ["Lindsay Lohan", "Rachel McAdams", "Amanda Seyfried"],
+        director: { name: "Mark Waters", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Lorne Michaels", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Tina Fey", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Lindsay Lohan", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rachel McAdams", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Amanda Seyfried", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
       }
@@ -820,10 +1062,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Greg Mottola",
-        producer: "Judd Apatow",
-        writer: "Seth Rogen, Evan Goldberg",
-        cast: ["Jonah Hill", "Michael Cera", "Christopher Mintz-Plasse"],
+        director: { name: "Greg Mottola", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Judd Apatow", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Seth Rogen", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Evan Goldberg", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Jonah Hill", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael Cera", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christopher Mintz-Plasse", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
       }
@@ -843,10 +1092,20 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Shawn Levy",
-        producer: "Ryan Reynolds, Shawn Levy",
-        writer: "Matt Lieberman, Zak Penn",
-        cast: ["Ryan Reynolds", "Jodie Comer", "Taika Waititi"],
+        director: { name: "Shawn Levy", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Ryan Reynolds", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Shawn Levy", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Matt Lieberman", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Zak Penn", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ryan Reynolds", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jodie Comer", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Taika Waititi", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1601042879364-f3947d3f9c16"]
       }
@@ -866,10 +1125,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Tim Miller",
-        producer: "Simon Kinberg, Lauren Shuler Donner",
-        writer: "Rhett Reese, Paul Wernick",
-        cast: ["Ryan Reynolds", "Morena Baccarin", "Ed Skrein"],
+        director: { name: "Tim Miller", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Simon Kinberg", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lauren Shuler Donner", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Rhett Reese", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Paul Wernick", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ryan Reynolds", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Morena Baccarin", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ed Skrein", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
       }
@@ -889,10 +1158,16 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Peter Farrelly",
-        producer: "Charles B. Wessler",
-        writer: "Ted Cohen, Peter Farrelly",
-        cast: ["Jim Carrey", "Jeff Daniels"],
+        director: { name: "Peter Farrelly", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Charles B. Wessler", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Ted Cohen", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Peter Farrelly", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Jim Carrey", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jeff Daniels", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=8hP9D6kZseM",
         btsPhotos: ["https://images.unsplash.com/photo-1601042879364-f3947d3f9c16"]
       }
@@ -912,10 +1187,16 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Mez Tharatorn",
-        producer: "Jira Maligool",
-        writer: "Mez Tharatorn, Benjamaporn Srabua",
-        cast: ["Sunny Suwanmethanont", "Preechaya Pongthananikorn"],
+        director: { name: "Mez Tharatorn", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jira Maligool", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Mez Tharatorn", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Benjamaporn Srabua", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Sunny Suwanmethanont", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Preechaya Pongthananikorn", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1585647347483-22b66260dfff"]
       }
@@ -937,10 +1218,14 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Denis Villeneuve",
-        producer: "Kira Davis",
-        writer: "Aaron Guzikowski",
-        cast: ["Hugh Jackman", "Jake Gyllenhaal", "Viola Davis"],
+        director: { name: "Denis Villeneuve", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Kira Davis", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Aaron Guzikowski", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Hugh Jackman", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jake Gyllenhaal", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Viola Davis", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1594909122845-11baa439b7bf"]
       }
@@ -960,10 +1245,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "David Fincher",
-        producer: "Arnold Kopelson",
-        writer: "Andrew Kevin Walker",
-        cast: ["Brad Pitt", "Morgan Freeman", "Gwyneth Paltrow"],
+        director: { name: "David Fincher", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Arnold Kopelson", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Andrew Kevin Walker", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Brad Pitt", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Morgan Freeman", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Gwyneth Paltrow", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1434030216411-0b793f4b4173"]
       }
@@ -983,10 +1272,14 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "David Fincher",
-        producer: "Ceán Chaffin",
-        writer: "Gillian Flynn",
-        cast: ["Ben Affleck", "Rosamund Pike", "Neil Patrick Harris"],
+        director: { name: "David Fincher", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Ceán Chaffin", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Gillian Flynn", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Ben Affleck", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rosamund Pike", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Neil Patrick Harris", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1533928298208-27ff66555d8d"]
       }
@@ -1006,10 +1299,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "David Fincher",
-        producer: "Ceán Chaffin, Mike Medavoy",
-        writer: "James Vanderbilt, Robert Graysmith",
-        cast: ["Jake Gyllenhaal", "Mark Ruffalo", "Robert Downey Jr."],
+        director: { name: "David Fincher", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Ceán Chaffin", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Mike Medavoy", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "James Vanderbilt", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Robert Graysmith", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Jake Gyllenhaal", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Mark Ruffalo", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Robert Downey Jr.", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1509114397022-ed747cca3f65"]
       }
@@ -1029,10 +1332,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Martin Scorsese",
-        producer: "Mike Medavoy",
-        writer: "Laeta Kalogridis, Dennis Lehane",
-        cast: ["Leonardo DiCaprio", "Mark Ruffalo", "Ben Kingsley"],
+        director: { name: "Martin Scorsese", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Mike Medavoy", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Laeta Kalogridis", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Dennis Lehane", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Leonardo DiCaprio", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Mark Ruffalo", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ben Kingsley", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=Xh0YpA9g9X8",
         btsPhotos: ["https://images.unsplash.com/photo-1594909122845-11baa439b7bf"]
       }
@@ -1052,10 +1362,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Dan Gilroy",
-        producer: "Jennifer Fox",
-        writer: "Dan Gilroy",
-        cast: ["Jake Gyllenhaal", "Rene Russo", "Riz Ahmed"],
+        director: { name: "Dan Gilroy", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jennifer Fox", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Dan Gilroy", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Jake Gyllenhaal", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rene Russo", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Riz Ahmed", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=X8kXYg_OBdc",
         btsPhotos: ["https://images.unsplash.com/photo-1434030216411-0b793f4b4173"]
       }
@@ -1077,10 +1391,20 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Frank Darabont",
-        producer: "Frank Darabont, David Valdes",
-        writer: "Stephen King, Frank Darabont",
-        cast: ["Tom Hanks", "David Morse", "Michael Clarke Duncan"],
+        director: { name: "Frank Darabont", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Frank Darabont", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "David Valdes", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: [
+          { name: "Stephen King", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Frank Darabont", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tom Hanks", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "David Morse", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael Clarke Duncan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
         btsPhotos: ["https://images.unsplash.com/photo-1489599849927-2ee91cede3ba"]
       }
@@ -1100,10 +1424,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "David Fincher",
-        producer: "Art Linson",
-        writer: "Chuck Palahniuk, Jim Uhls",
-        cast: ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
+        director: { name: "David Fincher", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Art Linson", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Chuck Palahniuk", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jim Uhls", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Brad Pitt", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Edward Norton", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Helena Bonham Carter", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
         btsPhotos: ["https://images.unsplash.com/photo-1593085512500-5d55148d6f0d"]
       }
@@ -1123,10 +1454,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Christopher Nolan",
-        producer: "Emma Thomas",
-        writer: "Jonathan Nolan, Christopher Nolan",
-        cast: ["Hugh Jackman", "Christian Bale", "Scarlett Johansson"],
+        director: { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Emma Thomas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jonathan Nolan", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christopher Nolan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Hugh Jackman", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Christian Bale", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Scarlett Johansson", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
         btsPhotos: ["https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1"]
       }
@@ -1146,10 +1484,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Steven Spielberg",
-        producer: "Branko Lustig",
-        writer: "Thomas Keneally, Steven Zaillian",
-        cast: ["Liam Neeson", "Ben Kingsley", "Ralph Fiennes"],
+        director: { name: "Steven Spielberg", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Branko Lustig", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Thomas Keneally", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Steven Zaillian", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Liam Neeson", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ben Kingsley", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ralph Fiennes", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=1F7771Zf3uE",
         btsPhotos: ["https://images.unsplash.com/photo-1593085512500-5d55148d6f0d"]
       }
@@ -1171,10 +1516,14 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Richard Curtis",
-        producer: "Tim Bevan",
-        writer: "Richard Curtis",
-        cast: ["Domhnall Gleeson", "Rachel McAdams", "Bill Nighy"],
+        director: { name: "Richard Curtis", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Tim Bevan", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Richard Curtis", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Domhnall Gleeson", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rachel McAdams", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Bill Nighy", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"]
       }
@@ -1194,10 +1543,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Nick Cassavetes",
-        producer: "Lynn Harris",
-        writer: "Nicholas Sparks, Jan Sardi",
-        cast: ["Ryan Gosling", "Rachel McAdams", "James Garner"],
+        director: { name: "Nick Cassavetes", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Lynn Harris", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Nicholas Sparks", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jan Sardi", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ryan Gosling", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rachel McAdams", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "James Garner", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
       }
@@ -1217,10 +1573,16 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Richard Linklater",
-        producer: "Anne Walker-McBay",
-        writer: "Richard Linklater, Kim Krizan",
-        cast: ["Ethan Hawke", "Julie Delpy"],
+        director: { name: "Richard Linklater", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Anne Walker-McBay", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Richard Linklater", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Kim Krizan", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ethan Hawke", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Julie Delpy", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"]
       }
@@ -1240,10 +1602,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Joe Wright",
-        producer: "Tim Bevan",
-        writer: "Jane Austen, Deborah Moggach",
-        cast: ["Keira Knightley", "Matthew Macfadyen", "Brenda Blethyn"],
+        director: { name: "Joe Wright", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Tim Bevan", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jane Austen", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Deborah Moggach", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Keira Knightley", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Matthew Macfadyen", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Brenda Blethyn", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
       }
@@ -1263,10 +1632,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Jon M. Chu",
-        producer: "Nina Jacobson",
-        writer: "Kevin Kwan, Peter Chiarelli",
-        cast: ["Constance Wu", "Henry Golding", "Michelle Yeoh"],
+        director: { name: "Jon M. Chu", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Nina Jacobson", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Kevin Kwan", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Peter Chiarelli", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Constance Wu", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Henry Golding", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michelle Yeoh", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"]
       }
@@ -1286,10 +1662,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Roger Michell",
-        producer: "Duncan Kenworthy",
-        writer: "Richard Curtis",
-        cast: ["Hugh Grant", "Julia Roberts", "Richard McCabe"],
+        director: { name: "Roger Michell", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Duncan Kenworthy", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Richard Curtis", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Hugh Grant", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Julia Roberts", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Richard McCabe", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
       }
@@ -1309,10 +1689,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Michel Gondry",
-        producer: "Steve Golin",
-        writer: "Charlie Kaufman, Michel Gondry",
-        cast: ["Jim Carrey", "Kate Winslet", "Kirsten Dunst"],
+        director: { name: "Michel Gondry", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Steve Golin", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Charlie Kaufman", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michel Gondry", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Jim Carrey", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Kate Winslet", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Kirsten Dunst", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"]
       }
@@ -1332,10 +1719,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Luca Guadagnino",
-        producer: "Peter Spears",
-        writer: "André Aciman, James Ivory",
-        cast: ["Timothée Chalamet", "Armie Hammer", "Michael Stuhlbarg"],
+        director: { name: "Luca Guadagnino", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Peter Spears", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "André Aciman", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "James Ivory", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Timothée Chalamet", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Armie Hammer", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michael Stuhlbarg", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1518709268805-4e9042af9f23"]
       }
@@ -1357,10 +1751,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Ang Lee",
-        producer: "Gil Netter",
-        writer: "Yann Martel, David Magee",
-        cast: ["Suraj Sharma", "Irrfan Khan", "Adil Hussain"],
+        director: { name: "Ang Lee", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Gil Netter", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Yann Martel", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "David Magee", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Suraj Sharma", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Irrfan Khan", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Adil Hussain", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1380,10 +1781,16 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Robert Zemeckis",
-        producer: "Tom Hanks, Jack Rapke",
-        writer: "William Broyles Jr.",
-        cast: ["Tom Hanks", "Helen Hunt"],
+        director: { name: "Robert Zemeckis", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "Tom Hanks", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jack Rapke", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: { name: "William Broyles Jr.", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Tom Hanks", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Helen Hunt", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1403,10 +1810,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Alejandro G. Iñárritu",
-        producer: "Arnon Milchan",
-        writer: "Michael Punke, Alejandro G. Iñárritu",
-        cast: ["Leonardo DiCaprio", "Tom Hardy", "Domhnall Gleeson"],
+        director: { name: "Alejandro G. Iñárritu", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Arnon Milchan", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Michael Punke", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Alejandro G. Iñárritu", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Leonardo DiCaprio", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Tom Hardy", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Domhnall Gleeson", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1426,10 +1840,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "James Cameron",
-        producer: "James Cameron, Jon Landau",
-        writer: "James Cameron",
-        cast: ["Sam Worthington", "Zoe Saldana", "Sigourney Weaver"],
+        director: { name: "James Cameron", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: [
+          { name: "James Cameron", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jon Landau", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
+        writer: { name: "James Cameron", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Sam Worthington", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+          { name: "Zoe Saldana", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Sigourney Weaver", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1449,10 +1870,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Steven Spielberg",
-        producer: "Frank Marshall",
-        writer: "George Lucas, Lawrence Kasdan",
-        cast: ["Harrison Ford", "Karen Allen", "Paul Freeman"],
+        director: { name: "Steven Spielberg", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Frank Marshall", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "George Lucas", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lawrence Kasdan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Harrison Ford", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Karen Allen", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Paul Freeman", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7"]
       }
@@ -1472,10 +1900,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Gore Verbinski",
-        producer: "Jerry Bruckheimer",
-        writer: "Ted Elliott, Terry Rossio",
-        cast: ["Johnny Depp", "Geoffrey Rush", "Orlando Bloom"],
+        director: { name: "Gore Verbinski", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jerry Bruckheimer", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Ted Elliott", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Terry Rossio", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Johnny Depp", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Geoffrey Rush", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Orlando Bloom", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1495,10 +1930,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Peter Jackson",
-        producer: "Carolynne Cunningham",
-        writer: "J.R.R. Tolkien, Fran Walsh",
-        cast: ["Martin Freeman", "Ian McKellen", "Richard Armitage"],
+        director: { name: "Peter Jackson", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Carolynne Cunningham", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "J.R.R. Tolkien", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Fran Walsh", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Martin Freeman", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ian McKellen", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Richard Armitage", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1518,10 +1960,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Stephen Sommers",
-        producer: "Sean Daniel",
-        writer: "Stephen Sommers",
-        cast: ["Brendan Fraser", "Rachel Weisz", "John Hannah"],
+        director: { name: "Stephen Sommers", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Sean Daniel", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Stephen Sommers", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Brendan Fraser", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rachel Weisz", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "John Hannah", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=l7O8VeaS3L8",
         btsPhotos: ["https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7"]
       }
@@ -1541,10 +1987,14 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Ron Howard",
-        producer: "William M. Connor",
-        writer: "William Nicholson",
-        cast: ["Viggo Mortensen", "Colin Farrell", "Joel Edgerton"],
+        director: { name: "Ron Howard", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "William M. Connor", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "William Nicholson", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Viggo Mortensen", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Colin Farrell", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Joel Edgerton", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=t5JvD90v-bM",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1566,10 +2016,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Andrew Adamson",
-        producer: "Mark Johnson",
-        writer: "C.S. Lewis, Ann Peacock",
-        cast: ["Tilda Swinton", "Georgie Henley", "William Moseley"],
+        director: { name: "Andrew Adamson", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Mark Johnson", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "C.S. Lewis", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ann Peacock", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tilda Swinton", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Georgie Henley", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "William Moseley", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1510172951991-856a654063f9"]
       }
@@ -1589,10 +2046,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Tim Burton",
-        producer: "Richard D. Zanuck",
-        writer: "Lewis Carroll, Linda Woolverton",
-        cast: ["Johnny Depp", "Mia Wasikowska", "Helena Bonham Carter"],
+        director: { name: "Tim Burton", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Richard D. Zanuck", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Lewis Carroll", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+          { name: "Linda Woolverton", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Johnny Depp", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Mia Wasikowska", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Helena Bonham Carter", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"]
       }
@@ -1612,10 +2076,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Guillermo del Toro",
-        producer: "Alfonso Cuarón",
-        writer: "Guillermo del Toro",
-        cast: ["Ivana Baquero", "Ariadna Gil", "Sergi López"],
+        director: { name: "Guillermo del Toro", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Alfonso Cuarón", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Guillermo del Toro", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Ivana Baquero", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ariadna Gil", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Sergi López", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1510172951991-856a654063f9"]
       }
@@ -1635,10 +2103,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Chris Columbus",
-        producer: "Karen Rosenfelt",
-        writer: "Rick Riordan, Craig Titley",
-        cast: ["Logan Lerman", "Brandon T. Jackson", "Alexandra Daddario"],
+        director: { name: "Chris Columbus", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Karen Rosenfelt", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Rick Riordan", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Craig Titley", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Logan Lerman", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Brandon T. Jackson", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Alexandra Daddario", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"]
       }
@@ -1658,10 +2133,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Bill Condon",
-        producer: "David Hoberman",
-        writer: "Stephen Chbosky, Evan Spiliotopoulos",
-        cast: ["Emma Watson", "Dan Stevens", "Luke Evans"],
+        director: { name: "Bill Condon", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "David Hoberman", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Stephen Chbosky", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" },
+          { name: "Evan Spiliotopoulos", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Emma Watson", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Dan Stevens", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Luke Evans", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1510172951991-856a654063f9"]
       }
@@ -1681,10 +2163,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Scott Derrickson",
-        producer: "Kevin Feige",
-        writer: "Jon Spaihts, Scott Derrickson",
-        cast: ["Benedict Cumberbatch", "Chiwetel Ejiofor", "Rachel McAdams"],
+        director: { name: "Scott Derrickson", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Kevin Feige", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jon Spaihts", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Scott Derrickson", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Benedict Cumberbatch", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Chiwetel Ejiofor", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Rachel McAdams", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"]
       }
@@ -1704,10 +2193,14 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "David Yates",
-        producer: "David Heyman",
-        writer: "J.K. Rowling",
-        cast: ["Eddie Redmayne", "Katherine Waterston", "Dan Fogler"],
+        director: { name: "David Yates", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "David Heyman", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "J.K. Rowling", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Eddie Redmayne", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Katherine Waterston", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+          { name: "Dan Fogler", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1510172951991-856a654063f9"]
       }
@@ -1727,10 +2220,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Matthew Vaughn",
-        producer: "Lorenzo di Bonaventura",
-        writer: "Jane Goldman, Matthew Vaughn",
-        cast: ["Charlie Cox", "Claire Danes", "Michelle Pfeiffer"],
+        director: { name: "Matthew Vaughn", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Lorenzo di Bonaventura", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Jane Goldman", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Matthew Vaughn", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Charlie Cox", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Claire Danes", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" },
+          { name: "Michelle Pfeiffer", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=R32qYStZ-g4",
         btsPhotos: ["https://images.unsplash.com/photo-1464822759023-fed622ff2c3b"]
       }
@@ -1752,10 +2252,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "John Lasseter",
-        producer: "Ralph Guggenheim",
-        writer: "John Lasseter, Pete Docter",
-        cast: ["Tom Hanks", "Tim Allen", "Don Rickles"],
+        director: { name: "John Lasseter", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Ralph Guggenheim", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "John Lasseter", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Pete Docter", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Tom Hanks", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Tim Allen", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+          { name: "Don Rickles", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1578632767115-351597cf2477"]
       }
@@ -1775,10 +2282,17 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Andrew Stanton",
-        producer: "Graham Walters",
-        writer: "Andrew Stanton, Bob Peterson",
-        cast: ["Albert Brooks", "Ellen DeGeneres", "Alexander Gould"],
+        director: { name: "Andrew Stanton", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Graham Walters", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Andrew Stanton", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Bob Peterson", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Albert Brooks", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ellen DeGeneres", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+          { name: "Alexander Gould", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1798,10 +2312,17 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยกรุงเทพ",
     crew: {
       create: {
-        director: "Brad Bird",
-        producer: "Brad Lewis",
-        writer: "Brad Bird, Jan Pinkava",
-        cast: ["Patton Oswalt", "Ian Holm", "Lou Romano"],
+        director: { name: "Brad Bird", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Brad Lewis", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Brad Bird", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jan Pinkava", photoUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Patton Oswalt", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Ian Holm", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+          { name: "Lou Romano", photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1518609878373-06d740f60d8b"]
       }
@@ -1821,10 +2342,17 @@ export const seedMovies: SeedMovie[] = [
     university: "จุฬาลงกรณ์มหาวิทยาลัย",
     crew: {
       create: {
-        director: "Andrew Stanton",
-        producer: "Jim Morris",
-        writer: "Andrew Stanton, Jim Reardon",
-        cast: ["Ben Burtt", "Elissa Knight", "Jeff Garlin"],
+        director: { name: "Andrew Stanton", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Jim Morris", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Andrew Stanton", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jim Reardon", photoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Ben Burtt", photoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" },
+          { name: "Elissa Knight", photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80" },
+          { name: "Jeff Garlin", photoUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }
@@ -1844,10 +2372,20 @@ export const seedMovies: SeedMovie[] = [
     university: "มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี",
     crew: {
       create: {
-        director: "Andrew Adamson, Vicky Jenson",
-        producer: "Aron Warner",
-        writer: "Ted Elliott, Terry Rossio",
-        cast: ["Mike Myers", "Eddie Murphy", "Cameron Diaz"],
+        director: [
+          { name: "Andrew Adamson", photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" },
+          { name: "Vicky Jenson", photoUrl: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=300&q=80" }
+        ],
+        producer: { name: "Aron Warner", photoUrl: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80" },
+        writer: [
+          { name: "Ted Elliott", photoUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" },
+          { name: "Terry Rossio", photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" }
+        ],
+        cast: [
+          { name: "Mike Myers", photoUrl: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=300&q=80" },
+          { name: "Eddie Murphy", photoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+          { name: "Cameron Diaz", photoUrl: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1578632767115-351597cf2477"]
       }
@@ -1867,10 +2405,14 @@ export const seedMovies: SeedMovie[] = [
     university: "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
     crew: {
       create: {
-        director: "Haruo Sotozaki",
-        producer: "Masanori Miyake",
-        writer: "Koyoharu Gotouge",
-        cast: ["Natsuki Hanae", "Akari Kito", "Yoshitsugu Matsuoka"],
+        director: { name: "Haruo Sotozaki", photoUrl: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=300&q=80" },
+        producer: { name: "Masanori Miyake", photoUrl: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80" },
+        writer: { name: "Koyoharu Gotouge", photoUrl: "https://images.unsplash.com/photo-1504257400762-971f9e9964d8?auto=format&fit=crop&w=300&q=80" },
+        cast: [
+          { name: "Natsuki Hanae", photoUrl: "https://images.unsplash.com/photo-1542206395-9feb3edaa68d?auto=format&fit=crop&w=300&q=80" },
+          { name: "Akari Kito", photoUrl: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=300&q=80" },
+          { name: "Yoshitsugu Matsuoka", photoUrl: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=300&q=80" }
+        ],
         btsVideo: "https://www.youtube.com/watch?v=3KR8_M-G9pA",
         btsPhotos: ["https://images.unsplash.com/photo-1506744038136-46273834b3fb"]
       }

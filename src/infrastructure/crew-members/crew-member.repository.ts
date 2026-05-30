@@ -33,16 +33,23 @@ export class CrewMemberRepositoryImpl implements CrewMemberRepository {
     });
   }
 
-  async create(name: string): Promise<CrewMember> {
+  async create(name: string, photoUrl?: string): Promise<CrewMember> {
     return prisma.crewMember.create({
-      data: { name },
+      data: { name, photoUrl },
     });
   }
 
-  async update(id: string, name: string): Promise<CrewMember> {
+  async update(
+    id: string,
+    name: string,
+    photoUrl?: string,
+  ): Promise<CrewMember> {
     return prisma.crewMember.update({
       where: { id },
-      data: { name },
+      data: {
+        name,
+        ...(photoUrl !== undefined ? { photoUrl } : {}),
+      },
     });
   }
 

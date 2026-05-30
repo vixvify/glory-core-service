@@ -44,7 +44,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       params: getMoviesByCategoryParamsSchema,
-    }
+    },
   )
   .get(
     "/university/:university",
@@ -55,7 +55,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       params: getMoviesByUniversityParamsSchema,
-    }
+    },
   )
   .get(
     "/:id",
@@ -66,7 +66,7 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
     },
     {
       params: getMovieByIdParamsSchema,
-    }
+    },
   )
   .post(
     "/",
@@ -111,5 +111,5 @@ export const movieRouter = new Elysia({ prefix: "/movie" })
       params: deleteMovieParamsSchema,
       requireAuth: true,
       requireRole: "admin",
-    }
+    },
   );

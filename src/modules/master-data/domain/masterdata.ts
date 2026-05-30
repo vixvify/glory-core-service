@@ -15,4 +15,3 @@ export interface AgeRating {
   name: string;
   createdAt: Date;
 }
-

@@ -1,11 +1,21 @@
-import { hashPassword, verifyPassword, signJWT, verifyJWT } from "../../core/utils/security";
-import { AppError, ConflictError, UnauthorizedError, BadRequestError } from "../../core/error";
+import {
+  hashPassword,
+  verifyPassword,
+  signJWT,
+  verifyJWT,
+} from "../../core/utils/security";
+import {
+  AppError,
+  ConflictError,
+  UnauthorizedError,
+  BadRequestError,
+} from "../../core/error";
 import { User, RegisterUserBodyInput, LoginUserBodyInput } from "./domain/auth";
 import { AuthRepository } from "./domain/auth.repository";
 import { AuthFactory } from "./factory";
 
 export class AuthService {
-  constructor(private repo: AuthRepository) { }
+  constructor(private repo: AuthRepository) {}
 
   async register(data: RegisterUserBodyInput): Promise<User> {
     try {
@@ -22,7 +32,8 @@ export class AuthService {
       });
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to register user";
+      const message =
+        error instanceof Error ? error.message : "Failed to register user";
       throw new BadRequestError(message, error);
     }
   }
@@ -34,17 +45,26 @@ export class AuthService {
         throw new UnauthorizedError("Invalid email or password");
       }
 
-      const isPasswordValid = await verifyPassword(data.password, user.password || "");
+      const isPasswordValid = await verifyPassword(
+        data.password,
+        user.password || "",
+      );
       if (!isPasswordValid) {
         throw new UnauthorizedError("Invalid email or password");
       }
 
-      const token = await signJWT({ id: user.id, name: user.name, email: user.email, role: user.role })
+      const token = await signJWT({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
 
       return AuthFactory.toSafeUserDTO(user, token);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to login";
+      const message =
+        error instanceof Error ? error.message : "Failed to login";
       throw new BadRequestError(message, error);
     }
   }
@@ -54,7 +74,10 @@ export class AuthService {
       return await this.repo.findById(userId);
     } catch (error: unknown) {
       if (error instanceof AppError) throw error;
-      const message = error instanceof Error ? error.message : "Failed to retrieve user profile";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Failed to retrieve user profile";
       throw new BadRequestError(message, error);
     }
   }
